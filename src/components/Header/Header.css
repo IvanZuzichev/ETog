@@ -1,0 +1,35 @@
+:root {
+  --header-height: clamp(60px, 8vh, 80px);
+  --padding-x: clamp(1rem, 4vw, 2rem);
+  --padding-y: clamp(0.5rem, 1.5vh, 1rem);
+  --color-web: #7b1fa2;
+  font-family: 'Onest', sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--padding-y) var(--padding-x);
+  background: var(--color-web);
+  height: var(--header-height);
+  min-height: var(--header-height);
+  box-sizing: border-box;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header__actions {
+  display: flex;
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+@media (max-width: 768px) {
+  .header {
+    --header-height: clamp(50px, 7vh, 70px);
+  }
+}
