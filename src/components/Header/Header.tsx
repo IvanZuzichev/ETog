@@ -1,12 +1,18 @@
+import React from 'react';
 import { Logo } from './Logo/Logo';
 import { ProfileButton } from './ProfileButton/ProfileButton';
 import { InputField } from './InputField/InputField';
 import { CreateButton } from './CreateButton/CreateButton';
+import { useTheme } from '../../theme/ThemeContext';
+import { useNavigate } from 'react-router-dom'; 
 import './Header.css';
 
-export const Header = () => {
+export const Header: React.FC = () => {
+  const navigate = useNavigate();
+  const { theme } = useTheme();
+
   const handleLogoClick = () => {
-    alert('Event Together');
+    navigate('/');
   };
 
   const handleSearch = (searchText: string) => {
@@ -17,8 +23,13 @@ export const Header = () => {
     }
   };
 
+  const headerStyle = {
+    backgroundColor: theme.colors.footerheaderBg,
+    color: theme.colors.footerheaderText
+  };
+
   return (
-    <header className='header'>
+    <header className='header' style={headerStyle}>
       <div className='header__left'>
         <CreateButton size='medium' />
         <Logo onClick={handleLogoClick} size='medium' />

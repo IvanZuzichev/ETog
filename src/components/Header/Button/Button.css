@@ -14,17 +14,18 @@
 }
 
 .button--primary {
-  background: var(--color-web);
-  color: white;
+  background: var(--primary-color, var(--color-web));
+  color: var(--footer-text, white);
 }
 
 .button--secondary {
-  background: #f7fafc;
-  color: #2d3748;
+  background: var(--primary-color, #7b1fa2)20;
+  color: var(--text-color, #2d3748);
 }
 
 .button:hover {
   transform: scale(1.03);
+  opacity: 0.9;
 }
 
 .button--small {

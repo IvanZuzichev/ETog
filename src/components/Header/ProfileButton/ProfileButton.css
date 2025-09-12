@@ -8,8 +8,8 @@
   align-items: center;
   gap: 0.3rem;
   padding: 0.6rem 1.2rem;
-  background: var(--color-web);
-  color: white;
+  background: var(--primary-color, var(--color-web)); /* Используем CSS переменные */
+  color: var(--footer-text, white);
   border: 0;
   border-radius: 25px;
   cursor: pointer;
@@ -22,11 +22,12 @@
 
 .profile-button:hover {
   transform: scale(1.03);
+  opacity: 0.9;
 }
 
 .profile-button__icon {
   flex-shrink: 0;
-  color: white;
+  color: inherit;
 }
 
 .profile-button__text {
@@ -54,8 +55,8 @@
   right: 0;
   margin-top: 1.2rem;
   right: -20%;
-  background: white;
-  border: 1px solid #e1e5e9;
+  background: var(--background-color, white);
+  border: 1px solid var(--primary-color, #e1e5e9);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   min-width: 180px;
@@ -73,17 +74,17 @@
   cursor: pointer;
   font-family: 'Onest', sans-serif;
   font-size: 14px;
-  color: #2d3748;
-  transition: background-color 0.2s ease;
+  color: var(--text-color, #2d3748);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .dropdown-item:hover {
-  background-color: #f7fafc;
-  color: var(--color-web);
+  background-color: var(--primary-color, #f7fafc);
+  color: var(--footer-text, var(--color-web));
 }
 
 .dropdown-item:not(:last-child) {
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--primary-color, #e2e8f0);
 }
 
 @media (max-width: 768px) {

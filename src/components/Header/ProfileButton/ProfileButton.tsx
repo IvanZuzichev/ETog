@@ -4,6 +4,8 @@ import { IoPersonSharp } from 'react-icons/io5';
 import { Button } from '../Button/Button';
 import { ProfileDropdown } from '../ProfileDropdown/ProfileDropdown';
 import { useClickOutside } from '../../../hooks/useClickOutside';
+import { useTheme } from '../../../theme/ThemeContext';
+import { useNavigate } from 'react-router-dom'; 
 import './ProfileButton.css';
 
 interface ProfileButtonProps {
@@ -17,8 +19,10 @@ export const ProfileButton: FC<ProfileButtonProps> = ({
   showText = true,
   size = 'medium',
 }) => {
+  const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme(); 
 
   useClickOutside(containerRef as React.RefObject<HTMLElement>, () =>
     setIsDropdownOpen(false)
@@ -29,8 +33,21 @@ export const ProfileButton: FC<ProfileButtonProps> = ({
     onClick?.();
   };
 
-  const handleMenuItemClick = (menuItem: string) => {
-    alert(menuItem);
+  const handleMenuItemClick = (menuItemId: string) => {
+    switch (menuItemId) {
+      case 'account':
+        navigate('/MyAccount');
+        break;
+      case 'profile':
+        navigate('/Account');
+        break;
+      case 'config':
+        navigate('/Configuration');
+        break;
+      default:
+        console.warn('Unknown menu item:', menuItemId);
+    }
+    setIsDropdownOpen(false);
   };
 
   return (
@@ -42,6 +59,10 @@ export const ProfileButton: FC<ProfileButtonProps> = ({
         aria-expanded={isDropdownOpen}
         className='profile-button'
         variant='primary'
+        style={{
+          backgroundColor: theme.colors.primary,
+          color: theme.colors.footerheaderText
+        }}
       >
         <IoPersonSharp className='profile-button__icon' />
         {showText && <span className='profile-button__text'>Профиль</span>}

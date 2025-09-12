@@ -3,9 +3,10 @@ import { useState, useRef } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { Button } from '../Button/Button';
 import { useClickOutside } from '../../../hooks/useClickOutside';
-
+import { useTheme } from '../../../theme/ThemeContext';
 import './CreateButton.css';
 import { BurgerDropdown } from '../BurgerDropdown';
+import { useNavigate } from 'react-router-dom'; 
 
 interface CreateButtonProps {
   onClick?: () => void;
@@ -17,8 +18,10 @@ export const CreateButton: FC<CreateButtonProps> = ({
   onClick,
   size = 'medium',
 }) => {
+  const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
 
   useClickOutside(containerRef as React.RefObject<HTMLElement>, () =>
     setIsDropdownOpen(false)
@@ -29,8 +32,32 @@ export const CreateButton: FC<CreateButtonProps> = ({
     onClick?.();
   };
 
-  const handleMenuItemClick = (menuItem: string) => {
-    alert(menuItem);
+  const handleMenuItemClick = (menuItemId: string) => {
+    switch (menuItemId) {
+      case 'create':
+        navigate('/CreateEvent');
+        break;
+      case 'favorites':
+        navigate('/FavoriteEvents');
+        break;
+      case 'recommendation':
+        navigate('/RecommendationEvents');
+        break;
+      case 'subscribe':
+        navigate('/Subscribers');
+        break;
+      case 'config':
+        navigate('/Configuration');
+        break;
+      default:
+        console.warn('Unknown menu item:', menuItemId);
+    }
+    setIsDropdownOpen(false);
+  };
+
+  const buttonStyle = {
+    backgroundColor: theme.colors.primary,
+    color: theme.colors.footerheaderText
   };
 
   return (
@@ -42,6 +69,7 @@ export const CreateButton: FC<CreateButtonProps> = ({
         aria-expanded={isDropdownOpen}
         className='profile-button'
         variant='primary'
+        style={buttonStyle}
       >
         <GiHamburgerMenu className='profile-button__icon' />
       </Button>

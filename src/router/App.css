@@ -4,12 +4,30 @@
   box-sizing: border-box;
 }
 
+:root {
+  --header-height: clamp(60px, 8vh, 80px);
+  --padding-x: clamp(1rem, 4vw, 2rem);
+  --padding-y: clamp(0.5rem, 1.5vh, 1rem);
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #7b1fa2;
+  --footer-bg: #7b1fa2;
+  --footer-text: #ffffff;
+  --button-bg: #ffffff;
+  --button-text: #7b1fa2;
+  font-family: 'Onest', sans-serif;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
 }
 
 .app {

@@ -1,6 +1,8 @@
 import type { FC } from 'react';
 import { Dropdown } from '../Dropdown/Dropdown';
 import { DropdownItem } from '../DropdownItem/DropdownItem';
+import { useTheme } from '../../../theme/ThemeContext'; 
+import './ProfileDropdown.css';
 
 interface ProfileDropdownProps {
   isOpen: boolean;
@@ -9,9 +11,9 @@ interface ProfileDropdownProps {
 }
 
 const menuItems = [
-  { id: 'account', label: 'Аккаунт' },
-  { id: 'profile', label: 'Мой профиль' },
-  { id: 'config', label: 'Конфигурация' },
+  { id: 'profile', label: 'Аккаунт' },
+  { id: 'account', label: 'Мой профиль' },
+  { id: 'config', label: 'Настройки' },
 ];
 
 export const ProfileDropdown: FC<ProfileDropdownProps> = ({
@@ -19,8 +21,10 @@ export const ProfileDropdown: FC<ProfileDropdownProps> = ({
   onClose,
   onMenuItemClick,
 }) => {
-  const handleItemClick = (label: string) => {
-    onMenuItemClick(label);
+  const { theme } = useTheme(); 
+
+  const handleItemClick = (id: string) => {
+    onMenuItemClick(id);
     onClose();
   };
 
@@ -29,9 +33,13 @@ export const ProfileDropdown: FC<ProfileDropdownProps> = ({
       {menuItems.map(item => (
         <DropdownItem
           key={item.id}
-          onClick={() => handleItemClick(item.label)}
+          onClick={() => handleItemClick(item.id)}
           variant='primary'
           size='medium'
+          style={{
+            backgroundColor: theme.colors.background,
+            color: theme.colors.text
+          }} 
         >
           {item.label}
         </DropdownItem>

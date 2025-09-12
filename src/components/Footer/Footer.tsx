@@ -1,33 +1,45 @@
+import React from 'react';
 import './Footer.css';
+import { useTheme } from '../../theme/ThemeContext';
+import { useNavigate } from 'react-router-dom'; 
 
-export function Footer() {
-  // Функции для обработки кликов
-  const handleContactClick = () => {
-    alert('Связаться с нами');
+export const Footer: React.FC = () => {
+  const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
+
+  const handleContactClick = (): void => {
+    navigate('/ContactUs');
   };
 
-  const handleSupportClick = () => {
-    alert('Поддержка');
+  const handleSupportClick = (): void => {
+    navigate('/Support');
   };
 
-  const handleAboutClick = () => {
-    alert('О нас');
+  const handleAboutClick = (): void => {
+    navigate('/AboutUs');
   };
 
-  const handleLegalClick = () => {
-    alert('Юридические документы');
+  const handleLegalClick = (): void => {
+    navigate('/LegalDocuments');
   };
 
-  const handleTelegramClick = () => {
+  const handleTelegramClick = (): void => {
     alert('Мы в Telegram');
   };
 
-  const handleVkClick = () => {
+  const handleVkClick = (): void => {
     alert('Мы во Вконтакте');
   };
 
+  const footerStyle: React.CSSProperties = {
+    '--footer-bg': theme.colors.footerheaderBg,
+    '--footer-text': theme.colors.footerheaderText,
+    '--button-bg': theme.colors.buttonBg,
+    '--button-text': theme.colors.buttonText,
+  } as React.CSSProperties;
+
   return (
-    <footer className='footer'>
+    <footer className='footer' style={footerStyle}>
       <div className='footer-column'>
         <p onClick={handleContactClick}>Связаться с нами</p>
         <p onClick={handleSupportClick}>Поддержка</p>
@@ -42,4 +54,4 @@ export function Footer() {
       </div>
     </footer>
   );
-}
+};

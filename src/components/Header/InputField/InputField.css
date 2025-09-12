@@ -1,17 +1,19 @@
 .input-field {
   display: flex;
   align-items: stretch;
-  background: white;
+  background: var(--background-color, white);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   width: 100%;
   min-width: 40%;
+  border: 1px solid var(--primary-color, #7b1fa2)20;
 }
 
 .input-field:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary-color, #7b1fa2);
 }
 
 .input-field__input {
@@ -23,16 +25,18 @@
   font-size: 1rem;
   border-radius: 20px 0 0 20px;
   min-width: 0;
+  background: var(--background-color, white);
+  color: var(--text-color, #000);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .input-field__input::placeholder {
-  color: #999;
+  color: var(--text-color, #999);
+  opacity: 0.7;
 }
 
 .input-field__button {
   border: none;
-  background: #f0f0f0;
-  color: #000;
   padding: 0.8rem 1.2rem;
   cursor: pointer;
   font-family: 'Onest', sans-serif;
@@ -45,8 +49,7 @@
 }
 
 .input-field__button:hover {
-  background: #e6e6e6;
-  color: var(--color-web);
+  transform: translateY(-1px);
 }
 
 .input-field--small {
@@ -80,7 +83,8 @@
 }
 
 .input-field__input:focus {
-  background: #f8f8f8;
+  background: var(--background-color, #f8f8f8);
+  box-shadow: inset 0 0 0 2px var(--primary-color, #7b1fa2)40;
 }
 
 @media (max-width: 1200px) {

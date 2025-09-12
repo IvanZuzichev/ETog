@@ -1,4 +1,5 @@
 import type { FC, ReactNode } from 'react';
+import { useTheme } from '../../../theme/ThemeContext'; 
 import './DropDownBurger.css';
 
 interface DropdownBurgerProps {
@@ -14,7 +15,22 @@ export const DropdownBurger: FC<DropdownBurgerProps> = ({
   children,
   position = 'right',
 }) => {
+  const { theme } = useTheme();
+
   if (!isOpen) return null;
 
-  return <div className={`dropdown dropdown--${position}`}>{children}</div>;
+  const dropdownStyle = {
+    backgroundColor: theme.colors.background,
+    borderColor: `${theme.colors.primary}30`,
+    color: theme.colors.text
+  };
+
+  return (
+    <div 
+      className={`dropdown dropdown--${position}`}
+      style={dropdownStyle}
+    >
+      {children}
+    </div>
+  );
 };

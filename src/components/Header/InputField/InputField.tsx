@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import { useState } from 'react';
+import { useTheme } from '../../../theme/ThemeContext';
 import './InputField.css';
 
 interface InputFieldProps {
@@ -12,6 +13,7 @@ export const InputField: FC<InputFieldProps> = ({
   size = 'medium',
 }) => {
   const [searchText, setSearchText] = useState('');
+  const { theme } = useTheme();
 
   const handleButtonClick = () => {
     if (onSearch) {
@@ -29,8 +31,26 @@ export const InputField: FC<InputFieldProps> = ({
     }
   };
 
+  const inputFieldStyle = {
+    backgroundColor: theme.colors.background,
+    border: `1px solid ${theme.colors.primary}20`
+  };
+
+  const inputStyle = {
+    backgroundColor: theme.colors.background,
+    color: theme.colors.text
+  };
+
+  const buttonStyle = {
+    backgroundColor: theme.colors.buttonBg,
+    color: theme.colors.text
+  };
+
   return (
-    <div className={`input-field input-field--${size}`}>
+    <div 
+      className={`input-field input-field--${size}`}
+      style={inputFieldStyle}
+    >
       <input
         type='text'
         placeholder='Поиск мероприятия для себя...'
@@ -38,8 +58,13 @@ export const InputField: FC<InputFieldProps> = ({
         value={searchText}
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
+        style={inputStyle}
       />
-      <button className='input-field__button' onClick={handleButtonClick}>
+      <button 
+        className='input-field__button' 
+        onClick={handleButtonClick}
+        style={buttonStyle}
+      >
         Найти
       </button>
     </div>

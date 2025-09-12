@@ -3,7 +3,7 @@
   top: 100%;
   right: 0;
   margin-top: 1.2rem;
-  background: white;
+  background: var(--background-color, white);
   border: 1px solid #e1e5e9;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -19,6 +19,14 @@
 .profile-dropdown .dropdown-item {
   text-align: right;
   width: 100%;
+  background: var(--background-color, white);
+  color: var(--text-color, black);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.profile-dropdown .dropdown-item:hover {
+  background-color: var(--primary-color, #7b1fa2);
+  color: white;
 }
 
 @keyframes dropdownFadeIn {
