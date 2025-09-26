@@ -1,12 +1,21 @@
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
+import { useThemeApply } from '../../hooks/useThemeApply';
+import React from 'react';
+import CreateEventContent from '../../components/CreateEventContent/CreateEventContent';
 
-export function CreateEventPage() {
+
+const CreateEventPage: React.FC = () => {
+
+  useThemeApply();
+  
   return (
-    <div>
+    <div className='main-page-wrapper'>
       <Header/>
-      <p>CreateEventPage</p>
+        <CreateEventContent/>
       <Footer/>
     </div>
   );
 }
+
+export default CreateEventPage;

@@ -1,38 +1,22 @@
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
-import { ThemeToggleButton } from '../../components/ThemeToggleButton/ThemeToggleButton'
-import { useTheme } from '../../theme/ThemeContext';
-export function ConfigurationPage() {
-   const { theme } = useTheme(); // Получаем текущую тему
+import { ThemeToggleButton } from '../../components/ConfigurationContent/ThemeToggleButton/ThemeToggleButton'
+import { UseFullPages } from '../../components/ConfigurationContent/UseFullPages';
+import { useThemeApply } from '../../hooks/useThemeApply';
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 
-  const containerStyle: React.CSSProperties = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: 'calc(100vh - 250px)', // Исправлено: minHeight вместо mineLight
-    textAlign: 'center' as const, // Добавляем тип для textAlign
-    padding: '2rem',
-    backgroundColor: theme.colors.background,
-    transition: 'background-color 0.3s ease',
-    gap: '60px',
-    alignContent: 'center'
-  };
+const ConfigurationPage: React.FC = () => {
+  useThemeApply();
+  useDocumentTitle('Настройки | Events Together — ETog');
 
-  const textStyle: React.CSSProperties = {
-    fontSize: '1.5rem',
-    color: theme.colors.text,
-    maxWidth: '600px',
-    lineHeight: 1.6,
-    transition: 'color 0.3s ease'
-  };
   return (
-    <div>
+    <div className='main-page-wrapper'>
       <Header/>
-      <div style={containerStyle}>
-      <p>ConfigurationPage</p>
         <ThemeToggleButton/>
-        </div>
+        <UseFullPages/>
       <Footer/>
     </div>
   );
 }
+
+export default ConfigurationPage;

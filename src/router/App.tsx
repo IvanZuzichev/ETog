@@ -1,23 +1,23 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import MainPage from '../pages/MainPage/MainPage';
-import { CreateEventPage } from '../pages/CreateEventPage/CreateEventPage';
-import { FavoriteEventsPage } from '../pages/FavoriteEventsPage/FavoriteEventsPage';
-import { RecommendationEventsPage } from '../pages/RecommendationEventsPage/RecommendationEventsPage';
-import { SubscribersPage } from '../pages/SubscribersPage/SubscribersPage';
-import { ConfigurationPage } from '../pages/ConfigurationPage/ConfigurationPage';
-import { ContactUsPage } from '../pages/ContactUsPage/ContactUsPage';
-import { SupportPage } from '../pages/SupportPage/SupportPage';
-import { AboutUsPage } from '../pages/AboutUsPage/AboutUsPage';
-import { LegalDocumentsPage } from '../pages/LegalDocumentsPage/LegalDocumentsPage';
-import { MyAccountPage } from '../pages/MyAccountPage/MyAccountPage';
-import { AccountPage } from '../pages/AccountPage/AccountPage';
-import { RegistrationPage } from '../pages/RegistrationPage/RegistrationPage';
-import { AuthorizationPage } from '../pages/AuthorizationPage/AuthorizationPage';
-import { SendMessagePage } from '../pages/SendMessagePage/SendMessagePage';
-import { ResetPasswordPage } from '../pages/ResetPasswordPage/ResetPasswordPage';
-import { DetailsEventPage } from '../pages/DetailsEventPage/DetailsEventPage';
-import { Code404Page } from '../pages/Code404Page/Code404Page';
+import CreateEventPage from '../pages/CreateEventPage/CreateEventPage';
+import FavoriteEventsPage from '../pages/FavoriteEventsPage/FavoriteEventsPage';
+import RecommendationEventsPage from '../pages/RecommendationEventsPage/RecommendationEventsPage';
+import SubscribersPage from '../pages/SubscribersPage/SubscribersPage';
+import ConfigurationPage from '../pages/ConfigurationPage/ConfigurationPage';
+import ContactUsPage from '../pages/ContactUsPage/ContactUsPage';
+import SupportPage from '../pages/SupportPage/SupportPage';
+import AboutUsPage from '../pages/AboutUsPage/AboutUsPage';
+import LegalDocumentsPage from '../pages/LegalDocumentsPage/LegalDocumentsPage';
+import MyAccountPage from '../pages/MyAccountPage/MyAccountPage';
+import AccountPage from '../pages/AccountPage/AccountPage';
+import RegistrationPage from '../pages/RegistrationPage/RegistrationPage';
+import AuthorizationPage from '../pages/AuthorizationPage/AuthorizationPage';
+import SendMessagePage from '../pages/SendMessagePage/SendMessagePage';
+import ResetPasswordPage from '../pages/ResetPasswordPage/ResetPasswordPage';
+import DetailsEventPage from '../pages/DetailsEventPage/DetailsEventPage';
+import Code404Page from '../pages/Code404Page/Code404Page';
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
       <Router>
           <Routes>
             <Route index element={<MainPage/>} />
-            <Route path="/CreateEvent" element={<CreateEventPage/>} />
+            <Route path="/CreateEvent" element={<CreateEventPage/>}/>
             <Route path="/FavoriteEvents" element={<FavoriteEventsPage/>} />
             <Route path="/RecommendationEvents" element={<RecommendationEventsPage/>} />
             <Route path="/Subscribers" element={<SubscribersPage/>} />

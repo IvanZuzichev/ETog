@@ -25,7 +25,7 @@ export function MainContent() {
 
   return (
     <div style={containerStyle}>
-      <p style={textStyle}> Тут будет контент, но я хочу спать честно( </p>
+      {/* <p style={textStyle}> Тут будет контент, но я хочу спать честно( </p> */}
     
     </div>
   );

@@ -1,0 +1,297 @@
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #7b1fa2;
+  --footer-bg: #7b1fa2;
+  --footer-text: #ffffff;
+  --button-bg: #ffffff;
+  --button-text: #7b1fa2;
+  font-family: 'Onest', sans-serif;
+}
+
+.datetime-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.datetime-button {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: var(--button-bg);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--text-color);
+  transition: all 0.2s ease;
+}
+
+.datetime-button:hover {
+  background: #f5f5f5;
+}
+
+.datetime-arrow {
+  transition: transform 0.2s ease;
+  font-size: 12px;
+}
+
+.datetime-arrow.open {
+  transform: rotate(180deg);
+}
+
+.datetime-modal {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%; 
+  background: var(--background-color);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 4px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.datetime-content {
+  padding: 16px;
+}
+
+.calendar-section {
+  margin-bottom: 16px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.calendar-month {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.calendar-nav-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: var(--text-color);
+}
+
+.calendar-nav-button:hover {
+  background: #f0f0f0;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendar-day-header {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px;
+  color: #666;
+}
+
+.calendar-day {
+  padding: 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--text-color);
+  transition: all 0.2s ease;
+}
+
+.calendar-day:hover:not(.empty) {
+  background: #e8f4ff;
+}
+
+.calendar-day.selected {
+  background: var(--primary-color);
+  color: var(--footer-text);
+}
+
+.calendar-day.empty {
+  cursor: default;
+}
+
+.time-section h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.time-slot {
+  padding: 6px 4px;
+  border: 1px solid #ddd;
+  background: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--text-color);
+  transition: all 0.2s ease;
+}
+
+.time-slot:hover {
+  background: #e8f4ff;
+  border-color: var(--primary-color);
+}
+
+/* Темная тема */
+[data-theme="dark"] .datetime-button {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: #2d2d2d;
+  color: var(--footer-text);
+}
+
+[data-theme="dark"] .datetime-button:hover {
+  background: #3d3d3d;
+}
+
+[data-theme="dark"] .datetime-modal {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: #2d2d2d;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .calendar-nav-button {
+  color: var(--footer-text);
+}
+
+[data-theme="dark"] .calendar-nav-button:hover {
+  background: #3d3d3d;
+}
+
+[data-theme="dark"] .calendar-day-header {
+  color: #cccccc;
+}
+
+[data-theme="dark"] .calendar-day {
+  color: var(--footer-text);
+}
+
+[data-theme="dark"] .calendar-day:hover:not(.empty) {
+  background: #3d3d3d;
+}
+
+[data-theme="dark"] .calendar-day.selected {
+  background: var(--primary-color);
+  color: var(--footer-text);
+}
+
+[data-theme="dark"] .time-slot {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--footer-text);
+  background: #3d3d3d;
+}
+
+[data-theme="dark"] .time-slot:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--footer-text);
+}
+
+.selected-date-info {
+  margin-top: 12px;
+  padding: 8px;
+  border: 1px solid #bae6fd;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--text-color);
+}
+
+.datetime-actions {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.save-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.save-button.active {
+  background: var(--primary-color);
+  color: var(--footer-text);
+}
+
+.save-button.active:hover {
+  background: var(--primary-color);
+}
+
+.save-button.disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.selection-warning {
+  margin-top: 8px;
+  padding: 8px;
+  background: #fff3cd;
+  border: 1px solid #ffecb5;
+  border-radius: 4px;
+  color: #856404;
+  font-size: 12px;
+  text-align: center;
+}
+
+.time-slot.selected {
+  background: var(--primary-color);
+  color: var(--footer-text);
+  border-color: var(--primary-color);
+}
+
+/* Темная тема для новых элементов */
+[data-theme="dark"] .selected-date-info {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--footer-text);
+}
+
+[data-theme="dark"] .save-button.active {
+  background: var(--primary-color);
+}
+
+[data-theme="dark"] .save-button.active:hover {
+  background: var(--primary-color);
+}
+
+[data-theme="dark"] .selection-warning {
+  background: #fef3c7;
+  border-color: #fcd34d;
+  color: #92400e;
+}
+
+[data-theme="dark"] .time-slot.selected {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--footer-text);
+}

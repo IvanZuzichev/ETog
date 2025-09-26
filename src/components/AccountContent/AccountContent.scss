@@ -1,0 +1,332 @@
+:root {
+  --header-height: clamp(60px, 8vh, 80px);
+  --padding-x: clamp(1rem, 4vw, 2rem);
+  --padding-y: clamp(0.5rem, 1.5vh, 1rem);
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #7b1fa2;
+  --footer-bg: #7b1fa2;
+  --footer-text: #ffffff;
+  --button-bg: #ffffff;
+  --button-text: #7b1fa2;
+  font-family: 'Onest', sans-serif;
+}
+
+.accountcontent-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: var(--background-color);
+  border-radius: 16px;
+  box-shadow: rgba(108, 107, 107, 0.48) 0px 0px 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.profile-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+.profile-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.profile-left {
+  flex: 0 0 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-right {
+  flex: 0 0 50%;
+}
+
+.profile-photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.profile-photo {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1/1;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.verification-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: #e8edf5;
+  border-radius: 25px;
+  border: 1px solid #4c81af;
+}
+
+.checkmark-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.verified-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2e577d;
+}
+
+.accountcontent-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.accountcontent-form .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.accountcontent-form .form-field .form-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+  width: 100%;
+  text-align: left;
+  color: var(--text-color);
+  padding-left: 4px;
+}
+
+.accountcontent-form .form-field .form-input,
+.accountcontent-form .form-field .form-textarea {
+  width: 100%;
+  padding: 14px 18px;
+  border: 2px solid rgba(123, 31, 162, 0.2);
+  border-radius: 12px;
+  background: var(--background-color);
+  font-size: 1rem;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.accountcontent-form .form-field .form-input:focus,
+.accountcontent-form .form-field .form-textarea:focus {
+  outline: none;
+  border-color: #7b1fa2;
+  box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.15);
+  transform: translateY(-1px);
+}
+
+.accountcontent-form .form-field .form-input:hover,
+.accountcontent-form .form-field .form-textarea:hover {
+  border-color: rgba(123, 31, 162, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.accountcontent-form .form-field .form-input::placeholder,
+.accountcontent-form .form-field .form-textarea::placeholder {
+  color: #999;
+}
+
+.accountcontent-form .form-field .form-textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: inherit;
+  line-height: 1.5;
+}
+
+.accountcontent-form .form-field .button-accountcontents {
+  width: 100%;
+  padding: 16px 24px;
+  border: 1px solid rgba(123, 31, 162, 0.3);
+  border-radius: 12px;
+  background: var(--footer-bg);
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  transition: all 0.3s ease;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(123, 31, 162, 0.3);
+  margin-top: 15px;
+}
+
+.accountcontent-form .form-field .button-accountcontents:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(123, 31, 162, 0.4);
+  border-color: rgba(123, 31, 162, 0.5);
+}
+
+.accountcontent-form .form-field .button-accountcontents:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(123, 31, 162, 0.3);
+}
+
+/* Темная тема */
+[data-theme="dark"] .accountcontent-container {
+  background: var(--background-color, #1a1a1a);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="dark"] .profile-title {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .accountcontent-form .form-field .form-input,
+[data-theme="dark"] .accountcontent-form .form-field .form-textarea {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: var(--background-color, #2d2d2d);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .accountcontent-form .form-field .form-input:focus,
+[data-theme="dark"] .accountcontent-form .form-field .form-textarea:focus {
+  border-color: #9c27b0;
+  box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.2);
+}
+
+[data-theme="dark"] .accountcontent-form .form-field .form-input:hover,
+[data-theme="dark"] .accountcontent-form .form-field .form-textarea:hover {
+  border-color: rgba(156, 39, 176, 0.4);
+}
+
+[data-theme="dark"] .accountcontent-form .form-field .button-accountcontents {
+  border-color: rgba(156, 39, 176, 0.4);
+  background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+  box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
+}
+
+[data-theme="dark"] .accountcontent-form .form-field .button-accountcontents:hover {
+  background: linear-gradient(135deg, #7b1fa2 0%, #6a1b8a 100%);
+  border-color: rgba(156, 39, 176, 0.6);
+}
+
+[data-theme="dark"] .verification-badge {
+  background: #2d3b2d;
+  border-color: #4c6aaf;
+}
+
+[data-theme="dark"] .verified-text {
+  color: #a5d6a7;
+}
+
+[data-theme="dark"] .profile-photo {
+  background: #2d2d2d;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+  .accountcontent-container {
+    width: 90vw;
+    padding: 20px;
+  }
+  
+  .profile-content {
+    gap: 5%;
+  }
+  
+  .profile-left,
+  .profile-right {
+    flex: 0 0 45%;
+  }
+}
+
+@media (max-width: 768px) {
+  .accountcontent-container {
+    width: 95vw;
+    padding: 15px;
+    margin: 10px;
+  }
+  
+  .profile-content {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .profile-left,
+  .profile-right {
+    flex: none;
+    width: 100%;
+  }
+  
+  .profile-photo {
+    max-width: 250px;
+  }
+  
+  .accountcontent-form .form-field .form-input,
+  .accountcontent-form .form-field .form-textarea,
+  .accountcontent-form .form-field .button-accountcontents {
+    width: 100% !important;
+  }
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Стили для сообщений об ошибках */
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 4px;
+  display: block;
+}
+
+.button-accountcontent {
+  font-size: 1rem;
+  font-weight: 500;
+  width: 100%;
+  color: var(--button-text);
+  border: none;
+  transform: none;
+  border-radius: 12px;
+  margin-top: 10px;
+  background-color: var(--background-color);
+  box-shadow: none;
+  font-weight: 500;
+  
+  &:hover {
+    color: #7b1fa2 !important;
+    text-decoration: underline !important;
+  }
+}

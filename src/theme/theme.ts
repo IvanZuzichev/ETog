@@ -4,7 +4,7 @@ export interface Theme {
     primary: string;
     background: string;
     text: string;
-    footerheaderBg: string;
+    footerheaderBg: string; 
     footerheaderText: string;
     buttonBg?: string;
     buttonText?: string;

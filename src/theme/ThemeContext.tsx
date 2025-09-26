@@ -1,10 +1,10 @@
-// ThemeContext.tsx
+// src/theme/ThemeContext.tsx
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import type { Theme, ThemeName } from './theme';
 import { lightTheme, darkTheme } from './theme';
 import Cookies from 'js-cookie';
-import { useStorageSync, broadcastStorageChange } from '../hooks/useStotageSync';
+import { applyThemeToDOM } from '../utils/themeUtils';
 
 interface ThemeContextType {
   theme: Theme;
@@ -14,39 +14,33 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-const THEME_COOKIE_KEY = 'theme';
-const THEME_STORAGE_KEY = 'theme';
 
 interface ThemeProviderProps {
   children: ReactNode;
 }
 
+const THEME_COOKIE_KEY = 'theme';
+const THEME_STORAGE_KEY = 'theme';
+
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [currentTheme, setCurrentTheme] = useState<Theme>(lightTheme);
+  const getInitialTheme = (): Theme => {
+    const savedThemeCookie = Cookies.get(THEME_COOKIE_KEY) as ThemeName;
+    const savedThemeStorage = localStorage.getItem(THEME_STORAGE_KEY) as ThemeName;
+    const savedTheme = savedThemeCookie || savedThemeStorage;
+    
+    if (savedTheme === 'dark') return darkTheme;
+    if (savedTheme === 'light') return lightTheme;
+    
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return prefersDark ? darkTheme : lightTheme;
+  };
 
-  const handleThemeSync = useCallback((themeValue: string) => {
-    const themeName = themeValue as ThemeName;
-    if (themeName === 'dark') {
-      setCurrentTheme(darkTheme);
-    } else if (themeName === 'light') {
-      setCurrentTheme(lightTheme);
-    }
-  }, []);
-
-  useStorageSync(THEME_STORAGE_KEY, handleThemeSync, [handleThemeSync]);
+  const [currentTheme, setCurrentTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
-    const savedTheme = Cookies.get(THEME_COOKIE_KEY) as ThemeName;
-    
-    if (savedTheme === 'dark') {
-      setCurrentTheme(darkTheme);
-    } else if (savedTheme === 'light') {
-      setCurrentTheme(lightTheme);
-    } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setCurrentTheme(prefersDark ? darkTheme : lightTheme);
-    }
-  }, []);
+    applyThemeToDOM(currentTheme);
+    localStorage.setItem(THEME_STORAGE_KEY, currentTheme.name);
+  }, [currentTheme]);
 
   const toggleTheme = () => {
     setCurrentTheme(prevTheme => {
@@ -58,7 +52,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         secure: process.env.NODE_ENV === 'production'
       });
       
-      broadcastStorageChange(THEME_STORAGE_KEY, newTheme.name);
+      localStorage.setItem(THEME_STORAGE_KEY, newTheme.name);
+      applyThemeToDOM(newTheme);
       
       return newTheme;
     });

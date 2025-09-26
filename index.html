@@ -8,6 +8,43 @@
     <link rel="icon" type="image/svg+xml" href="./src/assets/logo/Logo-Normal.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Events Together — ETog</title>
+    
+   <script>
+  function getInitialTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') return 'dark';
+    if (savedTheme === 'light') return 'light';
+    
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return prefersDark ? 'dark' : 'light';
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const theme = getInitialTheme();
+    const root = document.documentElement;
+    
+    // Добавляем класс к body
+    document.body.className = theme + '-theme';
+    
+    if (theme === 'dark') {
+      root.style.setProperty('--background-color', '#121212');
+      root.style.setProperty('--text-color', '#ffffff');
+      root.style.setProperty('--primary-color', '#1e1e1e');
+      root.style.setProperty('--footer-bg', '#1e1e1e');
+      root.style.setProperty('--footer-text', '#ffffff');
+      root.style.setProperty('--button-bg', '#333333');
+      root.style.setProperty('--button-text', '#ffffff');
+    } else {
+      root.style.setProperty('--background-color', '#ffffff');
+      root.style.setProperty('--text-color', '#000000');
+      root.style.setProperty('--primary-color', '#7b1fa2');
+      root.style.setProperty('--footer-bg', '#7b1fa2');
+      root.style.setProperty('--footer-text', '#ffffff');
+      root.style.setProperty('--button-bg', '#e6e6e6');
+      root.style.setProperty('--button-text', '#000000');
+    }
+  });
+</script>
   </head>
   <body>
     <div id="root"></div>

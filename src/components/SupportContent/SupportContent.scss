@@ -1,0 +1,311 @@
+:root {
+  --header-height: clamp(60px, 8vh, 80px);
+  --padding-x: clamp(1rem, 4vw, 2rem);
+  --padding-y: clamp(0.5rem, 1.5vh, 1rem);
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #7b1fa2;
+  --footer-bg: #7b1fa2;
+  --footer-text: #ffffff;
+  --button-bg: #ffffff;
+  --button-text: #7b1fa2;
+  font-family: 'Onest', sans-serif;
+}
+
+.support-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 43.75rem;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  align-items: center;
+  background: var(--background);
+  border-radius: 16px;
+  box-shadow: rgba(108, 107, 107, 0.48) 0px 0px 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    align-items: center;
+
+    .form-label {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+      width: 100%; // Вернул ширину
+      text-align: left;
+      color: var(--text);
+      padding-left: 4px;
+
+      &:after {
+        content: ' *';
+        color: #dc3545;
+      }
+
+      &:not([for="title"]):not([for="description"]):not([for="address"]):not([for="phone"]):not([for="email"]):after {
+        content: '';
+      }
+    }
+
+    .form-h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-align: center;
+      width: 100%;
+      margin-bottom: 15px;
+      color: var(--text);
+      padding: 12px 0;
+      // Убрал фиолетовую полоску
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%; // Вернул ширину
+      padding: 12px 16px;
+      border: 2px solid rgba(123, 31, 162, 0.2);
+      border-radius: 12px;
+      background: var(--background);
+      font-size: 1rem;
+      color: var(--text);
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+      &:focus {
+        outline: none;
+        border-color: #7b1fa2;
+        box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.15);
+        transform: translateY(-1px);
+      }
+
+      &:hover {
+        border-color: rgba(123, 31, 162, 0.4);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      &::placeholder {
+        color: #999;
+        // Убрал курсив
+      }
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+      font-family: inherit;
+      line-height: 1.5;
+    }
+
+    .dropdown-container,
+    .datetime-container {
+      width: 100% !important;
+      display: flex;
+      justify-content: center;
+
+      .dropdown-button,
+      .datetime-button {
+        width: 100% !important;
+        padding: 12px 16px !important;
+        border: 2px solid rgba(123, 31, 162, 0.2) !important;
+        border-radius: 12px !important;
+        background: var(--background) !important;
+        cursor: pointer !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        font-size: 1rem !important;
+        color: var(--text) !important;
+        transition: all 0.3s ease !important;
+        box-sizing: border-box !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+
+        &:hover {
+          border-color: rgba(123, 31, 162, 0.4) !important;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+          transform: translateY(-1px) scale(1.01);
+          background: rgba(123, 31, 162, 0.05) !important;
+        }
+
+        &:active {
+          transform: translateY(0) scale(1);
+        }
+      }
+    }
+
+    .button-supports {
+      width: 100%;
+      padding: 14px 20px;
+      border: 1px solid rgba(123, 31, 162, 0.3);
+      border-radius: 12px;
+      background: var(--footer-bg);
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+      transition: all 0.3s ease;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(123, 31, 162, 0.3);
+
+      &:hover {
+        transform: translateY(-2px) scale(1.01);
+        box-shadow: 0 6px 20px rgba(123, 31, 162, 0.4);
+        border-color: rgba(123, 31, 162, 0.5);
+      }
+
+      &:active {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 3px 10px rgba(123, 31, 162, 0.3);
+      }
+    }
+
+    .button-supports-help {
+         font-size: 1rem;
+      font-weight: 500;
+        width: 100%;
+      color: var(--button-text);
+      border: none;
+        transform: none;
+      border-radius: 12px;
+      margin-top: 10px;
+    background-color: var(--background-color);
+    box-shadow: none;
+    font-weight: 500;
+          &:hover {
+      color: #7b1fa2 !important;
+      text-decoration: underline !important;
+    }
+    }
+  }
+}
+
+/* Темная тема */
+[data-theme="dark"] {
+  .support-form-container {
+    background: var(--background, #1a1a1a);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); // Серая тень для темной темы
+
+    .form-field {
+      .form-input,
+      .form-textarea {
+        border-color: rgba(255, 255, 255, 0.15);
+        background: var(--background, #2d2d2d);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+        &:focus {
+          border-color: #9c27b0;
+          box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.2);
+        }
+
+        &:hover {
+          border-color: rgba(156, 39, 176, 0.4);
+        }
+      }
+
+      .dropdown-container,
+      .datetime-container {
+        .dropdown-button,
+        .datetime-button {
+          border-color: rgba(255, 255, 255, 0.15) !important;
+          background: var(--background, #2d2d2d) !important;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+
+          &:hover {
+            border-color: rgba(156, 39, 176, 0.4) !important;
+            background: rgba(156, 39, 176, 0.1) !important;
+          }
+        }
+      }
+
+      .button-contacts {
+        border-color: rgba(156, 39, 176, 0.4);
+        background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+        box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
+
+        &:hover {
+          background: linear-gradient(135deg, #7b1fa2 0%, #6a1b8a 100%);
+          border-color: rgba(156, 39, 176, 0.6);
+        }
+      }
+    }
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .support-form-container {
+    width: 100%;
+    padding: 15px;
+    padding-bottom: 10px; // Сохранено
+    border-radius: 12px;
+    margin: 10px;
+    width: calc(100% - 20px);
+
+    .form-field {
+      .form-input,
+      .form-textarea,
+      .dropdown-container .dropdown-button,
+      .datetime-container .datetime-button,
+      .button-events {
+        width: 100% !important; // Сохранено
+      }
+
+      .form-label {
+        width: 100%; // Сохранено
+      }
+    }
+  }
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Убираем стрелки у number input */
+.no-spinner {
+  -moz-appearance: textfield;
+  
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+/* Стили для сообщений об ошибках */
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 4px;
+  display: block;
+}
+
+.form-label:after {
+  content: ' *';
+  color: #dc3545;
+}
+
+.form-label:not([for="title"]):not([for="description"]):not([for="address"]):not([for="phone"]):not([for="email"]):after {
+  content: '';
+  color: #dc3545;
+}
+
+.form-field:nth-child(1) .form-label:after,
+.form-field:nth-child(2) .form-label:after {
+  content: ' *' !important;
+  color: #dc3545;
+}

@@ -1,12 +1,25 @@
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
+import { useTheme } from '../../theme/ThemeContext';
+import { useThemeApply } from '../../hooks/useThemeApply';
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
+import { AboutUsContent } from '../../components/AboutUsContent/AboutUsContent';
 
-export function AboutUsPage() {
+const AboutUsPage: React.FC = () => {
+  useThemeApply();
+   useDocumentTitle('О нашем проекте | Events Together — ETog');
+const { theme } = useTheme(); // Получаем текущую тему
+
   return (
-    <div>
+    <>
+      <div className='main-page-wrapper'>
+     
       <Header/>
-      <p>AboutUsPage</p>
+      <AboutUsContent/>
       <Footer/>
-    </div>
+      </div>
+      </>
   );
 }
+
+export default AboutUsPage;

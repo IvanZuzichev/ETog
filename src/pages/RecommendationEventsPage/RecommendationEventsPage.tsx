@@ -1,12 +1,17 @@
 import { Header } from '../../components/Header/Header';
-import { Footer } from '../../components/Footer/Footer';
+import { useThemeApply } from '../../hooks/useThemeApply';
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 
-export function RecommendationEventsPage() {
+const RecommendationEventsPage: React.FC = () => {
+  useThemeApply();
+  useDocumentTitle('Рекомендуем посетить | Events Together — ETog');
+  
   return (
-    <div>
+    <div className='main-page-wrapper'>
       <Header/>
-      <p>RecommendationEventsPage</p>
-      <Footer/>
+        {/* <p>RecommendationEventsPage</p> */}
     </div>
   );
 }
+
+export default RecommendationEventsPage;
