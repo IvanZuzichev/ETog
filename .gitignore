@@ -1,4 +1,4 @@
-# Logs
+# Логи
 logs
 *.log
 npm-debug.log*
@@ -7,18 +7,46 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# Зависимости
+node_modules/
+/dist
+/dist-ssr
 *.local
 
-# Editor directories and files
+# Директории и файлы редактора
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Переменные окружения
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Результаты сборки
+build/
+*.tsbuildinfo
+
+# Отчеты покрытия тестами
+coverage/
+.nyc_output/
+
+# Данные времени выполнения
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Опциональная директория кэша npm
+.npm
+
+# Опциональный кэш eslint
+.eslintcache

@@ -1,82 +1,108 @@
-// src/theme/ThemeContext.tsx
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import type { ReactNode } from 'react';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 import type { Theme, ThemeName } from './theme';
 import { lightTheme, darkTheme } from './theme';
-import Cookies from 'js-cookie';
 import { applyThemeToDOM } from '../utils/themeUtils';
+import Cookies from 'js-cookie';
 
-interface ThemeContextType {
+interface ThemeStore {
   theme: Theme;
-  toggleTheme: () => void;
-  isDark: boolean;
   themeName: ThemeName;
-}
-
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
-interface ThemeProviderProps {
-  children: ReactNode;
+  isDark: boolean;
+  toggleTheme: () => void;
+  setTheme: (themeName: ThemeName) => void;
+  initializeTheme: () => void;
 }
 
 const THEME_COOKIE_KEY = 'theme';
-const THEME_STORAGE_KEY = 'theme';
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const getInitialTheme = (): Theme => {
-    const savedThemeCookie = Cookies.get(THEME_COOKIE_KEY) as ThemeName;
-    const savedThemeStorage = localStorage.getItem(THEME_STORAGE_KEY) as ThemeName;
-    const savedTheme = savedThemeCookie || savedThemeStorage;
-    
-    if (savedTheme === 'dark') return darkTheme;
-    if (savedTheme === 'light') return lightTheme;
-    
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return prefersDark ? darkTheme : lightTheme;
-  };
+export const useThemeStore = create<ThemeStore>()(
+  persist(
+    (set, get) => ({
+      theme: lightTheme,
+      themeName: 'light',
+      isDark: false,
 
-  const [currentTheme, setCurrentTheme] = useState<Theme>(getInitialTheme);
+      initializeTheme: () => {
+        const savedThemeCookie = Cookies.get(THEME_COOKIE_KEY) as ThemeName;
+        const savedThemeStorage = localStorage.getItem('theme') as ThemeName;
+        const savedTheme = savedThemeCookie || savedThemeStorage;
 
-  useEffect(() => {
-    applyThemeToDOM(currentTheme);
-    localStorage.setItem(THEME_STORAGE_KEY, currentTheme.name);
-  }, [currentTheme]);
+        let initialTheme: Theme;
+        let initialThemeName: ThemeName;
 
-  const toggleTheme = () => {
-    setCurrentTheme(prevTheme => {
-      const newTheme = prevTheme.name === 'light' ? darkTheme : lightTheme;
-      
-      Cookies.set(THEME_COOKIE_KEY, newTheme.name, { 
-        expires: 365,
-        sameSite: 'strict',
-        secure: process.env.NODE_ENV === 'production'
-      });
-      
-      localStorage.setItem(THEME_STORAGE_KEY, newTheme.name);
-      applyThemeToDOM(newTheme);
-      
-      return newTheme;
-    });
-  };
+        if (savedTheme === 'dark') {
+          initialTheme = darkTheme;
+          initialThemeName = 'dark';
+        } else if (savedTheme === 'light') {
+          initialTheme = lightTheme;
+          initialThemeName = 'light';
+        } else {
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          initialTheme = prefersDark ? darkTheme : lightTheme;
+          initialThemeName = prefersDark ? 'dark' : 'light';
+        }
 
-  const value: ThemeContextType = {
-    theme: currentTheme,
-    toggleTheme,
-    isDark: currentTheme.name === 'dark',
-    themeName: currentTheme.name as ThemeName
-  };
+        applyThemeToDOM(initialTheme);
 
-  return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
-  );
-};
+        set({
+          theme: initialTheme,
+          themeName: initialThemeName,
+          isDark: initialThemeName === 'dark',
+        });
+      },
 
-export const useTheme = (): ThemeContextType => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
+      toggleTheme: () => {
+        const current = get();
+        const newThemeName = current.themeName === 'light' ? 'dark' : 'light';
+        const newTheme = newThemeName === 'light' ? lightTheme : darkTheme;
+
+        Cookies.set(THEME_COOKIE_KEY, newTheme.name, {
+          expires: 365,
+          sameSite: 'strict',
+          secure: process.env.NODE_ENV === 'production',
+        });
+
+        applyThemeToDOM(newTheme);
+
+        set({
+          theme: newTheme,
+          themeName: newThemeName,
+          isDark: newThemeName === 'dark',
+        });
+      },
+
+      setTheme: (themeName: ThemeName) => {
+        const newTheme = themeName === 'light' ? lightTheme : darkTheme;
+
+        Cookies.set(THEME_COOKIE_KEY, newTheme.name, {
+          expires: 365,
+          sameSite: 'strict',
+          secure: process.env.NODE_ENV === 'production',
+        });
+
+        applyThemeToDOM(newTheme);
+
+        set({
+          theme: newTheme,
+          themeName: themeName,
+          isDark: themeName === 'dark',
+        });
+      },
+    }),
+    {
+      name: 'theme-storage',
+      onRehydrateStorage: () => state => {
+        if (state) {
+          applyThemeToDOM(state.theme);
+        }
+      },
+    }
+  )
+);
+
+// Хук для использования темы (аналогичный интерфейс)
+export const useTheme = () => {
+  const { theme, toggleTheme, isDark, themeName, setTheme } = useThemeStore();
+  return { theme, toggleTheme, isDark, themeName, setTheme };
 };

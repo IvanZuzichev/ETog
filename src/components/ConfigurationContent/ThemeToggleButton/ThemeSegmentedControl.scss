@@ -1,3 +1,5 @@
+// Стили для компонента смены темы на странице "Конфигураций"
+
 .text-column {
   display: flex;
   flex-direction: column;
@@ -8,6 +10,7 @@
     font-weight: 600;
     margin: 0;
     line-height: 1.2;
+    color: var(--text-color, #000000);
   }
 }
 
@@ -29,13 +32,16 @@
   justify-items: center;
   margin: 2rem auto;
   padding: 1.5rem;
-  border-radius: 10px;
+  border-radius: 1.4rem;
+  box-shadow: 0 0 8px rgba(108, 107, 107, 0.48);
+  color: var(--text-color, #000000);
 
   &__label {
     font-size: 1rem;
     font-weight: 500;
     min-width: 40px;
     text-align: center;
+    color: var(--text-color, #000000);
   }
 
   &__switch {
@@ -59,7 +65,7 @@
     }
 
     &:checked + .theme-toggle__slider {
-         border-radius: 1.875rem;
+      border-radius: 1.875rem;
       background: var(--primary, #7b1fa2);
       
       &::before {
@@ -113,47 +119,11 @@
   }
 }
 
-[data-theme="dark"] {
-  .theme-toggle {
-    &__slider {
-      border-color: rgba(255, 255, 255, 0.2);
-      background: var(--background, #121212);
-      
-      &::before {
-        background: #333333;
-      }
-    }
-  }
-}
-
-@media (max-width: 1200px) {
-  .theme-toggle {
-    width: 20rem;
-    padding: 1.3rem;
-  }
-}
-
-@media (max-width: 992px) {
-  .theme-toggle {
-    width: 18rem;
-    gap: 15px;
-    padding: 1.2rem;
-    
-    .text-column .theme-toggle-text {
-      font-size: 1rem;
-    }
-    
-    &__label {
-      font-size: 0.95rem;
-    }
-  }
-}
 
 @media (max-width: 768px) {
   .theme-toggle {
-    width: 40% !important;
+    width: 40%;
     max-width: 60%;
-   
     padding: 1rem;
     gap: 15px;
     
@@ -161,7 +131,7 @@
       align-items: center;
       
       .theme-toggle-text {
-        font-size: 0.9rem !important;
+        font-size: 0.9rem;
         text-align: center;
       }
     }
@@ -171,7 +141,7 @@
     }
     
     &__label {
-      font-size: 0.9rem !important;
+      font-size: 0.9rem;
       min-width: auto;
     }
     
@@ -199,17 +169,17 @@
 
 @media (max-width: 480px) {
   .theme-toggle {
-    width: 50% !important;
+    width: 50%;
     margin: 1rem auto;
     padding: 0.8rem;
     gap: 12px;
     
     .text-column .theme-toggle-text {
-      font-size: 0.9rem !important;
+      font-size: 0.9rem;
     }
     
     &__label {
-      font-size: 0.9rem !important;
+      font-size: 0.9rem;
     }
     
     &__switch {

@@ -1,1 +1,1 @@
-export { EventFormFields } from './EventFormFields'
+export { EventFormFields } from './EventFormFields';

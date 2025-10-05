@@ -1,4 +1,4 @@
-# Dependencies
+# Зависимости
 node_modules/
 build/
 dist/
@@ -8,18 +8,18 @@ coverage/
 *.min.js
 *.min.css
 
-# Logs
+# Логи
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Runtime data
+# Данные времени выполнения
 pids
 *.pid
 *.seed
 *.pid.lock
 
-# Environment variables
+# Переменные окружения
 .env
 .env.local
 .env.development.local
@@ -32,6 +32,13 @@ pids
 *.swp
 *.swo
 
-# OS
+# Операционные системы
 .DS_Store
 Thumbs.db
+
+# Дополнения для Prettier
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+*.md
+*.json

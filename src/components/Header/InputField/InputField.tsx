@@ -1,56 +1,44 @@
 import type { FC } from 'react';
 import { useState } from 'react';
-import { useTheme } from '../../../theme/ThemeContext';
-import './InputField.css';
+import { useBlacklist } from '../../../hooks/useBlackList';
+import './InputField.scss';
 
 interface InputFieldProps {
   onSearch?: (searchText: string) => void;
   size?: 'small' | 'medium' | 'large';
 }
-
-export const InputField: FC<InputFieldProps> = ({
-  onSearch,
-  size = 'medium',
-}) => {
+// Компонент для поля ввода поиска
+export const InputField: FC<InputFieldProps> = ({ onSearch, size = 'medium' }) => {
   const [searchText, setSearchText] = useState('');
-  const { theme } = useTheme();
+  const { validateInput } = useBlacklist();
+
+  // Проверяем наличие запрещенных слов
+  const containsBlacklistedWords = validateInput(searchText).containsBlacklistedWords;
+  const isButtonDisabled = containsBlacklistedWords || !searchText.trim();
 
   const handleButtonClick = () => {
+    if (isButtonDisabled) return;
+
     if (onSearch) {
       onSearch(searchText);
     }
   };
-
+  // Проверка длины вводимого текста
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
+    const value = e.target.value;
+    if (value.length <= 120) {
+      setSearchText(value);
+    }
   };
-
+  // Начало поиска
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !isButtonDisabled) {
       handleButtonClick();
     }
   };
 
-  const inputFieldStyle = {
-    backgroundColor: theme.colors.background,
-    border: `1px solid ${theme.colors.primary}20`
-  };
-
-  const inputStyle = {
-    backgroundColor: theme.colors.background,
-    color: theme.colors.text
-  };
-
-  const buttonStyle = {
-    backgroundColor: theme.colors.buttonBg,
-    color: theme.colors.text
-  };
-
   return (
-    <div 
-      className={`input-field input-field--${size}`}
-      style={inputFieldStyle}
-    >
+    <div className={`input-field input-field--${size}`}>
       <input
         type='text'
         placeholder='Поиск мероприятия для себя...'
@@ -58,12 +46,11 @@ export const InputField: FC<InputFieldProps> = ({
         value={searchText}
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
-        style={inputStyle}
       />
-      <button 
-        className='input-field__button' 
+      <button
+        className={`input-field__button ${isButtonDisabled ? 'input-field__button--disabled' : ''}`}
         onClick={handleButtonClick}
-        style={buttonStyle}
+        disabled={isButtonDisabled}
       >
         Найти
       </button>

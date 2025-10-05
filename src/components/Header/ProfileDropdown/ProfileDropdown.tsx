@@ -1,27 +1,18 @@
 import type { FC } from 'react';
 import { Dropdown } from '../Dropdown/Dropdown';
 import { DropdownItem } from '../DropdownItem/DropdownItem';
-import { useTheme } from '../../../theme/ThemeContext'; 
-import './ProfileDropdown.css';
+import { PROFILE_MENU_ITEMS } from '../../../store/constants/profileMenuConstants';
+import './ProfileDropdown.scss';
+import { useThemeApply } from '../../../hooks/useThemeApply';
 
 interface ProfileDropdownProps {
   isOpen: boolean;
   onClose: () => void;
   onMenuItemClick: (menuItem: string) => void;
 }
-
-const menuItems = [
-  { id: 'profile', label: 'Аккаунт' },
-  { id: 'account', label: 'Мой профиль' },
-  { id: 'config', label: 'Настройки' },
-];
-
-export const ProfileDropdown: FC<ProfileDropdownProps> = ({
-  isOpen,
-  onClose,
-  onMenuItemClick,
-}) => {
-  const { theme } = useTheme(); 
+// Компонент для выпадающего списка справа
+export const ProfileDropdown: FC<ProfileDropdownProps> = ({ isOpen, onClose, onMenuItemClick }) => {
+  useThemeApply();
 
   const handleItemClick = (id: string) => {
     onMenuItemClick(id);
@@ -30,16 +21,13 @@ export const ProfileDropdown: FC<ProfileDropdownProps> = ({
 
   return (
     <Dropdown isOpen={isOpen} onClose={onClose} position='right'>
-      {menuItems.map(item => (
+      {PROFILE_MENU_ITEMS.map(item => (
         <DropdownItem
           key={item.id}
           onClick={() => handleItemClick(item.id)}
           variant='primary'
           size='medium'
-          style={{
-            backgroundColor: theme.colors.background,
-            color: theme.colors.text
-          }} 
+          className='profile-dropdown-item'
         >
           {item.label}
         </DropdownItem>

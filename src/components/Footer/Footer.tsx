@@ -1,45 +1,39 @@
-import React from 'react';
-import './Footer.css';
-import { useTheme } from '../../theme/ThemeContext';
-import { useNavigate } from 'react-router-dom'; 
+import './Footer.scss';
+import { useThemeApply } from '../../hooks/useThemeApply';
+import { useNavigate } from 'react-router-dom';
 
+// Компонент отвечающий за Футер (Footer) или же подвал страницы с полезными страницами
 export const Footer: React.FC = () => {
+  useThemeApply();
   const navigate = useNavigate();
-  const { theme, toggleTheme } = useTheme();
-
+  // Переход на страницу "Связаться с нами"
   const handleContactClick = (): void => {
     navigate('/ContactUs');
   };
-
+  // Переход на страницу "Поддержки"
   const handleSupportClick = (): void => {
     navigate('/Support');
   };
-
+  // Переход на страницу "О нас"
   const handleAboutClick = (): void => {
     navigate('/AboutUs');
   };
-
+  // Переход на страницу "Юридических документов"
   const handleLegalClick = (): void => {
     navigate('/LegalDocuments');
   };
-
+  // Переход в нашу социальную сеть Телеграм канал
   const handleTelegramClick = (): void => {
     alert('Мы в Telegram');
   };
-
+  // Переход в наше сообщество ВКонтакте
   const handleVkClick = (): void => {
     alert('Мы во Вконтакте');
   };
 
-  const footerStyle: React.CSSProperties = {
-    '--footer-bg': theme.colors.footerheaderBg,
-    '--footer-text': theme.colors.footerheaderText,
-    '--button-bg': theme.colors.buttonBg,
-    '--button-text': theme.colors.buttonText,
-  } as React.CSSProperties;
-
   return (
-    <footer className='footer' style={footerStyle}>
+    // Текста для перехода на страницы
+    <footer className='footer'>
       <div className='footer-column'>
         <p onClick={handleContactClick}>Связаться с нами</p>
         <p onClick={handleSupportClick}>Поддержка</p>

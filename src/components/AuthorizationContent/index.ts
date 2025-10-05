@@ -1,0 +1,1 @@
+export { AuthorizationContent } from './AuthorizationContent';

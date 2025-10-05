@@ -1,16 +1,14 @@
 import { Header } from '../../components/Header/Header';
-import { useThemeApply } from '../../hooks/useThemeApply';
 import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 
+// Страница с выводом мероприятий, своих подписок
 const SubscribersPage: React.FC = () => {
-  useThemeApply();
-   useDocumentTitle('Мероприятия подписок | Events Together — ETog');
+  useDocumentTitle('Мероприятия подписок | Events Together — ETog');
   return (
     <div className='main-page-wrapper'>
-      <Header/>
-        {/* <p>SubscribersPage</p> */}
+      <Header />
     </div>
   );
-}
+};
 
 export default SubscribersPage;

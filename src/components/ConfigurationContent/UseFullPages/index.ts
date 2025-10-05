@@ -1,1 +1,1 @@
-export { UseFullPages } from './UseFullPages'
+export { UseFullPages } from './UseFullPages';

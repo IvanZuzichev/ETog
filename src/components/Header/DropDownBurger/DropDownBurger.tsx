@@ -1,36 +1,14 @@
 import type { FC, ReactNode } from 'react';
-import { useTheme } from '../../../theme/ThemeContext'; 
-import './DropDownBurger.css';
-
+import './DropDownBurger.scss';
+import { useThemeApply } from '../../../hooks/useThemeApply';
 interface DropdownBurgerProps {
   isOpen: boolean;
-  onClose: () => void;
   children: ReactNode;
   position?: 'left' | 'right';
 }
 
-export const DropdownBurger: FC<DropdownBurgerProps> = ({
-  isOpen,
-  onClose,
-  children,
-  position = 'right',
-}) => {
-  const { theme } = useTheme();
-
+export const DropdownBurger: FC<DropdownBurgerProps> = ({ isOpen, children, position = 'right' }) => {
+  useThemeApply();
   if (!isOpen) return null;
-
-  const dropdownStyle = {
-    backgroundColor: theme.colors.background,
-    borderColor: `${theme.colors.primary}30`,
-    color: theme.colors.text
-  };
-
-  return (
-    <div 
-      className={`dropdown dropdown--${position}`}
-      style={dropdownStyle}
-    >
-      {children}
-    </div>
-  );
+  return <div className={`dropdown dropdown--${position}`}>{children}</div>;
 };

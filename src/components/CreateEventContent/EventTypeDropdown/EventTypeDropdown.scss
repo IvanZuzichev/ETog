@@ -1,3 +1,4 @@
+// Стили для выпадающего списка выбора типа мероприятия
 :root {
   --background-color: #ffffff;
   --text-color: #000000;
@@ -62,52 +63,20 @@
   font-size: 14px;
   color: var(--text-color);
   transition: background-color 0.2s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
 }
 
 .dropdown-item:hover {
   background: #f0f0f0;
+  color: #000000;
 }
 
 .dropdown-item-selected {
   background: #e8e8e8;
+  color: #000000;
   font-weight: 500;
-}
-
-/* Темная тема */
-[data-theme="dark"] .dropdown-button {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: #2d2d2d;
-  color: var(--footer-text);
-}
-
-[data-theme="dark"] .dropdown-button:hover {
-  background: #3d3d3d;
-}
-
-[data-theme="dark"] .dropdown-menu {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: #2d2d2d;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="dark"] .dropdown-item {
-  color: var(--footer-text);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .dropdown-item:last-child {
-  border-bottom: none;
-}
-
-[data-theme="dark"] .dropdown-item:hover {
-  background: #3d3d3d;
-}
-
-[data-theme="dark"] .dropdown-item-selected {
-  background: #4d4d4d;
-  color: var(--primary-color);
-}
-
-[data-theme="dark"] .dropdown-item:hover {
-  color: var(--primary-color);
 }

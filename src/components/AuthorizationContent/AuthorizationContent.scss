@@ -169,55 +169,6 @@
   box-shadow: 0 3px 10px rgba(123, 31, 162, 0.3);
 }
 
-/* Темная тема */
-[data-theme="dark"] .authorization-form-container {
-  background: var(--background-color, #1a1a1a);
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-}
-
-[data-theme="dark"] .authorization-form-container .form-field .form-input,
-[data-theme="dark"] .authorization-form-container .form-field .form-textarea {
-  border-color: rgba(255, 255, 255, 0.15);
-  background: var(--background-color, #2d2d2d);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-[data-theme="dark"] .authorization-form-container .form-field .form-input:focus,
-[data-theme="dark"] .authorization-form-container .form-field .form-textarea:focus {
-  border-color: #9c27b0;
-  box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.2);
-}
-
-[data-theme="dark"] .authorization-form-container .form-field .form-input:hover,
-[data-theme="dark"] .authorization-form-container .form-field .form-textarea:hover {
-  border-color: rgba(156, 39, 176, 0.4);
-}
-
-[data-theme="dark"] .authorization-form-container .form-field .dropdown-container .dropdown-button,
-[data-theme="dark"] .authorization-form-container .form-field .datetime-container .datetime-button {
-  border-color: rgba(255, 255, 255, 0.15) !important;
-  background: var(--background-color, #2d2d2d) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
-}
-
-[data-theme="dark"] .authorization-form-container .form-field .dropdown-container .dropdown-button:hover,
-[data-theme="dark"] .authorization-form-container .form-field .datetime-container .datetime-button:hover {
-  border-color: rgba(156, 39, 176, 0.4) !important;
-  background: rgba(156, 39, 176, 0.1) !important;
-}
-
-[data-theme="dark"] .authorization-form-container .form-field .button-authorizations {
-  border-color: rgba(156, 39, 176, 0.4);
-  background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
-  box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
-}
-
-[data-theme="dark"] .authorization-form-container .form-field .button-authorizations:hover {
-  background: linear-gradient(135deg, #7b1fa2 0%, #6a1b8a 100%);
-  border-color: rgba(156, 39, 176, 0.6);
-}
-
 /* Адаптивность */
 @media (max-width: 768px) {
   .authorization-form-container {
@@ -304,3 +255,43 @@
       text-decoration: underline !important;
     }
     }
+
+    .character-count-right {
+  font-size: 0.75rem;
+  color: #666;
+  text-align: right;
+  margin-top: 4px;
+  width: 100%;
+  display: block;
+  
+  [data-theme="dark"] & {
+    color: #999;
+  }
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 4px;
+  display: block;
+  text-align: left;
+  width: 100%;
+}
+
+.security-warning {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+  color: #856404;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.button-authorizations:disabled,
+.button-authorization:disabled,
+.form-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

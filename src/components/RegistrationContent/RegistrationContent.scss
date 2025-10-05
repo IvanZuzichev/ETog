@@ -1,3 +1,5 @@
+// Стили для регистрации
+
 :root {
   --header-height: clamp(60px, 8vh, 80px);
   --padding-x: clamp(1rem, 4vw, 2rem);
@@ -44,15 +46,6 @@
   text-align: left;
   color: var(--text-color);
   padding-left: 4px;
-}
-
-.registration-form-container .form-field .form-label:after {
-  content: ' *';
-  color: #dc3545;
-}
-
-.registration-form-container .form-field .form-label:not([for="title"]):not([for="description"]):not([for="address"]):not([for="phone"]):not([for="email"]):after {
-  content: '';
 }
 
 .registration-form-container .form-field .form-h1 {
@@ -105,44 +98,6 @@
   line-height: 1.5;
 }
 
-.registration-form-container .form-field .dropdown-container,
-.registration-form-container .form-field .datetime-container {
-  width: 100% !important;
-  display: flex;
-  justify-content: center;
-}
-
-.registration-form-container .form-field .dropdown-container .dropdown-button,
-.registration-form-container .form-field .datetime-container .datetime-button {
-  width: 100% !important;
-  padding: 12px 16px !important;
-  border: 2px solid rgba(123, 31, 162, 0.2) !important;
-  border-radius: 12px !important;
-  background: var(--background-color) !important;
-  cursor: pointer !important;
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  font-size: 1rem !important;
-  color: var(--text-color) !important;
-  transition: all 0.3s ease !important;
-  box-sizing: border-box !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-}
-
-.registration-form-container .form-field .dropdown-container .dropdown-button:hover,
-.registration-form-container .form-field .datetime-container .datetime-button:hover {
-  border-color: rgba(123, 31, 162, 0.4) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-  transform: translateY(-1px) scale(1.01);
-  background: rgba(123, 31, 162, 0.05) !important;
-}
-
-.registration-form-container .form-field .dropdown-container .dropdown-button:active,
-.registration-form-container .form-field .datetime-container .datetime-button:active {
-  transform: translateY(0) scale(1);
-}
-
 .registration-form-container .form-field .button-registrations {
   width: 100%;
   padding: 14px 20px;
@@ -169,56 +124,7 @@
   box-shadow: 0 3px 10px rgba(123, 31, 162, 0.3);
 }
 
-/* Темная тема */
-[data-theme="dark"] .registration-form-container {
-  background: var(--background-color, #1a1a1a);
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-}
-
-[data-theme="dark"] .registration-form-container .form-field .form-input,
-[data-theme="dark"] .registration-form-container .form-field .form-textarea {
-  border-color: rgba(255, 255, 255, 0.15);
-  background: var(--background-color, #2d2d2d);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-[data-theme="dark"] .registration-form-container .form-field .form-input:focus,
-[data-theme="dark"] .registration-form-container .form-field .form-textarea:focus {
-  border-color: #9c27b0;
-  box-shadow: 0 0 0 3px rgba(156, 39, 176, 0.2);
-}
-
-[data-theme="dark"] .registration-form-container .form-field .form-input:hover,
-[data-theme="dark"] .registration-form-container .form-field .form-textarea:hover {
-  border-color: rgba(156, 39, 176, 0.4);
-}
-
-[data-theme="dark"] .registration-form-container .form-field .dropdown-container .dropdown-button,
-[data-theme="dark"] .registration-form-container .form-field .datetime-container .datetime-button {
-  border-color: rgba(255, 255, 255, 0.15) !important;
-  background: var(--background-color, #2d2d2d) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
-}
-
-[data-theme="dark"] .registration-form-container .form-field .dropdown-container .dropdown-button:hover,
-[data-theme="dark"] .registration-form-container .form-field .datetime-container .datetime-button:hover {
-  border-color: rgba(156, 39, 176, 0.4) !important;
-  background: rgba(156, 39, 176, 0.1) !important;
-}
-
-[data-theme="dark"] .registration-form-container .form-field .button-registrations {
-  border-color: rgba(156, 39, 176, 0.4);
-  background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
-  box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
-}
-
-[data-theme="dark"] .registration-form-container .form-field .button-registrations:hover {
-  background: linear-gradient(135deg, #7b1fa2 0%, #6a1b8a 100%);
-  border-color: rgba(156, 39, 176, 0.6);
-}
-
-/* Адаптивность */
+// Адаптивность
 @media (max-width: 768px) {
   .registration-form-container {
     width: 100%;
@@ -231,10 +137,8 @@
   
   .registration-form-container .form-field .form-input,
   .registration-form-container .form-field .form-textarea,
-  .registration-form-container .form-field .dropdown-container .dropdown-button,
-  .registration-form-container .form-field .datetime-container .datetime-button,
-  .registration-form-container .form-field .button-events {
-    width: 100% !important;
+  .registration-form-container .form-field .button-registrations {
+    width: 100%;
   }
   
   .registration-form-container .form-field .form-label {
@@ -254,23 +158,13 @@
   }
 }
 
-/* Убираем стрелки у number input */
-.no-spinner {
-  -moz-appearance: textfield;
-}
-
-.no-spinner::-webkit-outer-spin-button,
-.no-spinner::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Стили для сообщений об ошибках */
 .error-message {
   color: #dc3545;
   font-size: 0.875rem;
   margin-top: 4px;
   display: block;
+  text-align: left;
+  width: 100%;
 }
 
 .form-label:after {
@@ -278,34 +172,25 @@
   color: #dc3545;
 }
 
-.form-label:not([for="title"]):not([for="description"]):not([for="address"]):not([for="phone"]):not([for="email"]):after {
-  content: '';
-}
-
-.form-field:nth-child(1) .form-label:after,
-.form-field:nth-child(2) .form-label:after {
-  content: ' *' !important;
-}
-
 .button-registration {
-         font-size: 1rem;
-      font-weight: 500;
-        width: 100%;
-      color: var(--button-text);
-      border: none;
-        transform: none;
-      border-radius: 12px;
-      margin-top: 10px;
-    background-color: var(--background-color);
-    box-shadow: none;
-    font-weight: 500;
-          &:hover {
-      color: #7b1fa2 !important;
-      text-decoration: underline !important;
-    }
-    }
+  font-size: 1rem;
+  font-weight: 500;
+  width: 100%;
+  color: var(--button-text);
+  border: none;
+  border-radius: 12px;
+  margin-top: 10px;
+  background-color: var(--background-color);
+  box-shadow: none;
+  cursor: pointer;
+  
+  &:hover {
+    color: #7b1fa2;
+    text-decoration: underline;
+  }
+}
 
-    .agreement-field {
+.agreement-field {
   margin-top: 10px;
   margin-bottom: 5px;
 }
@@ -331,10 +216,6 @@
   margin: 0;
   display: flex;
   align-items: center;
-  
-  &:after {
-    content: '' !important;
-  }
 }
 
 .agreement-link {
@@ -345,4 +226,13 @@
   &:hover {
     text-decoration: underline;
   }
+}
+
+.character-count-right {
+  font-size: 0.75rem;
+  color: #666;
+  text-align: right;
+  margin-top: 4px;
+  width: 100%;
+  display: block;
 }

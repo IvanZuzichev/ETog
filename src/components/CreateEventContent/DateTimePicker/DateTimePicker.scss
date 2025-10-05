@@ -1,3 +1,5 @@
+// Стили для компонента календаря на странице создания мероприятия
+
 :root {
   --background-color: #ffffff;
   --text-color: #000000;
@@ -118,6 +120,7 @@
 
 .calendar-day:hover:not(.empty) {
   background: #e8f4ff;
+  color: #000000;
 }
 
 .calendar-day.selected {
@@ -157,61 +160,8 @@
 
 .time-slot:hover {
   background: #e8f4ff;
+    color: #000000;
   border-color: var(--primary-color);
-}
-
-/* Темная тема */
-[data-theme="dark"] .datetime-button {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: #2d2d2d;
-  color: var(--footer-text);
-}
-
-[data-theme="dark"] .datetime-button:hover {
-  background: #3d3d3d;
-}
-
-[data-theme="dark"] .datetime-modal {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: #2d2d2d;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="dark"] .calendar-nav-button {
-  color: var(--footer-text);
-}
-
-[data-theme="dark"] .calendar-nav-button:hover {
-  background: #3d3d3d;
-}
-
-[data-theme="dark"] .calendar-day-header {
-  color: #cccccc;
-}
-
-[data-theme="dark"] .calendar-day {
-  color: var(--footer-text);
-}
-
-[data-theme="dark"] .calendar-day:hover:not(.empty) {
-  background: #3d3d3d;
-}
-
-[data-theme="dark"] .calendar-day.selected {
-  background: var(--primary-color);
-  color: var(--footer-text);
-}
-
-[data-theme="dark"] .time-slot {
-  border-color: rgba(255, 255, 255, 0.2);
-  color: var(--footer-text);
-  background: #3d3d3d;
-}
-
-[data-theme="dark"] .time-slot:hover {
-  background: var(--primary-color);
-  border-color: var(--primary-color);
-  color: var(--footer-text);
 }
 
 .selected-date-info {
@@ -267,31 +217,4 @@
   background: var(--primary-color);
   color: var(--footer-text);
   border-color: var(--primary-color);
-}
-
-/* Темная тема для новых элементов */
-[data-theme="dark"] .selected-date-info {
-  background: var(--primary-color);
-  border-color: var(--primary-color);
-  color: var(--footer-text);
-}
-
-[data-theme="dark"] .save-button.active {
-  background: var(--primary-color);
-}
-
-[data-theme="dark"] .save-button.active:hover {
-  background: var(--primary-color);
-}
-
-[data-theme="dark"] .selection-warning {
-  background: #fef3c7;
-  border-color: #fcd34d;
-  color: #92400e;
-}
-
-[data-theme="dark"] .time-slot.selected {
-  background: var(--primary-color);
-  border-color: var(--primary-color);
-  color: var(--footer-text);
 }

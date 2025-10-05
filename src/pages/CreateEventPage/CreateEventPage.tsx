@@ -1,21 +1,17 @@
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
-import { useThemeApply } from '../../hooks/useThemeApply';
 import React from 'react';
 import CreateEventContent from '../../components/CreateEventContent/CreateEventContent';
 
-
+// Страница  создания нового мероприятия
 const CreateEventPage: React.FC = () => {
-
-  useThemeApply();
-  
   return (
     <div className='main-page-wrapper'>
-      <Header/>
-        <CreateEventContent/>
-      <Footer/>
+      <Header />
+      <CreateEventContent />
+      <Footer />
     </div>
   );
-}
+};
 
 export default CreateEventPage;

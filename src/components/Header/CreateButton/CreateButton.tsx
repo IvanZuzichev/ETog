@@ -3,61 +3,56 @@ import { useState, useRef } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { Button } from '../Button/Button';
 import { useClickOutside } from '../../../hooks/useClickOutside';
-import { useTheme } from '../../../theme/ThemeContext';
-import './CreateButton.css';
+import './CreateButton.scss';
 import { BurgerDropdown } from '../BurgerDropdown';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
+import { useThemeApply } from '../../..//hooks/useThemeApply';
 
 interface CreateButtonProps {
   onClick?: () => void;
-  showText?: boolean;
   size?: 'small' | 'medium' | 'large';
 }
-
-export const CreateButton: FC<CreateButtonProps> = ({
-  onClick,
-  size = 'medium',
-}) => {
+// Компонент для левого выпадающего списка
+export const CreateButton: FC<CreateButtonProps> = ({ onClick, size = 'medium' }) => {
+  useThemeApply();
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { theme } = useTheme();
 
-  useClickOutside(containerRef as React.RefObject<HTMLElement>, () =>
-    setIsDropdownOpen(false)
-  );
+  useClickOutside(containerRef as React.RefObject<HTMLElement>, () => setIsDropdownOpen(false));
 
   const handleButtonClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
     onClick?.();
   };
-
+  // Выбор кнопки и переход на определенную страницу
   const handleMenuItemClick = (menuItemId: string) => {
     switch (menuItemId) {
+      // Страницу создания мероприятия
       case 'create':
         navigate('/CreateEvent');
         break;
+      // Страницу избранных мероприятий
       case 'favorites':
         navigate('/FavoriteEvents');
         break;
+      // Страницу рекомендованных мероприятий
       case 'recommendation':
         navigate('/RecommendationEvents');
         break;
+      // Страница подписки
       case 'subscribe':
         navigate('/Subscribers');
         break;
+      // Страницы настроеек
       case 'config':
         navigate('/Configuration');
         break;
+      // Проверка если вдруг при добавлении новой кнопки непраивльно ее добавили
       default:
         console.warn('Unknown menu item:', menuItemId);
     }
     setIsDropdownOpen(false);
-  };
-
-  const buttonStyle = {
-    backgroundColor: theme.colors.primary,
-    color: theme.colors.footerheaderText
   };
 
   return (
@@ -69,7 +64,6 @@ export const CreateButton: FC<CreateButtonProps> = ({
         aria-expanded={isDropdownOpen}
         className='profile-button'
         variant='primary'
-        style={buttonStyle}
       >
         <GiHamburgerMenu className='profile-button__icon' />
       </Button>

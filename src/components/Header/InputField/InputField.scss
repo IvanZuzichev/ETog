@@ -1,0 +1,135 @@
+// Стили для поля ввода поиска
+
+.input-field {
+  display: flex;
+  align-items: stretch;
+  background: var(--background-color, white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  width: 100%;
+  min-width: 40%;
+  border: 1px solid rgba(123, 31, 162, 0.125);
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary-color, #7b1fa2);
+  }
+
+  &__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.8rem 1.2rem;
+    font-family: 'Onest', sans-serif;
+    font-size: 1rem;
+    border-radius: 20px 0 0 20px;
+    min-width: 0;
+    background: var(--background-color, white);
+    color: var(--text-color, #000);
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &::placeholder {
+      color: var(--text-color, #999);
+      opacity: 0.7;
+    }
+
+    &:focus {
+      background: var(--background-color, #f8f8f8);
+      box-shadow: inset 0 0 0 2px rgba(123, 31, 162, 0.25);
+    }
+  }
+
+  &__button {
+    border: none;
+    padding: 0.8rem 1.2rem;
+    cursor: pointer;
+    font-family: 'Onest', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 0 20px 20px 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+    background: var(--button-bg);
+    color: var(--button-text);
+
+    &--disabled {
+      cursor: not-allowed;
+    
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+
+  &--small {
+    max-width: 300px;
+
+    .input-field__input,
+    .input-field__button {
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  &--medium {
+    max-width: 400px;
+
+    .input-field__input,
+    .input-field__button {
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+    }
+  }
+
+  &--large {
+    max-width: 500px;
+
+    .input-field__input,
+    .input-field__button {
+      padding: 1rem 1.5rem;
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    max-width: 400px;
+  }
+
+  @media (max-width: 992px) {
+    max-width: 350px;
+  }
+
+  @media (max-width: 768px) {
+    width: 100% !important;
+    max-width: 100%;
+    margin: 0 auto;
+
+    &__button {
+      padding: 0.8rem 1rem !important;
+      font-size: 0.9rem !important;
+      min-width: 60px;
+    }
+
+    &__input {
+      padding: 0.7rem 1rem !important;
+      font-size: 0.9rem !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 100% !important;
+
+    &__button {
+      padding: 0.7rem 0.8rem !important;
+      min-width: 50px;
+      font-size: 0.8rem !important;
+    }
+
+    &__input {
+      padding: 0.6rem 0.8rem !important;
+      font-size: 0.8rem !important;
+    }
+  }
+}

@@ -4,9 +4,9 @@ import { IoPersonSharp } from 'react-icons/io5';
 import { Button } from '../Button/Button';
 import { ProfileDropdown } from '../ProfileDropdown/ProfileDropdown';
 import { useClickOutside } from '../../../hooks/useClickOutside';
-import { useTheme } from '../../../theme/ThemeContext';
-import { useNavigate } from 'react-router-dom'; 
-import './ProfileButton.css';
+import { useNavigate } from 'react-router-dom';
+import './ProfileButton.scss';
+import { useThemeApply } from '../../../hooks/useThemeApply';
 
 interface ProfileButtonProps {
   onClick?: () => void;
@@ -14,37 +14,36 @@ interface ProfileButtonProps {
   size?: 'small' | 'medium' | 'large';
 }
 
-export const ProfileButton: FC<ProfileButtonProps> = ({
-  onClick,
-  showText = true,
-  size = 'medium',
-}) => {
+// Компонент, отвечающий за кнопку профиля
+export const ProfileButton: FC<ProfileButtonProps> = ({ onClick, showText = true, size = 'medium' }) => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { theme } = useTheme(); 
-
-  useClickOutside(containerRef as React.RefObject<HTMLElement>, () =>
-    setIsDropdownOpen(false)
-  );
+  useThemeApply();
+  useClickOutside(containerRef as React.RefObject<HTMLElement>, () => setIsDropdownOpen(false));
 
   const handleButtonClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
     onClick?.();
   };
 
+  // Выбор меню по нажатию на кнопку
   const handleMenuItemClick = (menuItemId: string) => {
     switch (menuItemId) {
+      // Переход на страницу "Мой профиль"
       case 'account':
         navigate('/MyAccount');
         break;
+      // Переход на страницу "Аккаунт"
       case 'profile':
         navigate('/Account');
         break;
+      // Переход на страницу "Настройки"
       case 'config':
         navigate('/Configuration');
         break;
       default:
+        // Проверка на ошибку если непраивльно добавили еще кнопки
         console.warn('Unknown menu item:', menuItemId);
     }
     setIsDropdownOpen(false);
@@ -59,10 +58,6 @@ export const ProfileButton: FC<ProfileButtonProps> = ({
         aria-expanded={isDropdownOpen}
         className='profile-button'
         variant='primary'
-        style={{
-          backgroundColor: theme.colors.primary,
-          color: theme.colors.footerheaderText
-        }}
       >
         <IoPersonSharp className='profile-button__icon' />
         {showText && <span className='profile-button__text'>Профиль</span>}

@@ -1,13 +1,16 @@
+// Значения для темы
+
 export interface Theme {
   name: string;
   colors: {
     primary: string;
     background: string;
     text: string;
-    footerheaderBg: string; 
+    footerheaderBg: string;
     footerheaderText: string;
     buttonBg?: string;
     buttonText?: string;
+    error: string;
   };
 }
 
@@ -20,8 +23,9 @@ export const lightTheme: Theme = {
     footerheaderBg: '#7b1fa2',
     footerheaderText: '#ffffff',
     buttonBg: '#e6e6e6',
-    buttonText: '#000000'
-  }
+    buttonText: '#000000',
+    error: 'red',
+  },
 };
 
 export const darkTheme: Theme = {
@@ -33,8 +37,9 @@ export const darkTheme: Theme = {
     footerheaderBg: '#1e1e1e',
     footerheaderText: '#ffffff',
     buttonBg: '#333333',
-    buttonText: '#ffffff'
-  }
+    buttonText: '#ffffff',
+    error: 'red',
+  },
 };
 
 export type ThemeName = 'light' | 'dark';

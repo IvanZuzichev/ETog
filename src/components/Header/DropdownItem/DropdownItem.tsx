@@ -1,12 +1,11 @@
 import type { FC, ButtonHTMLAttributes } from 'react';
-import { useTheme } from '../../../theme/ThemeContext';
-import './DropdownItem.css';
-
+import './DropdownItem.scss';
+import { useThemeApply } from '../../..//hooks/useThemeApply';
 interface DropdownItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'small' | 'medium' | 'large';
   variant?: 'primary' | 'secondary';
 }
-
+// Компонент отвечающий за кнопки выпадающего списка слева
 export const DropdownItem: FC<DropdownItemProps> = ({
   children,
   size = 'medium',
@@ -14,21 +13,9 @@ export const DropdownItem: FC<DropdownItemProps> = ({
   className = '',
   ...props
 }) => {
-  const { theme } = useTheme();
-
-  const dropdownItemStyle = {
-    backgroundColor: variant === 'secondary' ? 
-      `${theme.colors.primary}20` : 'transparent',
-    color: theme.colors.text,
-    borderBottomColor: `${theme.colors.primary}20`
-  };
-
+  useThemeApply();
   return (
-    <button
-      className={`dropdown-item dropdown-item--${size} dropdown-item--${variant} ${className}`}
-      style={dropdownItemStyle}
-      {...props}
-    >
+    <button className={`dropdown-item dropdown-item--${size} dropdown-item--${variant} ${className}`} {...props}>
       {children}
     </button>
   );

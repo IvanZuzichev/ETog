@@ -1,5 +1,5 @@
-// src/utils/themeUtils.ts
-import type { Theme } from '../theme/theme'; // Добавьте 'type'
+// Утилита для работы с темой
+import type { Theme } from '../theme/theme';
 
 export const applyThemeToDOM = (theme: Theme): void => {
   const root = document.documentElement;

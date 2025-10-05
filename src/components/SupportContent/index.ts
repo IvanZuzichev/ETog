@@ -1,0 +1,1 @@
+export { SupportContent } from './SupportContent';

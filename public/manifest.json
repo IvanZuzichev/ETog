@@ -1,0 +1,31 @@
+{
+  "short_name": "Events Together",
+  "name": "Events Together — ETog",
+  "description": "Платформа для организации и поиска мероприятий",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "pwa-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "pwa-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#7b1fa2",
+  "background_color": "#121212",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "categories": ["social", "entertainment", "events"]
+}

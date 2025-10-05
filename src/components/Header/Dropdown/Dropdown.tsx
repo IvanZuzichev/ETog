@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react';
-import { useTheme } from '../../../theme/ThemeContext';
-import './Dropdown.css';
+import './Dropdown.scss';
+import { useThemeApply } from '../../..//hooks/useThemeApply';
 
 interface DropdownProps {
   isOpen: boolean;
@@ -8,29 +8,10 @@ interface DropdownProps {
   children: ReactNode;
   position?: 'left' | 'right';
 }
-
-export const Dropdown: FC<DropdownProps> = ({
-  isOpen,
-  onClose,
-  children,
-  position = 'right',
-}) => {
-  const { theme } = useTheme();
-
+// Компонент для выпадающего списка слева
+export const Dropdown: FC<DropdownProps> = ({ isOpen, children, position = 'right' }) => {
+  useThemeApply();
   if (!isOpen) return null;
 
-  const dropdownStyle = {
-    backgroundColor: theme.colors.background,
-    borderColor: `${theme.colors.primary}30`,
-    color: theme.colors.text
-  };
-
-  return (
-    <div 
-      className={`dropdown dropdown--${position}`}
-      style={dropdownStyle}
-    >
-      {children}
-    </div>
-  );
+  return <div className={`dropdown dropdown--${position}`}>{children}</div>;
 };

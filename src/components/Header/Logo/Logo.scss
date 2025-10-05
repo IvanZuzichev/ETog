@@ -1,0 +1,28 @@
+// Стили для логотипа
+
+.logo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: clamp(0.5rem, 2vw, 1rem);
+  cursor: pointer;
+
+  &__image {
+    width: var(--logo-size);
+    height: var(--logo-size);
+    object-fit: contain;
+    border-radius: 12px 12px 12px 12px;
+  }
+
+  &--small &__image {
+    --logo-size: clamp(35px, 5vmin, 60px);
+  }
+
+  &--medium &__image {
+    --logo-size: clamp(40px, 6vmin, 70px);
+  }
+
+  &--large &__image {
+    --logo-size: clamp(50px, 7vmin, 80px);
+  }
+}

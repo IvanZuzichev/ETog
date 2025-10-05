@@ -1,3 +1,5 @@
+// Стили страницы "О нас"
+
 .work-container {
   width: 100vh;
   margin: 0 auto;
@@ -61,6 +63,7 @@
 
 .profile-image {
   aspect-ratio: 1/1;
+  width: 25vh;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   height: auto;
@@ -107,6 +110,6 @@
   }
   
   .profile-image {
-    width: 150px;
+    width: 25vh;
   }
 }

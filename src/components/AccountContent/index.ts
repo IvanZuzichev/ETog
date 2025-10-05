@@ -1,0 +1,1 @@
+export { AccountContent } from './AccountContent';

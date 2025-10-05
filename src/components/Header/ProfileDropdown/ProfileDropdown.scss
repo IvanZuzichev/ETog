@@ -1,0 +1,53 @@
+// Стили для выпадающего списка справа
+
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 1.2rem;
+  background: var(--background-color, white);
+  border: 1px solid rgba(123, 31, 162, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 180px;
+  z-index: 1000;
+  overflow: hidden;
+  animation: dropdownFadeIn 0.2s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  .dropdown-item {
+    text-align: right;
+    width: 100%;
+    background: var(--background-color, white);
+    color: var(--text-color, black);
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover {
+      background-color: var(--primary-color, #7b1fa2);
+      color: white;
+    }
+  }
+
+  @keyframes dropdownFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    min-width: 160px;
+    right: 0;
+  }
+}
+
+.profile-dropdown-item {
+  background-color: var(--background-color, #ffffff);
+  color: var(--text-color, #000000);
+}

@@ -1,46 +1,33 @@
 import type { FC } from 'react';
 import { DropdownBurger } from '../DropDownBurger/DropDownBurger';
 import { DropdownItem } from '../DropdownItem/DropdownItem';
-import { useTheme } from '../../../theme/ThemeContext';
+import { BURGER_MENU_ITEMS } from '../../../store/constants/burgerMenuConstants';
+import './BurgerDropdown.scss';
+import { useThemeApply } from '../../../hooks/useThemeApply';
 
 interface BurgerDropdownProps {
   isOpen: boolean;
   onClose: () => void;
   onMenuItemClick: (menuItemId: string) => void;
 }
-
-const menuItems = [
-  { id: 'create', label: 'Создать мероприятие' },
-  { id: 'favorites', label: 'Избранные мероприятия' },
-  { id: 'recommendation', label: 'Рекомендованные мероприятия' },
-  { id: 'subscribe', label: 'Подписки' },
-  { id: 'config', label: 'Настройки' },
-];
-
-export const BurgerDropdown: FC<BurgerDropdownProps> = ({
-  isOpen,
-  onClose,
-  onMenuItemClick,
-}) => {
-  const { theme } = useTheme();
-
+// Компонент для выпадающего списка Хедер (Header) Слева
+export const BurgerDropdown: FC<BurgerDropdownProps> = ({ isOpen, onClose, onMenuItemClick }) => {
+  useThemeApply();
+  // Нажатие на какую-то опредленную ячейку
   const handleItemClick = (id: string) => {
     onMenuItemClick(id);
     onClose();
   };
 
   return (
-    <DropdownBurger isOpen={isOpen} onClose={onClose} position='left'>
-      {menuItems.map(item => (
+    <DropdownBurger isOpen={isOpen} position='left'>
+      {BURGER_MENU_ITEMS.map(item => (
         <DropdownItem
           key={item.id}
           onClick={() => handleItemClick(item.id)}
           variant='primary'
           size='medium'
-          style={{
-            backgroundColor: theme.colors.background,
-            color: theme.colors.text
-          }}
+          className='burger-dropdown-item'
         >
           {item.label}
         </DropdownItem>

@@ -1,3 +1,4 @@
+// Конфигурации VS Code для автоматического форматирования кода
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,

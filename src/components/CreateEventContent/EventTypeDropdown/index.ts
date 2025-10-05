@@ -1,1 +1,1 @@
-export {EventTypeDropdown} from './EventTypeDropdown'
+export { EventTypeDropdown } from './EventTypeDropdown';

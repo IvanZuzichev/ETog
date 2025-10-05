@@ -1,12 +1,12 @@
 import type { FC, ButtonHTMLAttributes } from 'react';
-import { useTheme } from '../../../theme/ThemeContext'; 
-import './Button.css';
+import { useThemeApply } from '../../../hooks/useThemeApply';
+import './Button.scss';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'small' | 'medium' | 'large';
   variant?: 'primary' | 'secondary';
 }
-
+// Компонент отвечающий за кнопки в выпадающих списках Хедер (Header)
 export const Button: FC<ButtonProps> = ({
   children,
   size = 'medium',
@@ -14,23 +14,9 @@ export const Button: FC<ButtonProps> = ({
   className = '',
   ...props
 }) => {
-  const { theme } = useTheme(); 
-
-  const buttonStyle = {
-    backgroundColor: variant === 'primary' 
-      ? theme.colors.primary 
-      : `${theme.colors.primary}20`,
-    color: variant === 'primary' 
-      ? theme.colors.footerheaderText 
-      : theme.colors.text
-  };
-
+  useThemeApply();
   return (
-    <button
-      className={`button button--${size} button--${variant} ${className}`}
-      style={buttonStyle}
-      {...props}
-    >
+    <button className={`button button--${size} button--${variant} ${className}`} {...props}>
       {children}
     </button>
   );

@@ -1,3 +1,5 @@
+// Стили для компонента за ВРЕМЕННЫЙ компонент вывода всех страниц
+
 .usefull-pages {
   display: flex;
   flex-direction: column;
@@ -13,6 +15,12 @@
   border-radius: 1.4rem;
   box-shadow: rgba(108, 107, 107, 0.48) 0px 0px 8px;
   border: 1px solid rgba(0, 0, 0, 0.1);
+  background: var(--background);
+  color: var(--text);
+
+  &-header {
+    width: 100%;
+  }
 
   &-title {
     font-size: 1rem;
@@ -27,13 +35,6 @@
     flex-direction: column;
     gap: 10px;
     width: 100%;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--text);
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    text-align: center;
   }
 
   &-link {
@@ -44,66 +45,29 @@
     padding: 8px 16px;
     border-radius: 6px;
     text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
     
     &:hover {
-      color: #7b1fa2 !important;
-      text-decoration: underline !important;
-    }
-  }
-}
-
-[data-theme="dark"] {
-  .usefull-pages {
-    border-color: rgba(255, 255, 255, 0.2);
-    background: var(--background);
-    
-    &-title {
-      color: var(--text, #ffffff);
-    }
-    
-    &-link {
-      color: var(--text, #ffffff);
-      &:hover {
-        color: #9c27b0 !important;
-      }
-    }
-  }
-}
-
-@media (max-width: 1200px) {
-  .usefull-pages {
-    width: 20rem;
-    padding: 1.3rem;
-  }
-}
-
-@media (max-width: 992px) {
-  .usefull-pages {
-    width: 18rem;
-    padding: 1.2rem;
-    
-    &-title {
-      font-size: 0.95rem;
-    }
-    
-    &-link {
-      font-size: 0.95rem;
+      color: #7b1fa2;
+      text-decoration: underline;
+      background: rgba(123, 31, 162, 0.05);
     }
   }
 }
 
 @media (max-width: 768px) {
   .usefull-pages {
-    width: 40% !important;
+    width: 40%;
     max-width: 60%;
     padding: 1rem;
     
     &-title {
-      font-size: 0.9rem !important;
+      font-size: 0.9rem;
     }
     
     &-link {
-      font-size: 0.9rem !important;
+      font-size: 0.9rem;
       padding: 7px 14px;
     }
   }
@@ -111,15 +75,15 @@
 
 @media (max-width: 480px) {
   .usefull-pages {
-    width: 50% !important;
+    width: 50%;
     padding: 0.8rem;
     
     &-title {
-      font-size: 0.9rem !important;
+      font-size: 0.9rem;
     }
     
     &-link {
-      font-size: 0.85rem !important;
+      font-size: 0.85rem;
       padding: 6px 12px;
     }
   }
@@ -127,15 +91,15 @@
 
 @media (max-width: 360px) {
   .usefull-pages {
-    width: 95% !important;
+    width: 95%;
     padding: 0.8rem;
     
     &-title {
-      font-size: 0.9rem !important;
+      font-size: 0.9rem;
     }
     
     &-link {
-      font-size: 0.8rem !important;
+      font-size: 0.8rem;
     }
   }
 }

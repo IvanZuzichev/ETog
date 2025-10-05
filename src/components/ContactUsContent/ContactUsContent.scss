@@ -309,3 +309,25 @@
   content: ' *' !important;
   color: #dc3545;
 }
+
+.character-count-right {
+  font-size: 0.75rem;
+  color: #666;
+  text-align: right;
+  margin-top: 4px;
+  width: 100%;
+  display: block;
+  
+  [data-theme="dark"] & {
+    color: #999;
+  }
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 4px;
+  display: block;
+  text-align: left;
+  width: 100%;
+}
