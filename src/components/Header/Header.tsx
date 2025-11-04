@@ -26,14 +26,14 @@ export const Header: React.FC = () => {
   return (
     <header className='header'>
       <div className='header__left'>
-        {/* Выпадающий список справа */}
+        {/* Выпадающий список слева */}
         <CreateButton size='medium' />
         {/* Логотип проекта */}
         <Logo onClick={handleLogoClick} size='medium' />
       </div>
       {/* Поле ввода значений */}
       <InputField onSearch={handleSearch} size='medium' />
-      {/* Выпадающий список слева */}
+      {/* Выпадающий список справа */}
       <div className='header__actions'>
         <ProfileButton showText={true} size='medium' />
       </div>

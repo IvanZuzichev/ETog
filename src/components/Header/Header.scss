@@ -20,6 +20,7 @@
   box-sizing: border-box;
   gap: 1rem;
   transition: background-color 0.3s ease;
+   font-family: "Inter", sans-serif;
 
   &__left {
     display: flex;
@@ -38,7 +39,7 @@
     --header-height: clamp(50px, 7vh, 70px);
     flex-wrap: wrap;
     gap: 0.5rem;
-    padding: 5px;
+    padding: 2px;
     
     &__left {
       order: 1;

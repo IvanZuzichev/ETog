@@ -28,6 +28,7 @@
   border-radius: 16px;
   box-shadow: rgba(108, 107, 107, 0.48) 0px 0px 8px;
   border: 1px solid rgba(0, 0, 0, 0.08);
+   font-family: "Inter", sans-serif;
 }
 
 .registration-form-container .form-field {
@@ -46,6 +47,7 @@
   text-align: left;
   color: var(--text-color);
   padding-left: 4px;
+   font-family: "Inter", sans-serif;
 }
 
 .registration-form-container .form-field .form-h1 {
@@ -56,6 +58,7 @@
   margin-bottom: 15px;
   color: var(--text-color);
   padding: 12px 0;
+   font-family: "Inter", sans-serif;
 }
 
 .registration-form-container .form-field .form-input,
@@ -70,6 +73,7 @@
   transition: all 0.3s ease;
   box-sizing: border-box;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+   font-family: "Inter", sans-serif;
 }
 
 .registration-form-container .form-field .form-input:focus,
@@ -111,6 +115,7 @@
   transition: all 0.3s ease;
   text-align: center;
   box-shadow: 0 4px 15px rgba(123, 31, 162, 0.3);
+   font-family: "Inter", sans-serif;
 }
 
 .registration-form-container .form-field .button-registrations:hover {
@@ -165,6 +170,7 @@
   display: block;
   text-align: left;
   width: 100%;
+   font-family: "Inter", sans-serif;
 }
 
 .form-label:after {
@@ -216,6 +222,7 @@
   margin: 0;
   display: flex;
   align-items: center;
+   font-family: "Inter", sans-serif;
 }
 
 .agreement-link {
@@ -235,4 +242,5 @@
   margin-top: 4px;
   width: 100%;
   display: block;
+   font-family: "Inter", sans-serif;
 }

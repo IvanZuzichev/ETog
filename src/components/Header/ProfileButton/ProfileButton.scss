@@ -3,6 +3,10 @@
 .profile-button-container {
   position: relative;
   display: inline-block;
+  
+    .profile-button__text {
+      font-family: "Inter", sans-serif;
+    }
 
   .profile-button {
     display: flex;
@@ -15,10 +19,11 @@
     border-radius: 25px;
     cursor: pointer;
     font-size: 1.2rem;
-    font-family: 'Onest', sans-serif;
+     font-family: "Inter", sans-serif;
     font-weight: 500;
     transition: all 0.2s ease;
-    line-height: 1;
+    line-height: 1; 
+    
 
     &:hover {
       transform: scale(1.03);

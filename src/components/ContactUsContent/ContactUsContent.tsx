@@ -1,5 +1,4 @@
 import { useThemeApply } from '../../hooks/useThemeApply';
-import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 import { useState } from 'react';
 import './ContactUsContent.scss';
 import { useNavigate } from 'react-router-dom';
@@ -24,7 +23,6 @@ export const ContactUsContent: React.FC<ContactFormDataProps> = ({ formData, onF
   const { validateInput } = useBlacklist();
 
   useThemeApply();
-  useDocumentTitle('Связаться с нами | Events Together — ETog');
 
   const navigate = useNavigate();
 

@@ -239,7 +239,7 @@ export const AuthorizationContent: React.FC<AuthorizationDataProps> = ({ formDat
         {/* Текст перехода в сектор сброса пароля */}
         <div className='form-field'>
           <button type='button' className='button-authorization' onClick={handleSendCodeSubmit} disabled={isSubmitting}>
-            Забыли пароль?
+            Забыли пароль? Восстановить
           </button>
         </div>
 

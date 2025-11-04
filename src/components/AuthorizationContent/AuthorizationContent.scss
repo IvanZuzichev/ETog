@@ -44,6 +44,7 @@
   text-align: left;
   color: var(--text-color);
   padding-left: 4px;
+   font-family: "Inter", sans-serif;
 }
 
 .authorization-form-container .form-field .form-label:after {
@@ -63,6 +64,7 @@
   margin-bottom: 15px;
   color: var(--text-color);
   padding: 12px 0;
+   font-family: "Inter", sans-serif;
 }
 
 .authorization-form-container .form-field .form-input,
@@ -128,6 +130,7 @@
   transition: all 0.3s ease !important;
   box-sizing: border-box !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+   font-family: "Inter", sans-serif;
 }
 
 .authorization-form-container .form-field .dropdown-container .dropdown-button:hover,
@@ -156,6 +159,7 @@
   transition: all 0.3s ease;
   text-align: center;
   box-shadow: 0 4px 15px rgba(123, 31, 162, 0.3);
+   font-family: "Inter", sans-serif;
 }
 
 .authorization-form-container .form-field .button-authorizations:hover {
@@ -249,6 +253,7 @@
       margin-top: 10px;
     background-color: var(--background-color);
     box-shadow: none;
+     font-family: "Inter", sans-serif;
     font-weight: 500;
           &:hover {
       color: #7b1fa2 !important;

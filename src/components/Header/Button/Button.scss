@@ -12,6 +12,7 @@
   font-weight: 500;
   transition: all 0.2s ease;
   line-height: 1;
+   font-family: "Inter", sans-serif;
 
   &--primary {
     background: var(--primary-color, #7b1fa2);
@@ -31,16 +32,19 @@
   &--small {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
+     font-family: "Inter", sans-serif;
   }
 
   &--medium {
     padding: 0.6rem 1.2rem;
     font-size: 1.2rem;
+     font-family: "Inter", sans-serif;
   }
 
   &--large {
     padding: 0.8rem 1.5rem;
     font-size: 1.4rem;
+     font-family: "Inter", sans-serif;
   }
 
   @media (max-width: 768px) {

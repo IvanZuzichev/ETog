@@ -17,7 +17,7 @@ export const ThemeToggleButton: React.FC<ThemeToggleButtonProps> = () => {
   useEffect(() => {
     setIsClient(true);
   }, []);
-  // При долгой загрузки пользователя (Обраюотка ошибок)
+  // При долгой загрузки пользователя (Обработка ошибок)
   if (!isClient) {
     return (
       <div className={`theme-toggle`}>

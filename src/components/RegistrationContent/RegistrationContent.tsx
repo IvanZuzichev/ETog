@@ -312,7 +312,7 @@ export const RegistrationContent: React.FC<RegistrationDataProps> = ({ formData,
             />
             <label htmlFor='agreement' className='agreement-label'>
               Согласен с{' '}
-              <Link to='/LegalDocuments' className='agreement-link'>
+              <Link to='/UserAgreement' className='agreement-link'> 
                 пользовательским соглашением
               </Link>
             </label>

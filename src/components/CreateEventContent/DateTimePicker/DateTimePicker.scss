@@ -30,6 +30,7 @@
   font-size: 14px;
   color: var(--text-color);
   transition: all 0.2s ease;
+   font-family: "Inter", sans-serif;
 }
 
 .datetime-button:hover {
@@ -77,6 +78,7 @@
   font-weight: 600;
   font-size: 14px;
   color: var(--text-color);
+   font-family: "Inter", sans-serif;
 }
 
 .calendar-nav-button {
@@ -105,6 +107,7 @@
   font-weight: 600;
   padding: 4px;
   color: #666;
+   font-family: "Inter", sans-serif;
 }
 
 .calendar-day {
@@ -116,11 +119,13 @@
   font-size: 12px;
   color: var(--text-color);
   transition: all 0.2s ease;
+   font-family: "Inter", sans-serif;
 }
 
 .calendar-day:hover:not(.empty) {
   background: #e8f4ff;
   color: #000000;
+   font-family: "Inter", sans-serif;
 }
 
 .calendar-day.selected {
@@ -137,6 +142,7 @@
   font-size: 14px;
   font-weight: 600;
   color: var(--text-color);
+   font-family: "Inter", sans-serif;
 }
 
 .time-grid {
@@ -156,6 +162,7 @@
   font-size: 11px;
   color: var(--text-color);
   transition: all 0.2s ease;
+   font-family: "Inter", sans-serif;
 }
 
 .time-slot:hover {
@@ -171,6 +178,7 @@
   border-radius: 4px;
   font-size: 12px;
   color: var(--text-color);
+   font-family: "Inter", sans-serif;
 }
 
 .datetime-actions {
@@ -185,6 +193,7 @@
   cursor: pointer;
   font-size: 14px;
   transition: all 0.2s ease;
+   font-family: "Inter", sans-serif;
 }
 
 .save-button.active {
@@ -211,6 +220,7 @@
   color: #856404;
   font-size: 12px;
   text-align: center;
+   font-family: "Inter", sans-serif;
 }
 
 .time-slot.selected {

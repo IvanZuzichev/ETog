@@ -36,6 +36,7 @@
   color: var(--primary-color);
   margin: 0 0 40px 0;
   line-height: 1;
+   font-family: "Inter", sans-serif;
 }
 
 .not-found-message {
@@ -44,6 +45,7 @@
   margin: 0 0 40px 0;
   line-height: 1.5;
   font-weight: 500;
+   font-family: "Inter", sans-serif;
 }
 
 .not-found-button {
@@ -60,6 +62,7 @@
   transition: all 0.3s ease;
   text-align: center;
   box-shadow: 0 4px 15px rgba(123, 31, 162, 0.3);
+   font-family: "Inter", sans-serif;
 }
 
 .not-found-button:hover {

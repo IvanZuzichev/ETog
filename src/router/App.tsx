@@ -14,7 +14,6 @@ const ConfigurationPage = lazy(() => import('../pages/ConfigurationPage/Configur
 const ContactUsPage = lazy(() => import('../pages/ContactUsPage/ContactUsPage'));
 const SupportPage = lazy(() => import('../pages/SupportPage/SupportPage'));
 const AboutUsPage = lazy(() => import('../pages/AboutUsPage/AboutUsPage'));
-const LegalDocumentsPage = lazy(() => import('../pages/LegalDocumentsPage/LegalDocumentsPage'));
 const MyAccountPage = lazy(() => import('../pages/MyAccountPage/MyAccountPage'));
 const AccountPage = lazy(() => import('../pages/AccountPage/AccountPage'));
 const RegistrationPage = lazy(() => import('../pages/RegistrationPage/RegistrationPage'));
@@ -23,7 +22,11 @@ const SendMessagePage = lazy(() => import('../pages/SendMessagePage/SendMessageP
 const ResetPasswordPage = lazy(() => import('../pages/ResetPasswordPage/ResetPasswordPage'));
 const DetailsEventPage = lazy(() => import('../pages/DetailsEventPage/DetailsEventPage'));
 const Code404Page = lazy(() => import('../pages/Code404Page/Code404Page'));
-
+const PrivacyPolicyPage = lazy(() => import('../pages/PrivacyPolicyPage/PrivacyPolicyPage'))
+const TechnicalRequirementsPage = lazy(() => import('../pages/TechnicalRequirementsPage/TechnicalRequirementsPage'))
+const UserAgreementPage = lazy(() => import('../pages/UserAgreementPage/UserAgreementPage'))
+const EventRegulationsPage = lazy(() => import('../pages/EventRegulationsPage/EventRegulationsPage'))
+const OrganizerRulesPage = lazy(() => import('../pages/OrganizerRulesPage/OrganizerRulesPage'))
 // Маршрутизация веб-сервиса
 function App() {
   const { preloadPages } = usePreload();
@@ -47,13 +50,17 @@ function App() {
           <Route path='/ContactUs' element={<ContactUsPage />} />
           <Route path='/Support' element={<SupportPage />} />
           <Route path='/AboutUs' element={<AboutUsPage />} />
-          <Route path='/LegalDocuments' element={<LegalDocumentsPage />} />
           <Route path='/MyAccount' element={<MyAccountPage />} />
+          <Route path='/PrivacyPolicy' element={<PrivacyPolicyPage/>}/>
+          <Route path='/TechnicalRequirements' element={<TechnicalRequirementsPage/>}/>
+          <Route path='/UserAgreement' element={<UserAgreementPage/>}/>
+          <Route path='/EventRegulations' element={<EventRegulationsPage/>}/>
+          <Route path='/OrganizerRules' element={<OrganizerRulesPage/>}/>
           <Route path='/Account' element={<AccountPage />} /> {/* Сделать jwt-токен блокировку */}
           <Route path='/Registration' element={<RegistrationPage />} />
           <Route path='/Authorization' element={<AuthorizationPage />} />
           <Route path='/SendMessage' element={<SendMessagePage />} />
-          <Route path='/ResetPassword' element={<ResetPasswordPage />} />{' '}
+          <Route path='/ResetPassword' element={<ResetPasswordPage />} />
           {/* Сделать Дополнительную блокировку, пока прошлая страница не одобрит */}
           <Route path='/DetailsEvent' element={<DetailsEventPage />} />
           <Route path='*' element={<Code404Page />} />

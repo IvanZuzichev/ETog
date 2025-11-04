@@ -12,7 +12,7 @@
   width: 20rem;
   margin: 2rem auto;
   padding: 1.5rem;
-  border-radius: 1.4rem;
+  border-radius: 1.15rem;
   box-shadow: rgba(108, 107, 107, 0.48) 0px 0px 8px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: var(--background);
@@ -28,6 +28,7 @@
     margin: 0;
     text-align: center;
     color: var(--text);
+     font-family: "Inter", sans-serif;
   }
 
   &-links {
@@ -47,6 +48,7 @@
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    
     
     &:hover {
       color: #7b1fa2;

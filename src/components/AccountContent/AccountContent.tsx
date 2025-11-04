@@ -374,16 +374,6 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
 
               <div className='form-field'>
                 <div className='form-buttons-container'>
-                  {deleteConfirm ? (
-                    <>
-                      <button type='button' className='button-cancel-delete' onClick={cancelDelete}>
-                        Отмена
-                      </button>
-                      <button type='button' className='button-confirm-delete' onClick={handleDeleteAccount}>
-                        Подтвердить удаление
-                      </button>
-                    </>
-                  ) : (
                     <>
                       <button
                         type='button'
@@ -397,7 +387,6 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
                         {isSubmitting ? 'Сохранение...' : 'Изменить данные'}
                       </button>
                     </>
-                  )}
                 </div>
               </div>
             </form>

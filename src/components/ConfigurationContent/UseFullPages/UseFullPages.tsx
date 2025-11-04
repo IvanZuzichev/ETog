@@ -25,10 +25,6 @@ export const UseFullPages: React.FC<UseFullPagesProps> = () => {
   const handleAboutClick = (): void => {
     navigate('/AboutUs');
   };
-  // Переход на страницу с юрилическими документами веб-сайта
-  const handleLegalClick = (): void => {
-    navigate('/LegalDocuments');
-  };
 
   return (
     <div className={`usefull-pages`}>
@@ -48,10 +44,6 @@ export const UseFullPages: React.FC<UseFullPagesProps> = () => {
         <p className='usefull-pages-link' onClick={handleAboutClick}>
           {' '}
           О нашем проекте
-        </p>
-        <p className='usefull-pages-link' onClick={handleLegalClick}>
-          {' '}
-          Документы
         </p>
       </div>
     </div>

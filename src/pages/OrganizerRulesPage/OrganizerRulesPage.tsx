@@ -1,19 +1,19 @@
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
 import { useDocumentTitle } from '../../hooks/useDocumentTitle';
-import { LegalDocumentsContent } from '../../components/LegalDocumentsContent/LegalDocumentsContent';
+import { OrganizerRules } from '../../components/OrganizerRules/OrganizerRules';
 
 // Страница с документами на сайте
-const LegalDocumentsPage: React.FC = () => {
-  useDocumentTitle('Документы | Events Together — ETog');
+const OrganizerRulesPage: React.FC = () => {
+  useDocumentTitle('Правила для организаторов мероприятий | Events Together — ETog');
 
   return (
     <div className='main-page-wrapper'>
       <Header />
-      <LegalDocumentsContent />
+      <OrganizerRules />
       <Footer />
     </div>
   );
 };
 
-export default LegalDocumentsPage;
+export default OrganizerRulesPage;
