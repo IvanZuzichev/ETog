@@ -24,8 +24,9 @@ const RegistrationPage: React.FC = () => {
   return (
     <div className='main-page-wrapper'>
       <Header />
+      <div className="header-spacer"></div>
       <RegistrationContent formData={formData} onFormChange={handleFormChange} />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

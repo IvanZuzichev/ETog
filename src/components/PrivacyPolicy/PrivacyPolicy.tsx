@@ -7,7 +7,7 @@ export const PrivacyPolicy: React.FC = () => {
 
     return lines.map((line, lineIndex) => {
       const key = `privacy-${lineIndex}`;
-      
+
       if (line.includes('Соглашение об обработке персональных данных')) {
         return (
           <h2 key={key} className='document-title'>
@@ -53,9 +53,5 @@ export const PrivacyPolicy: React.FC = () => {
     });
   };
 
-  return (
-    <div className="privacy-policy">
-      {formatDocumentText(LEGAL_DOCUMENTS.PRIVACY_POLICY)}
-    </div>
-  );
+  return <div className='privacy-policy'>{formatDocumentText(LEGAL_DOCUMENTS.PRIVACY_POLICY)}</div>;
 };

@@ -3,52 +3,44 @@ import { useState, useRef } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { Button } from '../Button/Button';
 import { useClickOutside } from '../../../hooks/useClickOutside';
+import { Dropdown } from '../Dropdown/Dropdown';
+import { DropdownItem } from '../DropdownItem/DropdownItem';
 import './CreateButton.scss';
-import { BurgerDropdown } from '../BurgerDropdown';
 import { useNavigate } from 'react-router-dom';
-import { useThemeApply } from '../../..//hooks/useThemeApply';
+import { useThemeApply } from '../../../hooks/useThemeApply';
 
 interface CreateButtonProps {
   onClick?: () => void;
   size?: 'small' | 'medium' | 'large';
 }
-// Компонент для левого выпадающего списка
+
 export const CreateButton: FC<CreateButtonProps> = ({ onClick, size = 'medium' }) => {
   useThemeApply();
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useClickOutside(containerRef as React.RefObject<HTMLElement>, () => setIsDropdownOpen(false));
+  useClickOutside(containerRef, () => setIsDropdownOpen(false));
 
   const handleButtonClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
     onClick?.();
   };
-  // Выбор кнопки и переход на определенную страницу
+
   const handleMenuItemClick = (menuItemId: string) => {
     switch (menuItemId) {
-      // Страницу создания мероприятия
       case 'create':
         navigate('/CreateEvent');
         break;
-      // Страницу избранных мероприятий
       case 'favorites':
         navigate('/FavoriteEvents');
         break;
-      // Страницу рекомендованных мероприятий
       case 'recommendation':
         navigate('/RecommendationEvents');
         break;
-      // Страница подписки
       case 'subscribe':
         navigate('/Subscribers');
         break;
-      // Страницы настроеек
-      case 'config':
-        navigate('/Configuration');
-        break;
-      // Проверка если вдруг при добавлении новой кнопки непраивльно ее добавили
       default:
         console.warn('Unknown menu item:', menuItemId);
     }
@@ -56,23 +48,32 @@ export const CreateButton: FC<CreateButtonProps> = ({ onClick, size = 'medium' }
   };
 
   return (
-    <div className='profile-button-container' ref={containerRef}>
+    <div className='create-button-container' ref={containerRef}>
       <Button
         size={size}
         onClick={handleButtonClick}
-        aria-label='Profile'
+        aria-label='Menu'
         aria-expanded={isDropdownOpen}
-        className='profile-button'
+        className='create-button'
         variant='primary'
       >
-        <GiHamburgerMenu className='profile-button__icon' />
+        <GiHamburgerMenu className='create-button__icon' />
       </Button>
 
-      <BurgerDropdown
-        isOpen={isDropdownOpen}
-        onClose={() => setIsDropdownOpen(false)}
-        onMenuItemClick={handleMenuItemClick}
-      />
+      <Dropdown isOpen={isDropdownOpen} position='left'>
+        <DropdownItem onClick={() => handleMenuItemClick('create')}>
+          Создать мероприятие
+        </DropdownItem>
+        <DropdownItem onClick={() => handleMenuItemClick('favorites')}>
+          Избранное
+        </DropdownItem>
+        <DropdownItem onClick={() => handleMenuItemClick('recommendation')}>
+          Рекомендации
+        </DropdownItem>
+        <DropdownItem onClick={() => handleMenuItemClick('subscribe')}>
+          Подписки
+        </DropdownItem>
+      </Dropdown>
     </div>
   );
 };

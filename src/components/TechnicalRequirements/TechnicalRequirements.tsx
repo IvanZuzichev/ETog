@@ -7,7 +7,7 @@ export const TechnicalRequirements: React.FC = () => {
 
     return lines.map((line, lineIndex) => {
       const key = `technical-${lineIndex}`;
-      
+
       if (line.includes('Требования к ПО')) {
         return (
           <h2 key={key} className='document-title'>
@@ -53,9 +53,5 @@ export const TechnicalRequirements: React.FC = () => {
     });
   };
 
-  return (
-    <div className="technical-requirements">
-      {formatDocumentText(LEGAL_DOCUMENTS.TECHNICAL_REQUIREMENTS)}
-    </div>
-  );
+  return <div className='technical-requirements'>{formatDocumentText(LEGAL_DOCUMENTS.TECHNICAL_REQUIREMENTS)}</div>;
 };

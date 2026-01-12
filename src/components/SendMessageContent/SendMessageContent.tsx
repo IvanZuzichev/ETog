@@ -17,7 +17,7 @@ interface SendMessageDataProps {
 // Компонент для страницы отправки на почту кода сброса пароля и подтверждение личности
 export const SendMessageContent: React.FC<SendMessageDataProps> = ({ formData, onFormChange, className = '' }) => {
   const [errors, setErrors] = useState<{ email?: string }>({});
-    const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting] = useState(false);
   useThemeApply();
 
   const navigate = useNavigate();
@@ -56,8 +56,8 @@ export const SendMessageContent: React.FC<SendMessageDataProps> = ({ formData, o
   };
 
   const handleBackSubmit = () => {
-    navigate("/Authorization");
-  }
+    navigate('/Authorization');
+  };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
@@ -75,6 +75,7 @@ export const SendMessageContent: React.FC<SendMessageDataProps> = ({ formData, o
   };
 
   return (
+    <div className='sendmessage-page-centered'>
     <div className='main-page-wrapper'>
       <form className={`sendmessage-form-container ${className}`} onSubmit={handleSubmit}>
         <div className='form-field'>
@@ -113,6 +114,7 @@ export const SendMessageContent: React.FC<SendMessageDataProps> = ({ formData, o
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 };

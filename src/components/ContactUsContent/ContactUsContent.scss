@@ -43,15 +43,6 @@
       color: var(--text);
       padding-left: 4px;
        font-family: "Inter", sans-serif;
-
-      &:after {
-        content: ' *';
-        color: #dc3545;
-      }
-
-      &:not([for="title"]):not([for="description"]):not([for="address"]):not([for="phone"]):not([for="email"]):after {
-        content: '';
-      }
     }
 
     .form-h1 {
@@ -295,22 +286,6 @@
   font-size: 0.875rem;
   margin-top: 4px;
   display: block;
-}
-
-.form-label:after {
-  content: ' *';
-  color: #dc3545;
-}
-
-.form-label:not([for="title"]):not([for="description"]):not([for="address"]):not([for="phone"]):not([for="email"]):after {
-  content: '';
-  color: #dc3545;
-}
-
-.form-field:nth-child(1) .form-label:after,
-.form-field:nth-child(2) .form-label:after {
-  content: ' *' !important;
-  color: #dc3545;
 }
 
 .character-count-right {

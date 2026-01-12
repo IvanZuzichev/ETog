@@ -22,7 +22,7 @@ export const ResetPasswordContent: React.FC<ResetPasswordDataProps> = ({ formDat
   const [errors, setErrors] = useState<{ email?: string; code?: string; password?: string; repeat_password?: string }>(
     {}
   );
-      const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting] = useState(false);
   useThemeApply();
 
   const navigate = useNavigate();
@@ -128,10 +128,11 @@ export const ResetPasswordContent: React.FC<ResetPasswordDataProps> = ({ formDat
   };
 
   const handleBackSubmit = () => {
-    navigate("/Authorization");
-  }
+    navigate('/Authorization');
+  };
 
   return (
+    <div className='resetpassword-page-centered'>
     <div className='main-page-wrapper'>
       <form className={`resetpassword-form-container ${className}`} onSubmit={handleSubmit}>
         <div className='form-field'>
@@ -219,7 +220,7 @@ export const ResetPasswordContent: React.FC<ResetPasswordDataProps> = ({ formDat
           </div>
           {errors.repeat_password && <span className='error-message'>{errors.repeat_password}</span>}
         </div>
-           {/* Кнопка вернуться */}
+        {/* Кнопка вернуться */}
         <div className='form-field'>
           <button type='button' className='button-authorization' onClick={handleBackSubmit} disabled={isSubmitting}>
             Вспомнили пароль? Вернуться
@@ -232,6 +233,7 @@ export const ResetPasswordContent: React.FC<ResetPasswordDataProps> = ({ formDat
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 };

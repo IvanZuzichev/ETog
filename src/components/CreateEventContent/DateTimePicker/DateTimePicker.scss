@@ -1,12 +1,10 @@
-// Стили для компонента календаря на странице создания мероприятия
-
 :root {
-  --background-color: #ffffff;
+  --background-color: #F8F8F8;
+  --content-bg: #ffffff;
   --text-color: #000000;
   --primary-color: #7b1fa2;
   --footer-bg: #7b1fa2;
   --footer-text: #ffffff;
-  --button-bg: #ffffff;
   --button-text: #7b1fa2;
   font-family: 'Onest', sans-serif;
 }
@@ -19,27 +17,29 @@
 
 .datetime-button {
   width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background: var(--button-bg);
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(123, 31, 162, 0.2);
+  border-radius: 12px;
+  background: var(--content-bg);
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
+  font-size: 1rem;
   color: var(--text-color);
-  transition: all 0.2s ease;
-   font-family: "Inter", sans-serif;
+  transition: all 0.3s ease;
+  font-family: "Inter", sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .datetime-button:hover {
-  background: #f5f5f5;
+  border-color: rgba(123, 31, 162, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .datetime-arrow {
   transition: transform 0.2s ease;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .datetime-arrow.open {
@@ -50,82 +50,81 @@
   position: absolute;
   top: 100%;
   left: 0;
-  width: 100%; 
-  background: var(--background-color);
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-top: 4px;
+  width: 100%;
+  background: var(--content-bg);
+  border: 1px solid rgba(123, 31, 162, 0.2);
+  border-radius: 8px;
+  margin-top: 0.25rem;
   z-index: 1000;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .datetime-content {
-  padding: 16px;
+  padding: 1rem;
 }
 
 .calendar-section {
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 0.75rem;
 }
 
 .calendar-month {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--text-color);
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .calendar-nav-button {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 16px;
-  padding: 4px 8px;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
   border-radius: 4px;
   color: var(--text-color);
 }
 
 .calendar-nav-button:hover {
-  background: #f0f0f0;
+  background: rgba(123, 31, 162, 0.1);
 }
 
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
+  gap: 0.25rem;
 }
 
 .calendar-day-header {
   text-align: center;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 600;
-  padding: 4px;
+  padding: 0.25rem;
   color: #666;
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .calendar-day {
-  padding: 8px;
+  padding: 0.5rem;
   border: none;
   background: none;
   cursor: pointer;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--text-color);
   transition: all 0.2s ease;
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .calendar-day:hover:not(.empty) {
-  background: #e8f4ff;
-  color: #000000;
-   font-family: "Inter", sans-serif;
+  background: rgba(123, 31, 162, 0.1);
+  color: var(--text-color);
 }
 
 .calendar-day.selected {
@@ -138,71 +137,75 @@
 }
 
 .time-section h4 {
-  margin: 0 0 12px 0;
-  font-size: 14px;
+  margin: 0 0 0.75rem 0;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--text-color);
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .time-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
+  gap: 0.25rem;
   max-height: 200px;
   overflow-y: auto;
 }
 
 .time-slot {
-  padding: 6px 4px;
-  border: 1px solid #ddd;
+  padding: 0.375rem 0.25rem;
+  border: 1px solid rgba(123, 31, 162, 0.2);
   background: none;
   cursor: pointer;
   border-radius: 4px;
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: var(--text-color);
   transition: all 0.2s ease;
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .time-slot:hover {
-  background: #e8f4ff;
-    color: #000000;
+  background: rgba(123, 31, 162, 0.1);
+  color: var(--text-color);
   border-color: var(--primary-color);
 }
 
 .selected-date-info {
-  margin-top: 12px;
-  padding: 8px;
-  border: 1px solid #bae6fd;
+  margin-top: 0.75rem;
+  padding: 0.5rem;
+  border: 1px solid rgba(123, 31, 162, 0.2);
   border-radius: 4px;
-  font-size: 12px;
+  font-size: 0.75rem;
   color: var(--text-color);
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .datetime-actions {
-  margin-top: 16px;
+  margin-top: 1rem;
   text-align: center;
 }
 
 .save-button {
-  padding: 8px 16px;
+  padding: 0.5rem 1rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s ease;
-   font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  font-family: "Inter", sans-serif;
 }
 
 .save-button.active {
   background: var(--primary-color);
   color: var(--footer-text);
+  border: 1px solid rgba(123, 31, 162, 0.3);
+  box-shadow: 0 4px 15px rgba(123, 31, 162, 0.3);
 }
 
 .save-button.active:hover {
-  background: var(--primary-color);
+  background-color: #9716ce;
+  box-shadow: 0 6px 20px rgba(123, 31, 162, 0.4);
+  border-color: rgba(123, 31, 162, 0.5);
 }
 
 .save-button.disabled {
@@ -212,15 +215,15 @@
 }
 
 .selection-warning {
-  margin-top: 8px;
-  padding: 8px;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
   background: #fff3cd;
-  border: 1px solid #ffecb5;
-  border-radius: 4px;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
   color: #856404;
-  font-size: 12px;
+  font-size: 0.75rem;
   text-align: center;
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .time-slot.selected {

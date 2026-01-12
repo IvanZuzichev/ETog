@@ -224,6 +224,7 @@ export const RegistrationContent: React.FC<RegistrationDataProps> = ({ formData,
   };
 
   return (
+    <div className='registration-page-centered'>
     <div className='main-page-wrapper'>
       <form className={`registration-form-container ${className}`} onSubmit={handleSubmit}>
         <div className='form-field'>
@@ -312,7 +313,7 @@ export const RegistrationContent: React.FC<RegistrationDataProps> = ({ formData,
             />
             <label htmlFor='agreement' className='agreement-label'>
               Согласен с{' '}
-              <Link to='/UserAgreement' className='agreement-link'> 
+              <Link to='/UserAgreement' className='agreement-link'>
                 пользовательским соглашением
               </Link>
             </label>
@@ -339,6 +340,7 @@ export const RegistrationContent: React.FC<RegistrationDataProps> = ({ formData,
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 };

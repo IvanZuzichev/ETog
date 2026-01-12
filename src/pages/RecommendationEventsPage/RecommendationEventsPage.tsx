@@ -8,6 +8,7 @@ const RecommendationEventsPage: React.FC = () => {
   return (
     <div className='main-page-wrapper'>
       <Header />
+      <div className="header-spacer"></div>
     </div>
   );
 };

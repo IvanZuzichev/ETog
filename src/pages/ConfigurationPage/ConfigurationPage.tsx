@@ -11,6 +11,7 @@ const ConfigurationPage: React.FC = () => {
   return (
     <div className='main-page-wrapper'>
       <Header />
+      <div className="header-spacer"></div>
       <ThemeToggleButton />
       {/* Данный компонент временный для наполненности страницы */}
       <UseFullPages />

@@ -13,6 +13,7 @@ const AboutUsPage: React.FC = () => {
     <>
       <div className='main-page-wrapper'>
         <Header />
+        <div className="header-spacer"></div>
         <AboutUsContent />
         <Footer />
       </div>

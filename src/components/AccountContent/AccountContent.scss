@@ -246,14 +246,6 @@
   display: block;
 }
 
-
-.form-field:nth-child(1) .form-label:after,
-.form-field:nth-child(2) .form-label:after,
-.form-field:nth-child(4) .form-label:after {
-  content: ' *' !important;
-  color: #dc3545;
-}
-
 .form-field:nth-child(3) .form-label:after {
   content: none;
 }

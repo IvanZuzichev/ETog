@@ -1,0 +1,235 @@
+.event-section {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 30px 50px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  &__title {
+    font-family: 'Inter', sans-serif;
+    font-size: 38px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #101010;
+    margin: 0;
+    letter-spacing: -0.8px;
+  }
+
+  &__controls {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__filter-btn,
+  &__sort-btn {
+    padding: 10px 20px;
+    border: 1px solid rgba(16, 16, 16, 0.1);
+    border-radius: 8px;
+    background: #FFFFFF;
+    font-size: 14px;
+    font-weight: 500;
+    color: #101010;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: rgba(16, 16, 16, 0.3);
+      background: #F8F8F8;
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+
+  &__grid {
+    display: grid;
+    gap: 22px;
+    width: 100%;
+
+    &--4-cols {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    &--3-cols {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    &--2-cols {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    gap: 16px;
+  }
+
+  &__spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(16, 16, 16, 0.1);
+    border-top-color: #9B1E1C;
+    border-radius: 50%;
+    animation: event-section-spin 1s linear infinite;
+  }
+
+  &__end {
+    text-align: center;
+    padding: 40px 0;
+    color: #888888;
+    font-size: 16px;
+  }
+
+  &__load-more {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+  }
+
+  &__load-more-btn {
+    padding: 12px 32px;
+    background: #9B1E1C;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background: #860202;
+    }
+
+    &:disabled {
+      background: #CCCCCC;
+      cursor: not-allowed;
+    }
+  }
+}
+
+@keyframes event-section-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Адаптивные стили
+@media (max-width: 1439px) and (min-width: 1024px) {
+  .event-section {
+    padding: 32px 20px;
+
+    &__title {
+      font-size: 32px;
+    }
+
+    &__grid--4-cols {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+@media (max-width: 1023px) and (min-width: 744px) {
+  .event-section {
+    padding: 24px 16px;
+
+    &__title {
+      font-size: 28px;
+    }
+
+    &__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    &__controls {
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    &__grid--3-cols {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+@media (max-width: 743px) {
+  .event-section {
+    padding: 16px 12px;
+
+    &__title {
+      font-size: 24px;
+    }
+
+    &__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    &__controls {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    &__filter-btn,
+    &__sort-btn {
+      flex: 1;
+      text-align: center;
+    }
+
+    &__grid--2-cols {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    &__load-more-btn {
+      width: 100%;
+      padding: 14px;
+    }
+  }
+}
+
+// Добавьте в конец файла EventSection.scss
+
+.event-section__empty {
+  text-align: center;
+  padding: 80px 0;
+  color: #666666;
+  
+  p {
+    font-size: 16px;
+    margin: 8px 0;
+    
+    &:first-child {
+      font-size: 18px;
+      font-weight: 500;
+      color: #333333;
+    }
+  }
+}
+
+// Обновите .event-section__header
+.event-section__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}

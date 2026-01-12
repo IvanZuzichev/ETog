@@ -1,11 +1,11 @@
 import { useThemeApply } from '../../hooks/useThemeApply';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import './AccountContent.scss';
 import { useNavigate } from 'react-router-dom';
 import { PHOTO_CONSTANTS } from '../../store/constants/photoTypeOptions';
-import { useSecureStorage } from '../../hooks/useSecureStorage';
 import { useDataProtection } from '../../hooks/useDataProtection';
-import { useBlacklist } from '../../hooks/useBlackList'; // Добавляем хук
+import { useBlacklist } from '../../hooks/useBlackList';
+import { useGlobalAvatar } from '../../hooks/useGlobalAvatar';
 import AccountPhoto from '../../assets/Photo/User.png';
 import VerificatePhoto from '../../assets/Verificate/CheckMark.png';
 
@@ -22,32 +22,22 @@ interface AccountContentDataProps {
   className?: string;
 }
 
-// Компонент отображения страницы "Моего аккаунта"
 export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, onFormChange, className = '' }) => {
   const [errors, setErrors] = useState<{ login?: string; email?: string; password?: string; description?: string }>({});
-  const [avatar, setAvatar] = useState<string>(AccountPhoto);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { setSecureItem, getSecureItem, encryptData } = useSecureStorage();
+  const { avatar, updateAvatar } = useGlobalAvatar();
   const { hashData, generateSecureId } = useDataProtection();
   const { validateInput } = useBlacklist();
 
   useThemeApply();
   const navigate = useNavigate();
 
-  // Загрузка сохраненного аватара при монтировании
-  useEffect(() => {
-    const savedAvatar = getSecureItem('user_avatar');
-    if (savedAvatar && savedAvatar !== AccountPhoto) {
-      setAvatar(savedAvatar);
-    }
-  }, [getSecureItem]);
   const handleInputChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const value = e.target.value;
 
-    // Проверяем длину вводимого текста
     const limit = PHOTO_CONSTANTS.FIELD_LIMITS[field as keyof typeof PHOTO_CONSTANTS.FIELD_LIMITS];
     if (limit && value.length > limit) {
       setErrors(prev => ({
@@ -57,7 +47,6 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
       return;
     }
 
-    // Для поля description проверяем на наличие запрещенных слов
     if (field === 'description') {
       const blacklistValidation = validateInput(value);
       if (blacklistValidation.containsBlacklistedWords) {
@@ -65,46 +54,35 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
           ...prev,
           [field]: 'Описание содержит запрещенные слова',
         }));
-        // НЕ вызываем onFormChange - не обновляем данные формы
         return;
       }
     }
 
-    // Если проверки пройдены, обновляем данные и очищаем ошибки
     onFormChange(field, value);
     setErrors(prev => ({ ...prev, [field]: undefined }));
   };
 
-  // Функция для открытия проводника файлов
   const handleAvatarUpload = () => {
     fileInputRef.current?.click();
   };
 
-  // Функция для обработки выбора файла аватарки
   const handleAvatarSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
     if (file) {
-      // Проверяем тип файла
       if (!PHOTO_CONSTANTS.ALLOWED_AVATAR_TYPES.includes(file.type as any)) {
         alert(PHOTO_CONSTANTS.ERROR_MESSAGES.INVALID_FILE_TYPE);
         return;
       }
 
-      // Проверяем размер файла
       if (file.size > PHOTO_CONSTANTS.MAX_FILE_SIZE) {
         alert(PHOTO_CONSTANTS.ERROR_MESSAGES.FILE_TOO_LARGE);
         return;
       }
 
-      // Создаем URL для предпросмотра аватарки
       const avatarUrl = URL.createObjectURL(file);
-      setAvatar(avatarUrl);
+      updateAvatar(avatarUrl);
 
-      // Сохраняем аватар безопасно
-      setSecureItem('user_avatar', avatarUrl);
-
-      // Здесь можно добавить логику для сохранения файла на сервер
       console.log('Аватарка загружена:', {
         name: file.name,
         size: file.size,
@@ -117,7 +95,6 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
   const validateForm = () => {
     const newErrors: { login?: string; email?: string; password?: string; description?: string } = {};
 
-    // Проверка login
     if (!formData.login) {
       newErrors.login = PHOTO_CONSTANTS.ERROR_MESSAGES.LOGIN_REQUIRED;
     } else if (formData.login.length > PHOTO_CONSTANTS.FIELD_LIMITS.login) {
@@ -126,7 +103,6 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
       newErrors.login = 'Логин может содержать только буквы, цифры и нижнее подчеркивание';
     }
 
-    // Проверка email
     if (!formData.email) {
       newErrors.email = PHOTO_CONSTANTS.ERROR_MESSAGES.EMAIL_REQUIRED;
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -135,7 +111,6 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
       newErrors.email = `Email не должен превышать ${PHOTO_CONSTANTS.FIELD_LIMITS.email} символов`;
     }
 
-    // Проверка пароля
     if (!formData.password) {
       newErrors.password = PHOTO_CONSTANTS.ERROR_MESSAGES.PASSWORD_REQUIRED;
     } else if (formData.password.length < 6) {
@@ -146,7 +121,6 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
       newErrors.password = 'Пароль должен содержать заглавные и строчные буквы, а также цифры';
     }
 
-    // Проверка описания на наличие запрещенных слов
     const descriptionValidation = validateInput(formData.description);
     if (descriptionValidation.containsBlacklistedWords) {
       newErrors.description = 'Описание содержит запрещенные слова';
@@ -162,13 +136,11 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
     e.preventDefault();
 
     if (isSubmitting) return;
-
     if (!validateForm()) return;
 
     setIsSubmitting(true);
 
     try {
-      // ДЛЯ БУДУЩЕГО API - защищенные данные
       const hashedPassword = hashData(formData.password);
       const updateId = generateSecureId();
       const normalizedEmail = formData.email.trim().toLowerCase();
@@ -179,12 +151,11 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
         login: normalizedLogin,
         email: normalizedEmail,
         passwordHash: hashedPassword,
-        description: encryptData(formData.description || ''),
+        description: formData.description || '',
         avatarChanged: avatar !== AccountPhoto,
         updateTime: Date.now(),
       };
 
-      // ДЛЯ ALERT - показываем понятные данные
       const accountDataMessage = `
       Вы ввели данные:
       Логин: ${formData.login}
@@ -198,21 +169,9 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
       Логин: ${secureDataForAPI.login}
       Email: ${secureDataForAPI.email}
       Хеш пароля: ${secureDataForAPI.passwordHash.substring(0, 16)}...
-      Описание: ${formData.description}
       `.trim();
 
       alert(accountDataMessage);
-
-      // Сохраняем данные обновления безопасно
-      setSecureItem(
-        'user_profile_data',
-        JSON.stringify({
-          login: secureDataForAPI.login,
-          email: secureDataForAPI.email,
-          lastUpdate: secureDataForAPI.updateTime,
-        })
-      );
-
       alert('Данные успешно обновлены!');
     } catch (error) {
       console.error('Ошибка обновления данных:', error);
@@ -231,13 +190,13 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
     const isConfirmed = window.confirm('ВНИМАНИЕ! Вы точно хотите удалить профиль? Это действие необратимо!');
 
     if (isConfirmed) {
-      // Безопасное удаление данных
       try {
-        // Очищаем все пользовательские данные
         localStorage.removeItem('user_session');
         localStorage.removeItem('user_profile_data');
         localStorage.removeItem('user_avatar');
         localStorage.removeItem('user_registration_data');
+        
+        updateAvatar('');
 
         alert('Профиль успешно удален');
         navigate('/');
@@ -247,10 +206,6 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
       }
     }
 
-    setDeleteConfirm(false);
-  };
-
-  const cancelDelete = () => {
     setDeleteConfirm(false);
   };
 
@@ -269,12 +224,11 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
           <h1 className='profile-title'>Личные данные профиля</h1>
         </div>
 
-        {/* Левая часть с фото */}
         <div className='profile-content'>
           <div className='profile-left'>
             <div className='profile-photo-container'>
               <div className='profile-photo' onClick={handleAvatarUpload} style={{ cursor: 'pointer' }}>
-                <img src={avatar} alt='Profile' className='profile-image' />
+                <img src={avatar || AccountPhoto} alt='Profile' className='profile-image' />
                 <div className='avatar-overlay'></div>
               </div>
               <div className='verification-badge'>
@@ -284,7 +238,6 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
             </div>
           </div>
 
-          {/* Правая часть с формой */}
           <div className='profile-right'>
             <form className='accountcontent-form' onSubmit={handleSubmit}>
               <div className='form-field'>
@@ -374,19 +327,19 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
 
               <div className='form-field'>
                 <div className='form-buttons-container'>
-                    <>
-                      <button
-                        type='button'
-                        className='button-delete-account'
-                        onClick={handleDeleteAccount}
-                        disabled={isSubmitting}
-                      >
-                        Удалить аккаунт
-                      </button>
-                      <button type='submit' className='button-accountcontents' disabled={isSubmitting}>
-                        {isSubmitting ? 'Сохранение...' : 'Изменить данные'}
-                      </button>
-                    </>
+                  <>
+                    <button
+                      type='button'
+                      className='button-delete-account'
+                      onClick={handleDeleteAccount}
+                      disabled={isSubmitting}
+                    >
+                      Удалить аккаунт
+                    </button>
+                    <button type='submit' className='button-accountcontents' disabled={isSubmitting}>
+                      {isSubmitting ? 'Сохранение...' : 'Изменить данные'}
+                    </button>
+                  </>
                 </div>
               </div>
             </form>

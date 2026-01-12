@@ -22,11 +22,11 @@ const SendMessagePage = lazy(() => import('../pages/SendMessagePage/SendMessageP
 const ResetPasswordPage = lazy(() => import('../pages/ResetPasswordPage/ResetPasswordPage'));
 const DetailsEventPage = lazy(() => import('../pages/DetailsEventPage/DetailsEventPage'));
 const Code404Page = lazy(() => import('../pages/Code404Page/Code404Page'));
-const PrivacyPolicyPage = lazy(() => import('../pages/PrivacyPolicyPage/PrivacyPolicyPage'))
-const TechnicalRequirementsPage = lazy(() => import('../pages/TechnicalRequirementsPage/TechnicalRequirementsPage'))
-const UserAgreementPage = lazy(() => import('../pages/UserAgreementPage/UserAgreementPage'))
-const EventRegulationsPage = lazy(() => import('../pages/EventRegulationsPage/EventRegulationsPage'))
-const OrganizerRulesPage = lazy(() => import('../pages/OrganizerRulesPage/OrganizerRulesPage'))
+const PrivacyPolicyPage = lazy(() => import('../pages/PrivacyPolicyPage/PrivacyPolicyPage'));
+const TechnicalRequirementsPage = lazy(() => import('../pages/TechnicalRequirementsPage/TechnicalRequirementsPage'));
+const UserAgreementPage = lazy(() => import('../pages/UserAgreementPage/UserAgreementPage'));
+const EventRegulationsPage = lazy(() => import('../pages/EventRegulationsPage/EventRegulationsPage'));
+const OrganizerRulesPage = lazy(() => import('../pages/OrganizerRulesPage/OrganizerRulesPage'));
 // Маршрутизация веб-сервиса
 function App() {
   const { preloadPages } = usePreload();
@@ -51,11 +51,11 @@ function App() {
           <Route path='/Support' element={<SupportPage />} />
           <Route path='/AboutUs' element={<AboutUsPage />} />
           <Route path='/MyAccount' element={<MyAccountPage />} />
-          <Route path='/PrivacyPolicy' element={<PrivacyPolicyPage/>}/>
-          <Route path='/TechnicalRequirements' element={<TechnicalRequirementsPage/>}/>
-          <Route path='/UserAgreement' element={<UserAgreementPage/>}/>
-          <Route path='/EventRegulations' element={<EventRegulationsPage/>}/>
-          <Route path='/OrganizerRules' element={<OrganizerRulesPage/>}/>
+          <Route path='/PrivacyPolicy' element={<PrivacyPolicyPage />} />
+          <Route path='/TechnicalRequirements' element={<TechnicalRequirementsPage />} />
+          <Route path='/UserAgreement' element={<UserAgreementPage />} />
+          <Route path='/EventRegulations' element={<EventRegulationsPage />} />
+          <Route path='/OrganizerRules' element={<OrganizerRulesPage />} />
           <Route path='/Account' element={<AccountPage />} /> {/* Сделать jwt-токен блокировку */}
           <Route path='/Registration' element={<RegistrationPage />} />
           <Route path='/Authorization' element={<AuthorizationPage />} />

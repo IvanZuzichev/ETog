@@ -30,7 +30,7 @@ const CookieContent: React.FC<CookieContentProps> = ({ className = '' }) => {
       <div className='cookie-content__content'>
         <p className='cookie-content__text'>
           Мы используем файлы cookie, чтобы обеспечивать правильную работу нашего веб-сайта.
-          <Link to='/LegalDocuments' className='cookie-content__link'>
+          <Link to='/UserAgreement' className='cookie-content__link'>
             Правила использования файлов cookie
           </Link>
         </p>

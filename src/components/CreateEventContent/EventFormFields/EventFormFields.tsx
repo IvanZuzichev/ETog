@@ -29,6 +29,7 @@ interface UploadedFile {
   name: string;
   extension: string;
 }
+
 // Компонент отвечающий за форму создания мероприятия
 export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFormChange, className = '' }) => {
   useThemeApply();
@@ -41,6 +42,7 @@ export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFo
     title?: string;
     description?: string;
     address?: string;
+    price?: string;
     phone?: string;
     telegram?: string;
     email?: string;
@@ -150,6 +152,7 @@ export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFo
       title?: string;
       description?: string;
       address?: string;
+      price?: string;
       phone?: string;
       telegram?: string;
       email?: string;
@@ -163,19 +166,27 @@ export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFo
       newErrors.eventDateTime = 'Выберите дату и время';
     }
 
-    if (formData.title.length > EVENT_FORM_CONSTANTS.FIELD_LIMITS.title) {
+    if (!formData.title.trim()) {
+      newErrors.title = 'Введите название мероприятия';
+    } else if (formData.title.length > EVENT_FORM_CONSTANTS.FIELD_LIMITS.title) {
       newErrors.title = `Название не должно превышать ${EVENT_FORM_CONSTANTS.FIELD_LIMITS.title} символов`;
     }
 
-    if (formData.description.length > EVENT_FORM_CONSTANTS.FIELD_LIMITS.description) {
+    if (!formData.description.trim()) {
+      newErrors.description = 'Введите описание мероприятия';
+    } else if (formData.description.length > EVENT_FORM_CONSTANTS.FIELD_LIMITS.description) {
       newErrors.description = `Описание не должно превышать ${EVENT_FORM_CONSTANTS.FIELD_LIMITS.description} символов`;
     }
 
-    if (formData.address.length > EVENT_FORM_CONSTANTS.FIELD_LIMITS.address) {
+    if (!formData.address.trim()) {
+      newErrors.address = 'Введите адрес мероприятия';
+    } else if (formData.address.length > EVENT_FORM_CONSTANTS.FIELD_LIMITS.address) {
       newErrors.address = `Адрес не должен превышать ${EVENT_FORM_CONSTANTS.FIELD_LIMITS.address} символов`;
     }
 
-    if (formData.phone.length > EVENT_FORM_CONSTANTS.FIELD_LIMITS.phone) {
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Введите номер телефона';
+    } else if (formData.phone.length > EVENT_FORM_CONSTANTS.FIELD_LIMITS.phone) {
       newErrors.phone = `Телефон не должен превышать ${EVENT_FORM_CONSTANTS.FIELD_LIMITS.phone} символов`;
     }
 
@@ -183,7 +194,11 @@ export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFo
       newErrors.telegram = `Telegram не должен превышать ${EVENT_FORM_CONSTANTS.FIELD_LIMITS.telegram} символов`;
     }
 
-    if (formData.email.length > EVENT_FORM_CONSTANTS.FIELD_LIMITS.email) {
+    if (!formData.email.trim()) {
+      newErrors.email = 'Введите email';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Введите корректный email';
+    } else if (formData.email.length > EVENT_FORM_CONSTANTS.FIELD_LIMITS.email) {
       newErrors.email = `Email не должен превышать ${EVENT_FORM_CONSTANTS.FIELD_LIMITS.email} символов`;
     }
 
@@ -225,179 +240,261 @@ export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFo
         style={{ display: 'none' }}
       />
 
-      <div className='form-field'>
-        <h1 className='form-h1'>Заполните информацию о предстоящем мероприятии</h1>
+      <div className='form-header'>
+        <h1 className='form-title'>Создание нового мероприятия</h1>
+        <p className='form-subtitle'>Заполните информацию о предстоящем мероприятии</p>
       </div>
-      {/* Ввод названия мероприяти */}
-      <div className='form-field'>
-        <label htmlFor='title' className='form-label'>
-          Название мероприятия
-        </label>
-        <input
-          id='title'
-          type='text'
-          value={formData.title}
-          onChange={handleInputChange('title')}
-          className='form-input'
-          placeholder='Введите название мероприятия'
-          required
-          maxLength={EVENT_FORM_CONSTANTS.FIELD_LIMITS.title}
-        />
-        <div className='character-count-right'>
-          {formData.title.length}/{EVENT_FORM_CONSTANTS.FIELD_LIMITS.title}
-        </div>
-        {errors.title && <span className='error-message'>{errors.title}</span>}
-      </div>
-      {/* Выбор типа мероприятия (Отдельный компонент) */}
-      <div className='form-field'>
-        <label htmlFor='type' className='form-label'>
-          Тип мероприятия
-        </label>
-        <EventTypeDropdown onSelect={handleEventTypeSelect} className='form-dropdown' />
-        {errors.eventType && <span className='error-message'>{errors.eventType}</span>}
-      </div>
-      {/* Выбор даты и времени мероприятия (Отдельный компонент) */}
-      <div className='form-field'>
-        <label htmlFor='date' className='form-label'>
-          Дата и время мероприятия
-        </label>
-        <DateTimePicker onSelect={handleDateTimeSelect} className='form-datetime' />
-        {errors.eventDateTime && <span className='error-message'>{errors.eventDateTime}</span>}
-      </div>
-      {/* Ввод описания мероприятия */}
-      <div className='form-field'>
-        <label htmlFor='description' className='form-label'>
-          Описание мероприятия
-        </label>
-        <textarea
-          id='description'
-          value={formData.description}
-          onChange={handleInputChange('description')}
-          className='form-textarea'
-          placeholder='Опишите ваше мероприятие'
-          rows={4}
-          required
-          maxLength={EVENT_FORM_CONSTANTS.FIELD_LIMITS.description}
-        />
-        <div className='character-count-right'>
-          {formData.description.length}/{EVENT_FORM_CONSTANTS.FIELD_LIMITS.description}
-        </div>
-        {errors.description && <span className='error-message'>{errors.description}</span>}
-      </div>
-      {/* Ввод стоимости мероприятия */}
-      <div className='form-field'>
-        <label htmlFor='price' className='form-label'>
-          Стоимость мероприятия
-        </label>
-        <input
-          id='price'
-          type='number'
-          value={formData.price}
-          onChange={handleInputChange('price')}
-          className='form-input no-spinner'
-          placeholder='0'
-          min='0'
-          step='any'
-          onWheel={e => e.currentTarget.blur()}
-        />
-      </div>
-      {/* Ввод адреса мероприятия */}
-      <div className='form-field'>
-        <label htmlFor='address' className='form-label'>
-          Адрес проведения мероприятия
-        </label>
-        <input
-          id='address'
-          type='text'
-          value={formData.address}
-          onChange={handleInputChange('address')}
-          className='form-input'
-          placeholder='Введите адрес'
-          required
-          maxLength={EVENT_FORM_CONSTANTS.FIELD_LIMITS.address}
-        />
-        <div className='character-count-right'>
-          {formData.address.length}/{EVENT_FORM_CONSTANTS.FIELD_LIMITS.address}
-        </div>
-        {errors.address && <span className='error-message'>{errors.address}</span>}
-      </div>
-      {/* Ввод номера телефона организатора мероприятия */}
-      <div className='form-field'>
-        <label htmlFor='phone' className='form-label'>
-          Номер телефона организатора
-        </label>
-        <input
-          id='phone'
-          type='tel'
-          value={formData.phone}
-          onChange={handleInputChange('phone')}
-          className='form-input'
-          placeholder='+7 (999) 999-99-99'
-          required
-          maxLength={EVENT_FORM_CONSTANTS.FIELD_LIMITS.phone}
-        />
-        <div className='character-count-right'>
-          {formData.phone.length}/{EVENT_FORM_CONSTANTS.FIELD_LIMITS.phone}
-        </div>
-        {errors.phone && <span className='error-message'>{errors.phone}</span>}
-      </div>
-      {/* Ввод телеграма организатора мероприятия */}
-      <div className='form-field'>
-        <label htmlFor='telegram' className='form-label'>
-          Ник Telegram организатора
-        </label>
-        <input
-          id='telegram'
-          type='text'
-          value={formData.telegram}
-          onChange={handleInputChange('telegram')}
-          className='form-input'
-          placeholder='@username'
-          maxLength={EVENT_FORM_CONSTANTS.FIELD_LIMITS.telegram}
-        />
-        <div className='character-count-right'>
-          {formData.telegram.length}/{EVENT_FORM_CONSTANTS.FIELD_LIMITS.telegram}
-        </div>
-        {errors.telegram && <span className='error-message'>{errors.telegram}</span>}
-      </div>
-      {/* Ввод электронной почты организатора */}
-      <div className='form-field'>
-        <label htmlFor='email' className='form-label'>
-          Электронная почта организатора
-        </label>
-        <input
-          id='email'
-          type='email'
-          value={formData.email}
-          onChange={handleInputChange('email')}
-          className='form-input'
-          placeholder='email@example.com'
-          required
-          maxLength={EVENT_FORM_CONSTANTS.FIELD_LIMITS.email}
-        />
-        <div className='character-count-right'>
-          {formData.email.length}/{EVENT_FORM_CONSTANTS.FIELD_LIMITS.email}
-        </div>
-        {errors.email && <span className='error-message'>{errors.email}</span>}
-      </div>
-      {/* Кнопка загрузки обложки мероприятия (Один файл) */}
-      <div className='form-field'>
-        <button type='button' className='button-events' onClick={handleCoverUpload}>
-          Загрузите обложку мероприятия...
-        </button>
 
-        {uploadedFile && (
-          <div className='uploaded-file-info'>
-            <span className='file-name'>{uploadedFile.name}</span>
-            <button type='button' className='remove-file-button' onClick={handleRemoveFile} aria-label='Удалить файл'>
-              ×
-            </button>
+      {/* Основная информация */}
+      <div className='form-section'>
+        <h3 className='section-title'>Основная информация</h3>
+        
+        <div className='form-grid'>
+          {/* Левая колонка */}
+          <div className='form-column'>
+            {/* Название мероприятия */}
+            <div className='form-field'>
+              <label htmlFor='title' className='form-label'>
+                Название мероприятия
+              </label>
+              <input
+                id='title'
+                type='text'
+                value={formData.title}
+                onChange={handleInputChange('title')}
+                className='form-input'
+                placeholder='Введите название мероприятия'
+                required
+                maxLength={EVENT_FORM_CONSTANTS.FIELD_LIMITS.title}
+              />
+              <div className='character-count'>
+                {formData.title.length}/{EVENT_FORM_CONSTANTS.FIELD_LIMITS.title}
+              </div>
+              {errors.title && <span className='error-message'>{errors.title}</span>}
+            </div>
+
+            {/* Тип мероприятия */}
+            <div className='form-field'>
+              <label className='form-label'>
+                Тип мероприятия
+              </label>
+              <EventTypeDropdown 
+                onSelect={handleEventTypeSelect} 
+                className='form-dropdown'
+              />
+              {errors.eventType && <span className='error-message'>{errors.eventType}</span>}
+            </div>
+
+            {/* Дата и время */}
+            <div className='form-field'>
+              <label className='form-label'>
+                Дата и время мероприятия
+              </label>
+              <DateTimePicker 
+                onSelect={handleDateTimeSelect} 
+                className='form-datetime'
+              />
+              {errors.eventDateTime && <span className='error-message'>{errors.eventDateTime}</span>}
+            </div>
           </div>
-        )}
+
+          {/* Правая колонка */}
+          <div className='form-column'>
+            {/* Описание */}
+            <div className='form-field'>
+              <label htmlFor='description' className='form-label'>
+                Описание мероприятия
+              </label>
+              <textarea
+                id='description'
+                value={formData.description}
+                onChange={handleInputChange('description')}
+                className='form-textarea'
+                placeholder='Опишите ваше мероприятие'
+                rows={8}
+                required
+                maxLength={EVENT_FORM_CONSTANTS.FIELD_LIMITS.description}
+              />
+              <div className='character-count'>
+                {formData.description.length}/{EVENT_FORM_CONSTANTS.FIELD_LIMITS.description}
+              </div>
+              {errors.description && <span className='error-message'>{errors.description}</span>}
+            </div>
+          </div>
+        </div>
+
+        {/* Стоимость и адрес - одинаковой ширины */}
+        <div className='equal-fields'>
+          <div className='form-field'>
+            <label htmlFor='price' className='form-label'>
+              Стоимость (₽)
+            </label>
+            <div className='price-input-wrapper'>
+              <input
+                id='price'
+                type='number'
+                value={formData.price}
+                onChange={handleInputChange('price')}
+                className='form-input no-spinner'
+                placeholder='0'
+                min='0'
+                step='100'
+                onWheel={e => e.currentTarget.blur()}
+              />
+              <span className='price-suffix'>₽</span>
+            </div>
+            {errors.price && <span className='error-message'>{errors.price}</span>}
+          </div>
+
+          <div className='form-field'>
+            <label htmlFor='address' className='form-label'>
+              Адрес проведения
+            </label>
+            <input
+              id='address'
+              type='text'
+              value={formData.address}
+              onChange={handleInputChange('address')}
+              className='form-input'
+              placeholder='Введите адрес'
+              required
+              maxLength={EVENT_FORM_CONSTANTS.FIELD_LIMITS.address}
+            />
+            <div className='character-count'>
+              {formData.address.length}/{EVENT_FORM_CONSTANTS.FIELD_LIMITS.address}
+            </div>
+            {errors.address && <span className='error-message'>{errors.address}</span>}
+          </div>
+        </div>
       </div>
-      {/* Кнопка создания мероприятия */}
-      <div className='form-field'>
-        <button type='submit' className='button-events'>
+
+      {/* Контактная информация */}
+      <div className='form-section'>
+        <h3 className='section-title'>Контактная информация организатора</h3>
+        
+        <div className='contact-grid'>
+          {/* Телефон */}
+          <div className='form-field'>
+            <label htmlFor='phone' className='form-label'>
+              Номер телефона
+            </label>
+            <input
+              id='phone'
+              type='tel'
+              value={formData.phone}
+              onChange={handleInputChange('phone')}
+              className='form-input'
+              placeholder='+7 (999) 999-99-99'
+              required
+              maxLength={EVENT_FORM_CONSTANTS.FIELD_LIMITS.phone}
+            />
+            <div className='character-count'>
+              {formData.phone.length}/{EVENT_FORM_CONSTANTS.FIELD_LIMITS.phone}
+            </div>
+            {errors.phone && <span className='error-message'>{errors.phone}</span>}
+          </div>
+
+          {/* Telegram */}
+          <div className='form-field'>
+            <label htmlFor='telegram' className='form-label'>
+              Telegram
+            </label>
+            <input
+              id='telegram'
+              type='text'
+              value={formData.telegram}
+              onChange={handleInputChange('telegram')}
+              className='form-input'
+              placeholder='@username'
+              maxLength={EVENT_FORM_CONSTANTS.FIELD_LIMITS.telegram}
+            />
+            <div className='character-count'>
+              {formData.telegram.length}/{EVENT_FORM_CONSTANTS.FIELD_LIMITS.telegram}
+            </div>
+            {errors.telegram && <span className='error-message'>{errors.telegram}</span>}
+          </div>
+
+          {/* Email */}
+          <div className='form-field'>
+            <label htmlFor='email' className='form-label'>
+              Email
+            </label>
+            <input
+              id='email'
+              type='email'
+              value={formData.email}
+              onChange={handleInputChange('email')}
+              className='form-input'
+              placeholder='email@example.com'
+              required
+              maxLength={EVENT_FORM_CONSTANTS.FIELD_LIMITS.email}
+            />
+            <div className='character-count'>
+              {formData.email.length}/{EVENT_FORM_CONSTANTS.FIELD_LIMITS.email}
+            </div>
+            {errors.email && <span className='error-message'>{errors.email}</span>}
+          </div>
+        </div>
+      </div>
+
+      {/* Загрузка обложки */}
+      <div className='form-section'>
+  <h3 className='section-title'>Загрузка обложки</h3>
+  
+  <div className='form-field'>
+    <div className='upload-area' onClick={handleCoverUpload}>
+      {uploadedFile ? (
+        <div className='uploaded-file-info'>
+          <div className='file-preview'>
+            <div className='file-details'>
+              <span className='file-name'>{uploadedFile.name}</span>
+              <span className='file-size'>
+                {(uploadedFile.file.size / 1024 / 1024).toFixed(2)} MB
+              </span>
+            </div>
+          </div>
+          <button 
+            type='button' 
+            className='remove-file-btn'
+            onClick={(e) => {
+              e.stopPropagation();
+              handleRemoveFile();
+            }}
+            title='Удалить файл'
+            aria-label='Удалить файл'
+          >
+          </button>
+        </div>
+      ) : (
+        <>
+          <div className='upload-text'>
+            <p className='upload-title'>Загрузите обложку мероприятия</p>
+            <p className='upload-subtitle'>JPG, PNG • Максимум 5MB</p>
+          </div>
+          <button type='button' className='upload-btn'>
+            Выбрать файл
+          </button>
+        </>
+      )}
+    </div>
+  </div>
+</div>
+
+      {/* Кнопки действий */}
+      <div className='form-actions'>
+        <button 
+          type='button' 
+          className='btn-secondary'
+          onClick={clearForm}
+            title='Очистить форму'
+        >
+          Очистить форму
+        </button>
+        <button 
+          type='submit' 
+          className='btn-primary'
+           title='Создать мероприятие'
+        >
           Создать мероприятие
         </button>
       </div>

@@ -62,7 +62,7 @@ export const useVoiceRecordSearch = (): UseVoiceRecordSearchReturn => {
     recognition.continuous = true;
     recognition.interimResults = true;
     recognition.lang = 'ru-RU';
-    
+
     // Пытаемся установить более длинную паузу (работает в некоторых браузерах)
     if ('webkitSpeechRecognition' in window) {
       try {
@@ -72,39 +72,36 @@ export const useVoiceRecordSearch = (): UseVoiceRecordSearchReturn => {
       }
     }
 
-    let lastResultTime;
-
     recognition.onstart = () => {
       setIsListening(true);
       setError(null);
-      
-      if (fullTranscriptRef.current && 
-          !fullTranscriptRef.current.endsWith('. ') && 
-          !fullTranscriptRef.current.endsWith('! ') && 
-          !fullTranscriptRef.current.endsWith('? ')) {
+
+      if (
+        fullTranscriptRef.current &&
+        !fullTranscriptRef.current.endsWith('. ') &&
+        !fullTranscriptRef.current.endsWith('! ') &&
+        !fullTranscriptRef.current.endsWith('? ')
+      ) {
         fullTranscriptRef.current += '. ';
       }
-      
+
       setTranscript(fullTranscriptRef.current);
-      lastResultTime = Date.now();
     };
 
     recognition.onresult = (event: any) => {
       let currentTranscript = '';
       let hasFinalResult = false;
-      
+
       for (let i = event.resultIndex; i < event.results.length; i++) {
         const transcriptPart = event.results[i][0].transcript;
-        
+
         if (event.results[i].isFinal) {
           let finalTranscript = transcriptPart;
-          
-          if (!finalTranscript.endsWith('.') && 
-              !finalTranscript.endsWith('!') && 
-              !finalTranscript.endsWith('?')) {
+
+          if (!finalTranscript.endsWith('.') && !finalTranscript.endsWith('!') && !finalTranscript.endsWith('?')) {
             finalTranscript += '.';
           }
-          
+
           fullTranscriptRef.current += finalTranscript + ' ';
           currentTranscript = '';
           hasFinalResult = true;
@@ -112,16 +109,13 @@ export const useVoiceRecordSearch = (): UseVoiceRecordSearchReturn => {
           currentTranscript = transcriptPart;
         }
       }
-      
+
       setTranscript(fullTranscriptRef.current + currentTranscript);
-      
-      // Сбрасываем таймер при получении любого результата
-      lastResultTime = Date.now();
-      
+
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
-      
+
       // Устанавливаем таймер на 3 секунды после последнего результата
       if (hasFinalResult) {
         timeoutRef.current = setTimeout(() => {
@@ -133,12 +127,12 @@ export const useVoiceRecordSearch = (): UseVoiceRecordSearchReturn => {
 
     recognition.onerror = (event: any) => {
       console.error('Ошибка распознавания:', event.error);
-      
+
       // Игнорируем ошибку "no-speech", так как это нормально при паузах
       if (event.error !== 'no-speech') {
         setError(`Ошибка распознавания: ${event.error}`);
       }
-      
+
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
         timeoutRef.current = null;
@@ -148,7 +142,7 @@ export const useVoiceRecordSearch = (): UseVoiceRecordSearchReturn => {
 
     recognition.onend = () => {
       console.log('Распознавание завершено');
-      
+
       // Автоматически перезапускаем, если это не было ручное остановление
       if (isListening) {
         console.log('Автоперезапуск распознавания...');
@@ -187,7 +181,7 @@ export const useVoiceRecordSearch = (): UseVoiceRecordSearchReturn => {
     };
 
     recognitionRef.current = recognition;
-    
+
     try {
       recognition.start();
     } catch (e) {

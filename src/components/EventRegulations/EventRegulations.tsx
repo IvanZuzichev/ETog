@@ -7,7 +7,7 @@ export const EventRegulations: React.FC = () => {
 
     return lines.map((line, lineIndex) => {
       const key = `regulations-${lineIndex}`;
-      
+
       if (line.includes('Регламент проведения мероприятий ETog')) {
         return (
           <h2 key={key} className='document-title'>
@@ -53,9 +53,5 @@ export const EventRegulations: React.FC = () => {
     });
   };
 
-  return (
-    <div className="event-regulations">
-      {formatDocumentText(LEGAL_DOCUMENTS.EVENT_REGULATIONS)}
-    </div>
-  );
+  return <div className='event-regulations'>{formatDocumentText(LEGAL_DOCUMENTS.EVENT_REGULATIONS)}</div>;
 };

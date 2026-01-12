@@ -7,7 +7,7 @@ export const UserAgreement: React.FC = () => {
 
     return lines.map((line, lineIndex) => {
       const key = `agreement-${lineIndex}`;
-      
+
       if (line.includes('Пользовательское соглашение для ETog')) {
         return (
           <h2 key={key} className='document-title'>
@@ -53,9 +53,5 @@ export const UserAgreement: React.FC = () => {
     });
   };
 
-  return (
-    <div className="user-agreement">
-      {formatDocumentText(LEGAL_DOCUMENTS.USER_AGREEMENT)}
-    </div>
-  );
+  return <div className='user-agreement'>{formatDocumentText(LEGAL_DOCUMENTS.USER_AGREEMENT)}</div>;
 };

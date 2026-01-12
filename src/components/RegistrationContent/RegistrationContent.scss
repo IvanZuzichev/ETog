@@ -1,17 +1,24 @@
-// Стили для регистрации
-
 :root {
   --header-height: clamp(60px, 8vh, 80px);
   --padding-x: clamp(1rem, 4vw, 2rem);
   --padding-y: clamp(0.5rem, 1.5vh, 1rem);
-  --background-color: #ffffff;
+  --background-color: #F8F8F8; 
   --text-color: #000000;
   --primary-color: #7b1fa2;
   --footer-bg: #7b1fa2;
   --footer-text: #ffffff;
-  --button-bg: #ffffff;
+  --content-bg: #ffffff; 
   --button-text: #7b1fa2;
   font-family: 'Onest', sans-serif;
+}
+
+.registration-page-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--header-height, 80px));
+  padding: 2rem 1rem;
+  box-sizing: border-box;
 }
 
 .registration-form-container {
@@ -24,11 +31,11 @@
   margin-top: 20px;
   margin-bottom: 20px;
   align-items: center;
-  background: var(--background-color);
-  border-radius: 16px;
-  box-shadow: rgba(108, 107, 107, 0.48) 0px 0px 8px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-   font-family: "Inter", sans-serif;
+  background: var(--content-bg); /* Используем content-bg как в авторизации */
+  border-radius: 8px; /* 8px как в авторизации, вместо 16px */
+  // box-shadow: rgba(108, 107, 107, 0.48) 0px 0px 8px; /* Закомментировано как в авторизации */
+  // border: 1px solid rgba(0, 0, 0, 0.08); /* Закомментировано как в авторизации */
+  font-family: "Inter", sans-serif;
 }
 
 .registration-form-container .form-field {
@@ -47,7 +54,7 @@
   text-align: left;
   color: var(--text-color);
   padding-left: 4px;
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .registration-form-container .form-field .form-h1 {
@@ -58,7 +65,7 @@
   margin-bottom: 15px;
   color: var(--text-color);
   padding: 12px 0;
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .registration-form-container .form-field .form-input,
@@ -67,13 +74,13 @@
   padding: 12px 16px;
   border: 2px solid rgba(123, 31, 162, 0.2);
   border-radius: 12px;
-  background: var(--background-color);
+  background: var(--content-bg); /* Используем content-bg */
   font-size: 1rem;
   color: var(--text-color);
   transition: all 0.3s ease;
   box-sizing: border-box;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .registration-form-container .form-field .form-input:focus,
@@ -102,11 +109,56 @@
   line-height: 1.5;
 }
 
+/* Стили для чекбокса соглашения */
+.agreement-field {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.agreement-container {
+  display: flex;
+  align-items: flex-start; /* Изменено с center на flex-start */
+  width: 100%;
+  gap: 10px;
+}
+
+.agreement-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+  margin-top: 3px; /* Добавлено для выравнивания */
+  flex-shrink: 0;
+}
+
+.agreement-label {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  cursor: pointer;
+  margin: 0;
+  display: flex;
+  align-items: flex-start; /* Изменено с center на flex-start */
+  line-height: 1.4;
+  font-family: "Inter", sans-serif;
+}
+
+.agreement-link {
+  color: var(--button-text);
+  text-decoration: none;
+  margin-left: 4px;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* Основная кнопка регистрации - как в авторизации */
 .registration-form-container .form-field .button-registrations {
   width: 100%;
   padding: 14px 20px;
   border: 1px solid rgba(123, 31, 162, 0.3);
-  border-radius: 12px;
+  border-radius: 8px; /* 8px как в авторизации, вместо 12px */
   background: var(--footer-bg);
   cursor: pointer;
   font-size: 1rem;
@@ -115,21 +167,64 @@
   transition: all 0.3s ease;
   text-align: center;
   box-shadow: 0 4px 15px rgba(123, 31, 162, 0.3);
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
+  
+  &:hover {
+    background-color: #9716ce; /* Как в авторизации */
+    box-shadow: 0 6px 20px rgba(123, 31, 162, 0.4);
+    border-color: rgba(123, 31, 162, 0.5);
+    transform: none; /* Убрано transform как в авторизации */
+  }
+  
+  &:active {
+    background-color: #9716ce; /* Как в авторизации */
+    box-shadow: 0 3px 10px rgba(123, 31, 162, 0.3);
+    transform: none; /* Убрано transform как в авторизации */
+  }
 }
 
-.registration-form-container .form-field .button-registrations:hover {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 6px 20px rgba(123, 31, 162, 0.4);
-  border-color: rgba(123, 31, 162, 0.5);
+/* Кнопка перехода на авторизацию - как в авторизации */
+.button-registration {
+  font-size: 1rem;
+  font-weight: 500;
+  width: 100%;
+  color: var(--button-text);
+  border: none;
+  margin-top: 10px;
+  background-color: var(--content-bg); /* content-bg вместо background-color */
+  box-shadow: none;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 0; /* Добавлено для лучшего кликабельного пространства */
+  
+  &:hover {
+    color: #7b1fa2 !important;
+    text-decoration: underline !important;
+  }
 }
 
-.registration-form-container .form-field .button-registrations:active {
-  transform: translateY(0) scale(1);
-  box-shadow: 0 3px 10px rgba(123, 31, 162, 0.3);
+.character-count-right {
+  font-size: 0.75rem;
+  color: #666;
+  text-align: right;
+  margin-top: 4px;
+  width: 100%;
+  display: block;
+  font-family: "Inter", sans-serif;
 }
 
-// Адаптивность
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 4px;
+  display: block;
+  text-align: left;
+  width: 100%;
+  font-family: "Inter", sans-serif;
+}
+
+/* Адаптивность - как в авторизации */
 @media (max-width: 768px) {
   .registration-form-container {
     width: 100%;
@@ -143,104 +238,22 @@
   .registration-form-container .form-field .form-input,
   .registration-form-container .form-field .form-textarea,
   .registration-form-container .form-field .button-registrations {
-    width: 100%;
+    width: 100% !important;
   }
   
   .registration-form-container .form-field .form-label {
     width: 100%;
   }
-}
-
-/* Анимации */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.error-message {
-  color: #dc3545;
-  font-size: 0.875rem;
-  margin-top: 4px;
-  display: block;
-  text-align: left;
-  width: 100%;
-   font-family: "Inter", sans-serif;
-}
-
-.form-label:after {
-  content: ' *';
-  color: #dc3545;
-}
-
-.button-registration {
-  font-size: 1rem;
-  font-weight: 500;
-  width: 100%;
-  color: var(--button-text);
-  border: none;
-  border-radius: 12px;
-  margin-top: 10px;
-  background-color: var(--background-color);
-  box-shadow: none;
-  cursor: pointer;
   
-  &:hover {
-    color: #7b1fa2;
-    text-decoration: underline;
+  .agreement-label {
+    font-size: 0.85rem;
   }
 }
 
-.agreement-field {
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-
-.agreement-container {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 10px;
-}
-
-.agreement-checkbox {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--primary-color);
-  cursor: pointer;
-}
-
-.agreement-label {
-  font-size: 0.9rem;
-  color: var(--text-color);
-  cursor: pointer;
-  margin: 0;
-  display: flex;
-  align-items: center;
-   font-family: "Inter", sans-serif;
-}
-
-.agreement-link {
-  color: var(--button-text);
-  text-decoration: none;
-  margin-left: 4px;
-  
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-.character-count-right {
-  font-size: 0.75rem;
-  color: #666;
-  text-align: right;
-  margin-top: 4px;
-  width: 100%;
-  display: block;
-   font-family: "Inter", sans-serif;
+/* Дополнительные стили для инвалидных состояний */
+.button-registrations:disabled,
+.button-registration:disabled,
+.form-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

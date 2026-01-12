@@ -8,6 +8,7 @@ const CreateEventPage: React.FC = () => {
   return (
     <div className='main-page-wrapper'>
       <Header />
+      <div className="header-spacer"></div>
       <CreateEventContent />
       <Footer />
     </div>

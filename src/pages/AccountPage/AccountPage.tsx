@@ -26,6 +26,7 @@ const AccountPage: React.FC = () => {
   return (
     <div className='main-page-wrapper'>
       <Header />
+      <div className="header-spacer"></div>
       <AccountContent formData={formData} onFormChange={handleFormChange} />
       <Footer />
     </div>

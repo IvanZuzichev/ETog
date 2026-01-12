@@ -10,6 +10,7 @@ const PrivacyPolicyPage: React.FC = () => {
   return (
     <div className='main-page-wrapper'>
       <Header />
+      <div className="header-spacer"></div>
       <PrivacyPolicy />
       <Footer />
     </div>

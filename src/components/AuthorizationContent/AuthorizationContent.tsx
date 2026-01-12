@@ -183,7 +183,7 @@ export const AuthorizationContent: React.FC<AuthorizationDataProps> = ({ formDat
   };
 
   return (
-    <div className='main-page-wrapper'>
+    <div className='authorization-page-centered'>
       <form className={`authorization-form-container ${className}`} onSubmit={handleSubmit}>
         <div className='form-field'>
           <h1 className='form-h1'>Авторизация</h1>

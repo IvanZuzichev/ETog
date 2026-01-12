@@ -4,5 +4,5 @@ export const BURGER_MENU_ITEMS = [
   { id: 'favorites', label: 'Избранные мероприятия' },
   { id: 'recommendation', label: 'Рекомендованные мероприятия' },
   { id: 'subscribe', label: 'Подписки' },
-  { id: 'config', label: 'Настройки' },
+  // { id: 'config', label: 'Настройки' },
 ] as const;

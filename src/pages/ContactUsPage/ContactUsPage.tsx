@@ -24,6 +24,7 @@ const ContactUsPage: React.FC = () => {
   return (
     <div className='main-page-wrapper'>
       <Header />
+      <div className="header-spacer"></div>
       <ContactUsContent formData={formData} onFormChange={handleFormChange} />
       <Footer />
     </div>

@@ -1,16 +1,24 @@
-// Стили для компонента тсраницы сброса пароля
 :root {
   --header-height: clamp(60px, 8vh, 80px);
   --padding-x: clamp(1rem, 4vw, 2rem);
   --padding-y: clamp(0.5rem, 1.5vh, 1rem);
-  --background-color: #ffffff;
+  --background-color: #F8F8F8; 
   --text-color: #000000;
   --primary-color: #7b1fa2;
   --footer-bg: #7b1fa2;
   --footer-text: #ffffff;
-  --button-bg: #ffffff;
+  --content-bg: #ffffff; 
   --button-text: #7b1fa2;
   font-family: 'Onest', sans-serif;
+}
+
+.sendmessage-page-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--header-height, 80px));
+  padding: 2rem 1rem;
+  box-sizing: border-box;
 }
 
 .sendmessage-form-container {
@@ -23,11 +31,11 @@
   margin-top: 20px;
   margin-bottom: 20px;
   align-items: center;
-  background: var(--background-color);
-  border-radius: 1.15rem;
-  box-shadow: rgba(108, 107, 107, 0.48) 0px 0px 8px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-   font-family: "Inter", sans-serif;
+  background: var(--content-bg); /* Используем content-bg */
+  border-radius: 8px; /* 8px как в авторизации, вместо 1.15rem */
+  // box-shadow: rgba(108, 107, 107, 0.48) 0px 0px 8px; /* Закомментировано как в авторизации */
+  // border: 1px solid rgba(0, 0, 0, 0.08); /* Закомментировано как в авторизации */
+  font-family: "Inter", sans-serif;
 }
 
 .sendmessage-form-container .form-field {
@@ -46,16 +54,7 @@
   text-align: left;
   color: var(--text-color);
   padding-left: 4px;
-   font-family: "Inter", sans-serif;
-}
-
-.sendmessage-form-container .form-field .form-label:after {
-  content: ' *';
-  color: #dc3545;
-}
-
-.sendmessage-form-container .form-field .form-label:not([for="title"]):not([for="description"]):not([for="address"]):not([for="phone"]):not([for="email"]):after {
-  content: '';
+  font-family: "Inter", sans-serif;
 }
 
 .sendmessage-form-container .form-field .form-h1 {
@@ -66,7 +65,7 @@
   margin-bottom: 15px;
   color: var(--text-color);
   padding: 12px 0;
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .sendmessage-form-container .form-field .form-input,
@@ -74,14 +73,14 @@
   width: 100%;
   padding: 12px 16px;
   border: 2px solid rgba(123, 31, 162, 0.2);
-  border-radius: 1.15rem;
-  background: var(--background-color);
+  border-radius: 12px; /* 12px как в авторизации, вместо 1.15rem */
+  background: var(--content-bg); /* Используем content-bg */
   font-size: 1rem;
   color: var(--text-color);
   transition: all 0.3s ease;
   box-sizing: border-box;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .sendmessage-form-container .form-field .form-input:focus,
@@ -110,49 +109,12 @@
   line-height: 1.5;
 }
 
-.sendmessage-form-container .form-field .dropdown-container,
-.sendmessage-form-container .form-field .datetime-container {
-  width: 100% !important;
-  display: flex;
-  justify-content: center;
-}
-
-.sendmessage-form-container .form-field .dropdown-container .dropdown-button,
-.sendmessage-form-container .form-field .datetime-container .datetime-button {
-  width: 100% !important;
-  padding: 12px 16px !important;
-  border: 2px solid rgba(123, 31, 162, 0.2) !important;
-  border-radius: 1.15rem;
-  background: var(--background-color) !important;
-  cursor: pointer !important;
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  font-size: 1rem !important;
-  color: var(--text-color) !important;
-  transition: all 0.3s ease !important;
-  box-sizing: border-box !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-}
-
-.sendmessage-form-container .form-field .dropdown-container .dropdown-button:hover,
-.sendmessage-form-container .form-field .datetime-container .datetime-button:hover {
-  border-color: rgba(123, 31, 162, 0.4) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-  transform: translateY(-1px) scale(1.01);
-  background: rgba(123, 31, 162, 0.05) !important;
-}
-
-.sendmessage-form-container .form-field .dropdown-container .dropdown-button:active,
-.sendmessage-form-container .form-field .datetime-container .datetime-button:active {
-  transform: translateY(0) scale(1);
-}
-
+/* Кнопка отправки - как в авторизации */
 .sendmessage-form-container .form-field .button-sendmessages {
   width: 100%;
   padding: 14px 20px;
   border: 1px solid rgba(123, 31, 162, 0.3);
-  border-radius: 1.15rem;
+  border-radius: 8px; /* 8px как в авторизации, вместо 1.15rem */
   background: var(--footer-bg);
   cursor: pointer;
   font-size: 1rem;
@@ -161,64 +123,74 @@
   transition: all 0.3s ease;
   text-align: center;
   box-shadow: 0 4px 15px rgba(123, 31, 162, 0.3);
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
+  
+  &:hover {
+    background-color: #9716ce; /* Как в авторизации */
+    box-shadow: 0 6px 20px rgba(123, 31, 162, 0.4);
+    border-color: rgba(123, 31, 162, 0.5);
+    transform: none; /* Убрано transform как в авторизации */
+  }
+  
+  &:active {
+    background-color: #9716ce; /* Как в авторизации */
+    box-shadow: 0 3px 10px rgba(123, 31, 162, 0.3);
+    transform: none; /* Убрано transform как в авторизации */
+  }
 }
 
-.sendmessage-form-container .form-field .button-sendmessages:hover {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 6px 20px rgba(123, 31, 162, 0.4);
-  border-color: rgba(123, 31, 162, 0.5);
-}
-
-.sendmessage-form-container .form-field .button-sendmessages:active {
-  transform: translateY(0) scale(1);
-  box-shadow: 0 3px 10px rgba(123, 31, 162, 0.3);
-}
-
+/* Кнопка перехода на авторизацию - как в авторизации */
 .button-authorization {
-         font-size: 1rem;
-      font-weight: 500;
-        width: 100%;
-      color: var(--button-text);
-      border: none;
-        transform: none;
-      border-radius: 12px;
-      margin-top: 10px;
-    background-color: var(--background-color);
-    box-shadow: none;
-     font-family: "Inter", sans-serif;
-    font-weight: 500;
-          &:hover {
-      color: #7b1fa2 !important;
-      text-decoration: underline !important;
-    }
-    }
+  font-size: 1rem;
+  font-weight: 500;
+  width: 100%;
+  color: var(--button-text);
+  border: none;
+  margin-top: 10px;
+  background-color: var(--content-bg); /* content-bg вместо background-color */
+  box-shadow: none;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 10px 0; /* Добавлено для лучшего кликабельного пространства */
+  
+  &:hover {
+    color: #7b1fa2 !important;
+    text-decoration: underline !important;
+  }
+}
 
-        .character-count-right {
+.character-count-right {
   font-size: 0.75rem;
   color: #666;
   text-align: right;
   margin-top: 4px;
   width: 100%;
   display: block;
-  
-  [data-theme="dark"] & {
-    color: #999;
-  }
+  font-family: "Inter", sans-serif;
 }
 
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 4px;
+  display: block;
+  text-align: left;
+  width: 100%;
+  font-family: "Inter", sans-serif;
+}
 
-/* Темная тема */
+/* Темная тема - можно удалить или оставить, но привести в соответствие с авторизацией */
 [data-theme="dark"] .sendmessage-form-container {
-  background: var(--background-color, #1a1a1a);
+  background: var(--content-bg, #2d2d2d); /* Используем content-bg */
   border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  // box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); /* Закомментировано как в авторизации */
 }
 
 [data-theme="dark"] .sendmessage-form-container .form-field .form-input,
 [data-theme="dark"] .sendmessage-form-container .form-field .form-textarea {
   border-color: rgba(255, 255, 255, 0.15);
-  background: var(--background-color, #2d2d2d);
+  background: var(--content-bg, #2d2d2d); /* Используем content-bg */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -233,31 +205,23 @@
   border-color: rgba(156, 39, 176, 0.4);
 }
 
-[data-theme="dark"] .sendmessage-form-container .form-field .dropdown-container .dropdown-button,
-[data-theme="dark"] .sendmessage-form-container .form-field .datetime-container .datetime-button {
-  border-color: rgba(255, 255, 255, 0.15) !important;
-  background: var(--background-color, #2d2d2d) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
-}
-
-[data-theme="dark"] .sendmessage-form-container .form-field .dropdown-container .dropdown-button:hover,
-[data-theme="dark"] .sendmessage-form-container .form-field .datetime-container .datetime-button:hover {
-  border-color: rgba(156, 39, 176, 0.4) !important;
-  background: rgba(156, 39, 176, 0.1) !important;
-}
-
 [data-theme="dark"] .sendmessage-form-container .form-field .button-sendmessages {
   border-color: rgba(156, 39, 176, 0.4);
-  background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+  background: var(--footer-bg); /* Используем переменную вместо градиента */
   box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
 }
 
 [data-theme="dark"] .sendmessage-form-container .form-field .button-sendmessages:hover {
-  background: linear-gradient(135deg, #7b1fa2 0%, #6a1b8a 100%);
+  background-color: #9716ce; /* Как в авторизации */
   border-color: rgba(156, 39, 176, 0.6);
 }
 
-/* Адаптивность */
+[data-theme="dark"] .button-authorization {
+  background-color: var(--content-bg, #2d2d2d);
+  color: var(--button-text);
+}
+
+/* Адаптивность - как в авторизации */
 @media (max-width: 768px) {
   .sendmessage-form-container {
     width: 100%;
@@ -270,9 +234,7 @@
   
   .sendmessage-form-container .form-field .form-input,
   .sendmessage-form-container .form-field .form-textarea,
-  .sendmessage-form-container .form-field .dropdown-container .dropdown-button,
-  .sendmessage-form-container .form-field .datetime-container .datetime-button,
-  .sendmessage-form-container .form-field .button-events {
+  .sendmessage-form-container .form-field .button-sendmessages {
     width: 100% !important;
   }
   
@@ -281,47 +243,23 @@
   }
 }
 
-/* Анимации */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Дополнительные стили для инвалидных состояний - как в авторизации */
+.button-sendmessages:disabled,
+.button-authorization:disabled,
+.form-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-/* Убираем стрелки у number input */
-.no-spinner {
-  -moz-appearance: textfield;
-}
-
-.no-spinner::-webkit-outer-spin-button,
-.no-spinner::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Стили для сообщений об ошибках */
-.error-message {
-  color: #dc3545;
-  font-size: 0.875rem;
-  margin-top: 4px;
-  display: block;
-}
-
-.form-label:after {
-  content: ' *';
-  color: #dc3545;
-}
-
-.form-label:not([for="title"]):not([for="description"]):not([for="address"]):not([for="phone"]):not([for="email"]):after {
-  content: '';
-}
-
-.form-field:nth-child(1) .form-label:after,
-.form-field:nth-child(2) .form-label:after {
-  content: ' *' !important;
+.info-message {
+  background: #e3f2fd;
+  border: 1px solid #bbdefb;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+  color: #1565c0;
+  font-size: 0.9rem;
+  text-align: center;
+  width: 100%;
+  font-family: "Inter", sans-serif;
 }

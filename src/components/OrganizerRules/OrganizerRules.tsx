@@ -7,7 +7,7 @@ export const OrganizerRules: React.FC = () => {
 
     return lines.map((line, lineIndex) => {
       const key = `organizer-${lineIndex}`;
-      
+
       if (line.includes('Правила для организаторов мероприятий ETog')) {
         return (
           <h2 key={key} className='document-title'>
@@ -53,9 +53,5 @@ export const OrganizerRules: React.FC = () => {
     });
   };
 
-  return (
-    <div className="organizer-rules">
-      {formatDocumentText(LEGAL_DOCUMENTS.ORGANIZER_RULES)}
-    </div>
-  );
+  return <div className='organizer-rules'>{formatDocumentText(LEGAL_DOCUMENTS.ORGANIZER_RULES)}</div>;
 };

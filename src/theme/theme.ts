@@ -18,7 +18,7 @@ export const lightTheme: Theme = {
   name: 'light',
   colors: {
     primary: '#7b1fa2',
-    background: '#ffffff',
+    background: '#F1F0EE',
     text: '#000000',
     footerheaderBg: '#7b1fa2',
     footerheaderText: '#ffffff',

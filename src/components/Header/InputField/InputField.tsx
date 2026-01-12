@@ -10,23 +10,12 @@ interface InputFieldProps {
   size?: 'small' | 'medium' | 'large';
 }
 
-export const InputField: FC<InputFieldProps> = ({ 
-  onSearch, 
-  onVoiceSearch, 
-  size = 'medium' 
-}) => {
+export const InputField: FC<InputFieldProps> = ({ onSearch, onVoiceSearch, size = 'medium' }) => {
   const [searchText, setSearchText] = useState('');
   const { validateInput } = useBlacklist();
-  
+
   // Используем хук голосового поиска
-  const {
-    isListening,
-    transcript,
-    startListening,
-    stopListening,
-    error,
-    resetTranscript
-  } = useVoiceRecordSearch();
+  const { isListening, transcript, startListening, stopListening, error, resetTranscript } = useVoiceRecordSearch();
 
   // Синхронизируем транскрипцию с полем ввода
   useEffect(() => {
@@ -71,7 +60,7 @@ export const InputField: FC<InputFieldProps> = ({
 
   return (
     <div className={`input-field input-field--${size}`}>
-      <div className="input-field__wrapper">
+      <div className='input-field__wrapper'>
         <input
           type='text'
           placeholder='Поиск мероприятия для себя...'
@@ -84,41 +73,38 @@ export const InputField: FC<InputFieldProps> = ({
         <button
           className={`input-field__voice-button ${isListening ? 'input-field__voice-button--listening' : ''}`}
           onClick={handleVoiceSearch}
-          type="button"
-          aria-label={isListening ? "Остановить запись" : "Начать голосовой поиск"}
-          title={isListening ? "Остановить запись" : "Начать голосовой поиск"}
+          type='button'
+          aria-label={isListening ? 'Остановить запись' : 'Начать голосовой поиск'}
+          title={isListening ? 'Остановить запись' : 'Начать голосовой поиск'}
         >
-          <svg 
-            width="20" 
-            height="20" 
-            viewBox="0 0 24 24" 
-            fill="currentColor"
-            className="input-field__voice-icon"
-          >
-            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+          <svg width='20' height='20' viewBox='0 0 24 24' fill='currentColor' className='input-field__voice-icon'>
+            <path d='M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z' />
+            <path d='M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z' />
           </svg>
         </button>
-        
+
         {/* Индикатор ошибки (можно сделать toast или другой UI) */}
         {error && (
-          <div className="input-field__error" style={{
-            position: 'absolute',
-            top: '100%',
-            left: 0,
-            right: 0,
-            backgroundColor: '#ffebee',
-            color: '#c62828',
-            padding: '0.5rem',
-            fontSize: '0.8rem',
-            borderRadius: '0 0 4px 4px',
-            zIndex: 10
-          }}>
+          <div
+            className='input-field__error'
+            style={{
+              position: 'absolute',
+              top: '100%',
+              left: 0,
+              right: 0,
+              backgroundColor: '#ffebee',
+              color: '#c62828',
+              padding: '0.5rem',
+              fontSize: '0.8rem',
+              borderRadius: '0 0 4px 4px',
+              zIndex: 10,
+            }}
+          >
             {error}
           </div>
         )}
       </div>
-      
+
       <button
         className={`input-field__button ${isButtonDisabled ? 'input-field__button--disabled' : ''}`}
         onClick={handleButtonClick}
