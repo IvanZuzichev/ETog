@@ -26,13 +26,6 @@ export const SupportContent: React.FC<SupportFormDataProps> = ({ formData, onFor
   useThemeApply();
   useDocumentTitle('Поддержка | Events Together — ETog');
 
-  const navigate = useNavigate();
-
-  // Переход на страницу связаться с нами
-  const handleContactClick = (): void => {
-    navigate('/ContactUs');
-  };
-
   const validateForm = () => {
     const newErrors: { email?: string; title?: string; description?: string } = {};
 
@@ -207,11 +200,6 @@ export const SupportContent: React.FC<SupportFormDataProps> = ({ formData, onFor
             disabled={hasBlacklistErrors}
           >
             Отправить проблему
-          </button>
-        </div>
-        <div className='form-field'>
-          <button type='button' className='button-supports-help' onClick={handleContactClick}>
-            Если появились пожелания
           </button>
         </div>
       </form>

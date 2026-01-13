@@ -1,36 +1,33 @@
 import { useState, useRef, useEffect } from 'react';
-import './DateTimePicker.scss';
+import './DatePicker.scss';
 import { useThemeApply } from '../../../hooks/useThemeApply';
 import { DATE_TIME_CONSTANTS } from '../../../store/constants/dateTimeConstants';
 import { DateTimeUtils } from '../../../utils/dateTimeUtils';
 
-interface DateTimePickerProps {
-  onSelect: (date: Date) => void;
+interface DatePickerProps {
+  onSelect: (date: Date | null) => void;
   className?: string;
-  selectedDate?: Date | null; // Добавляем новый проп
+  selectedDate?: Date | null;
 }
 
-export const DateTimePicker: React.FC<DateTimePickerProps> = ({ 
+export const DatePicker: React.FC<DatePickerProps> = ({ 
   onSelect, 
   className = '',
-  selectedDate: externalSelectedDate = null // Добавляем внешнее управление
+  selectedDate: externalSelectedDate = null
 }) => {
   useThemeApply();
   const [isOpen, setIsOpen] = useState(false);
   const [internalSelectedDate, setInternalSelectedDate] = useState<Date | null>(null);
   const [tempDate, setTempDate] = useState<Date | null>(null);
-  const [tempTime, setTempTime] = useState<{ hour: number; minute: number } | null>(null);
   const [currentDate, setCurrentDate] = useState(new Date());
   const calendarRef = useRef<HTMLDivElement>(null);
 
-  // Синхронизируем внутреннее состояние с внешним пропом
   useEffect(() => {
     if (externalSelectedDate !== undefined) {
       setInternalSelectedDate(externalSelectedDate);
     }
   }, [externalSelectedDate]);
 
-  // Используем внешнее значение или внутреннее
   const selectedDate = externalSelectedDate !== undefined ? externalSelectedDate : internalSelectedDate;
 
   const isDayDisabled = (day: number): boolean => {
@@ -40,37 +37,18 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
     return DateTimeUtils.isPastDate(testDate);
   };
 
-  const isTimeDisabled = (hour: number, minute: number): boolean => {
-    if (!tempDate) return false;
-    return DateTimeUtils.isPastDateTime(tempDate, { hour, minute });
-  };
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (calendarRef.current && !calendarRef.current.contains(event.target as Node)) {
-        if (!tempDate || !tempTime) {
-          return;
-        }
         setIsOpen(false);
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [tempDate, tempTime]);
+  }, []);
 
   const handleToggle = () => {
-    if (isOpen && tempDate && tempTime) {
-      const finalDate = new Date(tempDate);
-      finalDate.setHours(tempTime.hour, tempTime.minute);
-      const newSelectedDate = finalDate;
-      if (externalSelectedDate === undefined) {
-        setInternalSelectedDate(newSelectedDate);
-      }
-      onSelect(newSelectedDate);
-      setTempDate(null);
-      setTempTime(null);
-    }
     setIsOpen(!isOpen);
   };
 
@@ -80,29 +58,23 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
     const newDate = new Date(currentDate);
     newDate.setDate(day);
     newDate.setHours(0, 0, 0, 0);
+    
     setTempDate(newDate);
-    setTempTime(null);
-  };
-
-  const handleTimeSelect = (hours: number, minutes: number) => {
-    if (!tempDate || isTimeDisabled(hours, minutes)) return;
-
-    setTempTime({ hour: hours, minute: minutes });
-  };
-
-  const handleSaveSelection = () => {
-    if (tempDate && tempTime) {
-      const finalDate = new Date(tempDate);
-      finalDate.setHours(tempTime.hour, tempTime.minute);
-      const newSelectedDate = finalDate;
-      if (externalSelectedDate === undefined) {
-        setInternalSelectedDate(newSelectedDate);
-      }
-      onSelect(newSelectedDate);
-      setIsOpen(false);
-      setTempDate(null);
-      setTempTime(null);
+    
+    // Немедленно сохраняем выбранную дату (без времени)
+    if (externalSelectedDate === undefined) {
+      setInternalSelectedDate(newDate);
     }
+    onSelect(newDate);
+  };
+
+  const handleClearDate = () => {
+    setTempDate(null);
+    if (externalSelectedDate === undefined) {
+      setInternalSelectedDate(null);
+    }
+    onSelect(null);
+    setIsOpen(false);
   };
 
   const navigateMonth = (direction: number) => {
@@ -114,18 +86,16 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
     return DateTimeUtils.getDaysInMonth(currentDate.getFullYear(), currentDate.getMonth());
   };
 
-  const isSelectionComplete = tempDate && tempTime;
-
   return (
-    <div className={`datetime-container ${className}`} ref={calendarRef}>
-      <button type='button' onClick={handleToggle} className='datetime-button'>
-        <span>{selectedDate ? DateTimeUtils.formatDate(selectedDate) : 'Выберите дату и время'}</span>
-        <span className={`datetime-arrow ${isOpen ? DATE_TIME_CONSTANTS.CLASS_NAMES.OPEN : ''}`}>▼</span>
+    <div className={`datepicker-container ${className}`} ref={calendarRef}>
+      <button type='button' onClick={handleToggle} className='datepicker-button'>
+        <span>{selectedDate ? DateTimeUtils.formatDateOnly(selectedDate) : 'Выберите дату'}</span>
+        <span className={`datepicker-arrow ${isOpen ? DATE_TIME_CONSTANTS.CLASS_NAMES.OPEN : ''}`}>▼</span>
       </button>
 
       {isOpen && (
-        <div className='datetime-modal'>
-          <div className='datetime-content'>
+        <div className='datepicker-modal'>
+          <div className='datepicker-content'>
             {/* Календарь */}
             <div className='calendar-section'>
               <div className='calendar-header'>
@@ -174,44 +144,23 @@ export const DateTimePicker: React.FC<DateTimePickerProps> = ({
               )}
             </div>
 
-            {/* Выбор времени */}
-            <div className='time-section'>
-              <h4>
-                {DATE_TIME_CONSTANTS.MESSAGES.SELECT_TIME}
-                {tempTime && `(${DateTimeUtils.formatTime(tempTime.hour, tempTime.minute)})`}
-              </h4>
-              <div className='time-grid'>
-                {DateTimeUtils.generateTimeSlots().map((slot, index) => (
-                  <button
-                    key={index}
-                    className={`time-slot ${
-                      tempTime && tempTime.hour === slot.hour && tempTime.minute === slot.minute
-                        ? DATE_TIME_CONSTANTS.CLASS_NAMES.SELECTED
-                        : ''
-                    } ${isTimeDisabled(slot.hour, slot.minute) ? DATE_TIME_CONSTANTS.CLASS_NAMES.DISABLED : ''}`}
-                    onClick={() => handleTimeSelect(slot.hour, slot.minute)}
-                    disabled={isTimeDisabled(slot.hour, slot.minute)}
-                  >
-                    {DateTimeUtils.formatTime(slot.hour, slot.minute)}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Кнопка сохранения */}
-            <div className='datetime-actions'>
+            {/* Кнопки действий */}
+            <div className='datepicker-actions'>
+              {tempDate && (
+                <button
+                  className='clear-button'
+                  onClick={handleClearDate}
+                >
+                  Очистить
+                </button>
+              )}
               <button
-                className={`save-button ${isSelectionComplete ? DATE_TIME_CONSTANTS.CLASS_NAMES.ACTIVE : DATE_TIME_CONSTANTS.CLASS_NAMES.DISABLED}`}
-                onClick={handleSaveSelection}
-                disabled={!isSelectionComplete}
+                className='close-button'
+                onClick={() => setIsOpen(false)}
               >
-                {DATE_TIME_CONSTANTS.MESSAGES.SAVE}
+                Выбрать
               </button>
             </div>
-
-            {!isSelectionComplete && (
-              <div className='selection-warning'>{DATE_TIME_CONSTANTS.MESSAGES.PLEASE_SELECT}</div>
-            )}
           </div>
         </div>
       )}

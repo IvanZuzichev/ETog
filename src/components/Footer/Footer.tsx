@@ -153,20 +153,12 @@ export const Footer: React.FC = () => {
         <div className='footer__bottom'>
           <div className='footer__copyright'>
             <p className='footer__copyright-text'>
-              © {new Date().getFullYear()} Events Together — ETog. Все права защищены.
+              © 2025-{new Date().getFullYear()} Events Together — ETog. Все права защищены.
             </p>
             <p className='footer__copyright-subtext'>
               Платформа для организации и поиска мероприятий
             </p>
           </div>
-          
-          {/* <div className='footer__legal-links'>
-            <Link to='/UserAgreement' className='footer__legal-link'>Соглашение</Link>
-            <span className='footer__legal-separator'>•</span>
-            <Link to='/PrivacyPolicy' className='footer__legal-link'>Конфиденциальность</Link>
-            <span className='footer__legal-separator'>•</span>
-            <Link to='/CookiePolicy' className='footer__legal-link'>Cookie</Link>
-          </div> */}
         </div>
       </div>
     </footer>

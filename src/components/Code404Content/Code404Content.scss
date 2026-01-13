@@ -1,14 +1,13 @@
-// Стили для страницы 404 (Если пользователь ввел не праивльно название страницы)
 :root {
   --header-height: clamp(60px, 8vh, 80px);
   --padding-x: clamp(1rem, 4vw, 2rem);
   --padding-y: clamp(0.5rem, 1.5vh, 1rem);
-  --background-color: #ffffff;
+  --background-color: #F8F8F8;
   --text-color: #000000;
   --primary-color: #7b1fa2;
   --footer-bg: #7b1fa2;
   --footer-text: #ffffff;
-  --button-bg: #ffffff;
+  --content-bg: #ffffff;
   --button-text: #7b1fa2;
   font-family: 'Onest', sans-serif;
 }
@@ -18,68 +17,150 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  justify-items: center;
-  min-height: 70vh;
-  background-color: var(--background-color);
-  padding: var(--padding-y) var(--padding-x);
+  padding: 2rem 1rem;
   box-sizing: border-box;
+  background-color: var(--background-color);
 }
 
 .not-found-content {
-  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 25.75rem;
+  padding: 2.5rem 2rem;
+  background: var(--content-bg);
+  border-radius: 12px;
   text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(123, 31, 162, 0.1);
 }
 
 .not-found-title {
-  font-size: clamp(6rem, 20vw, 12rem);
-  font-weight: 700;
+  font-size: clamp(5rem, 15vw, 7rem);
+  font-weight: 800;
   color: var(--primary-color);
-  margin: 0 0 40px 0;
+  margin: 0 0 1.5rem 0;
   line-height: 1;
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
+  background: #888;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .not-found-message {
-  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-size: 1.125rem;
   color: var(--text-color);
-  margin: 0 0 40px 0;
-  line-height: 1.5;
-  font-weight: 500;
-   font-family: "Inter", sans-serif;
+  margin: 0 0 2.5rem 0;
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  opacity: 0.85;
 }
 
 .not-found-button {
   width: 100%;
-  max-width: 20.5rem;
-  padding: 16px 24px;
+  padding: 14px 20px;
   border: 1px solid rgba(123, 31, 162, 0.3);
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--footer-bg);
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   color: white;
   transition: all 0.3s ease;
   text-align: center;
   box-shadow: 0 4px 15px rgba(123, 31, 162, 0.3);
-   font-family: "Inter", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .not-found-button:hover {
-  transform: translateY(-2px);
+  background-color: #9716ce;
   box-shadow: 0 6px 20px rgba(123, 31, 162, 0.4);
   border-color: rgba(123, 31, 162, 0.5);
+  transform: translateY(-2px);
 }
 
 .not-found-button:active {
-  transform: translateY(0);
+  background-color: #9716ce;
   box-shadow: 0 3px 10px rgba(123, 31, 162, 0.3);
+  transform: translateY(0);
+}
+
+.not-found-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.2);
 }
 
 // Адаптивность
 @media (max-width: 768px) {
+  .not-found-container {
+    padding: 1.5rem 1rem;
+  }
+  
+  .not-found-content {
+    padding: 2rem 1.5rem;
+    margin: 0 1rem;
+    max-width: calc(100% - 2rem);
+  }
+  
+  .not-found-title {
+    font-size: clamp(4rem, 12vw, 6rem);
+    margin-bottom: 1.25rem;
+  }
+  
+  .not-found-message {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  
   .not-found-button {
-    width: 90% !important;
+    padding: 12px 18px;
+    font-size: 0.95rem;
+  }
+}
+
+// Для очень маленьких экранов
+@media (max-width: 480px) {
+  .not-found-content {
+    padding: 1.5rem 1.25rem;
+    border-radius: 10px;
+  }
+  
+  .not-found-title {
+    font-size: clamp(3.5rem, 10vw, 5rem);
+  }
+  
+  .not-found-message {
+    font-size: 0.95rem;
+  }
+  
+  .not-found-button {
+    padding: 12px 16px;
     font-size: 0.9rem;
   }
+}
+
+// Анимации
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.not-found-content {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.not-found-emoji {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.7;
 }

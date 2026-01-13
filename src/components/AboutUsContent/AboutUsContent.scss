@@ -1,115 +1,304 @@
-// Стили страницы "О нас"
-
-.work-container {
-  width: 100vh;
-  margin: 0 auto;
-  padding: 20px;
+:root {
+  --header-height: clamp(60px, 8vh, 80px);
+  --padding-x: clamp(1rem, 4vw, 2rem);
+  --padding-y: clamp(0.5rem, 1.5vh, 1rem);
+  --background-color: #F8F8F8;
+  --text-color: #000000;
+  --primary-color: #7b1fa2;
+  --footer-bg: #7b1fa2;
+  --footer-text: #ffffff;
+  --content-bg: #ffffff;
+  --button-text: #7b1fa2;
+  font-family: 'Onest', sans-serif;
 }
 
-.work-title {
-  text-align: center;
-  margin-bottom: 20px;
-  
-  p {
-    font-family: "Inter", sans-serif;
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 0;
-  }
-}
-
-.work-ZION,
-.work-ETog {
+.about-us-container {
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
-  gap: 40px;
+  justify-content: center;
+  min-height: calc(100vh - var(--header-height, 80px));
+  padding: 3rem var(--padding-x) 4rem;
+  box-sizing: border-box;
+  background-color: var(--background-color);
 }
 
-.work-ZION {
-  .image-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-     width: 25vh;
-    flex: 0 0 auto;
+.about-us-content {
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.about-us-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}
+
+.about-us-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0 0 0.75rem 0;
+  font-family: "Inter", sans-serif;
+  line-height: 1.2;
+}
+
+.about-us-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.about-us-card {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  background: var(--content-bg);
+  border-radius: 8px;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(123, 31, 162, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-us-card--zion {
+  .about-us-card__content {
+    order: 2;
   }
   
-  .description-section {
-    display: flex;
-    align-items: center;
+  .about-us-card__image {
+    order: 1;
   }
 }
 
-.work-ETog {
-  .description-section {
-    display: flex;
-    align-items: center;
+.about-us-card--etog {
+  .about-us-card__content {
     order: 1;
   }
   
-  .image-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 25vh;
-    flex: 0 0 auto;
+  .about-us-card__image {
     order: 2;
   }
-  .profile-image {
+}
+
+.about-us-card__image {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 220px;
+  border-radius: 8px;
+}
+
+.about-us-card__logo {
+  width: 200px;
+  height: 200px;
+  border-radius: 8px;
+  object-fit: contain;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  
+  &--clickable {
     cursor: pointer;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.02);
+    }
+    
+    &:active {
+      transform: scale(0.98);
+    }
   }
 }
 
-.profile-image {
-  aspect-ratio: 1/1;
-  width: 25vh;
-  border-radius: 1.15rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  height: auto;
-  object-fit: cover;
-}
-
-.work-photo-footer {
-   font-family: "Inter", sans-serif;
-  font-size: 1rem;
+.about-us-card__label {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-top: 1rem;
   text-align: center;
-  margin-top: 8px;
+  font-family: "Inter", sans-serif;
 }
 
-.work-photo-description {
+.about-us-card__content {
+  flex: 1;
+}
+
+.about-us-card__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0 0 1rem 0;
   font-family: "Inter", sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin: 0;
-  height: 100%;
-  display: flex;
-  align-items: center;
+}
+
+.about-us-card__description {
+  font-size: 1rem;
+  color: var(--text-color);
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+  font-family: "Inter", sans-serif;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Темная тема */
+[data-theme="dark"] {
+  .about-us-container {
+    background-color: #121212;
+  }
+  
+  .about-us-title {
+    color: #ffffff;
+  }
+  
+  .about-us-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .about-us-card {
+    background: #1e1e1e;
+    border-color: rgba(123, 31, 162, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  }
+  
+  .about-us-card__label {
+    color: #ffffff;
+  }
+  
+  .about-us-card__title {
+    color: #bb86fc;
+  }
+  
+  .about-us-card__description {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .about-us-card__logo {
+    background: transparent;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+  .about-us-container {
+    padding: 2rem var(--padding-x) 3rem;
+  }
+  
+  .about-us-card {
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .about-us-card__logo {
+    width: 180px;
+    height: 180px;
+  }
 }
 
 @media (max-width: 768px) {
-  .work-container {
-    width: 90%;
-    max-width: 80vh;
+  .about-us-title {
+    font-size: 2rem;
   }
   
-  .work-ZION,
-  .work-ETog {
-    flex-direction: column;
-    gap: 15px;
+  .about-us-subtitle {
+    font-size: 1rem;
   }
   
-  .work-ETog {
-    .description-section {
-      order: 1;
+  .about-us-card {
+    flex-direction: column !important;
+    gap: 2rem;
+    padding: 1.75rem;
+    margin-bottom: 2rem;
+    
+    &.about-us-card--zion {
+      .about-us-card__content {
+        order: 2;
+      }
+      
+      .about-us-card__image {
+        order: 1;
+      }
     }
     
-    .image-section {
-      order: 2;
+    &.about-us-card--etog {
+      .about-us-card__content {
+        order: 2;
+      }
+      
+      .about-us-card__image {
+        order: 1;
+      }
     }
   }
   
-  .profile-image {
-    width: 25vh;
+  .about-us-card__image {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .about-us-card__logo {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .about-us-card__title {
+    font-size: 1.375rem;
+    text-align: center;
+  }
+  
+  .about-us-card__description {
+    font-size: 0.95rem;
+    text-align: center;
   }
 }
+
+@media (max-width: 480px) {
+  .about-us-container {
+    padding: 1.5rem 1rem 2.5rem;
+  }
+  
+  .about-us-title {
+    font-size: 1.75rem;
+  }
+  
+  .about-us-header {
+    margin-bottom: 2rem;
+  }
+  
+  .about-us-card {
+    padding: 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+  
+  .about-us-card__logo {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .about-us-card__label {
+    font-size: 1rem;
+  }
+}
+
+/* Анимации */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

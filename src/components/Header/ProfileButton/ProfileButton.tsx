@@ -27,7 +27,7 @@ export const ProfileButton: FC<ProfileButtonProps> = ({ size = 'medium' }) => {
   useClickOutside(containerRef as React.RefObject<HTMLElement>, () => setIsDropdownOpen(false));
 
   const handleButtonClick = () => {
-    navigate('/Account');
+    navigate('/MyAccount');
   };
 
   return (

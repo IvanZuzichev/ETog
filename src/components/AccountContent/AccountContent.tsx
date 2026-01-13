@@ -6,8 +6,12 @@ import { PHOTO_CONSTANTS } from '../../store/constants/photoTypeOptions';
 import { useDataProtection } from '../../hooks/useDataProtection';
 import { useBlacklist } from '../../hooks/useBlackList';
 import { useGlobalAvatar } from '../../hooks/useGlobalAvatar';
+import { 
+  ACCOUNT_STATUS, 
+  STATUS_CONFIG,
+  ORGANIZATION_PLANS 
+} from '../../store/constants/accountStatus';
 import AccountPhoto from '../../assets/Photo/User.png';
-import VerificatePhoto from '../../assets/Verificate/CheckMark.png';
 
 interface AccountContentData {
   login: string;
@@ -19,10 +23,16 @@ interface AccountContentData {
 interface AccountContentDataProps {
   formData: AccountContentData;
   onFormChange: (field: string, value: string) => void;
+  accountStatus?: string; // статус из ACCOUNT_STATUS
   className?: string;
 }
 
-export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, onFormChange, className = '' }) => {
+export const AccountContent: React.FC<AccountContentDataProps> = ({ 
+  formData, 
+  onFormChange, 
+  accountStatus = ACCOUNT_STATUS.UNVERIFIED,
+  className = '' 
+}) => {
   const [errors, setErrors] = useState<{ login?: string; email?: string; password?: string; description?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
@@ -34,6 +44,8 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
 
   useThemeApply();
   const navigate = useNavigate();
+
+  const statusConfig = STATUS_CONFIG[ACCOUNT_STATUS.UNVERIFIED];
 
   const handleInputChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -209,6 +221,55 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
     setDeleteConfirm(false);
   };
 
+  // Функция для выхода из аккаунта
+  const handleLogout = () => {
+    const isConfirmed = window.confirm('Вы действительно хотите выйти из аккаунта?');
+    
+    if (isConfirmed) {
+      try {
+        localStorage.removeItem('user_session');
+        localStorage.removeItem('user_auth_token');
+        updateAvatar('');
+        
+        alert('Вы успешно вышли из аккаунта');
+        navigate('/');
+      } catch (error) {
+        console.error('Ошибка при выходе из аккаунта:', error);
+        alert('Ошибка при выходе из аккаунта');
+      }
+    }
+  };
+
+  // Функция для подтверждения аккаунта
+  const handleVerifyAccount = () => {
+    const isConfirmed = window.confirm(
+      'Отправить письмо для подтверждения email?\n\n' +
+      'На вашу почту будет отправлена ссылка для подтверждения.'
+    );
+    
+    if (isConfirmed) {
+      alert('Письмо с подтверждением отправлено на вашу почту');
+      // Здесь логика отправки письма
+    }
+  };
+
+  // Функция для запроса статуса организации
+  const handleRequestOrganizationStatus = () => {
+    const isConfirmed = window.confirm(
+      'Запросить статус организации?\n\n' +
+      'Для получения статуса организации вам потребуется:\n' +
+      '1. Официальные документы компании\n' +
+      '2. Подтверждение домена email\n' +
+      '3. Верификация через службу поддержки\n\n' +
+      'Подать заявку?'
+    );
+    
+    if (isConfirmed) {
+      alert('Заявка на статус организации отправлена. Мы свяжемся с вами в течение 3 рабочих дней.');
+      // Здесь логика отправки заявки
+    }
+  };
+
   return (
     <div className='main-page-wrapper'>
       <div className={`accountcontent-container ${className}`}>
@@ -231,116 +292,138 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({ formData, on
                 <img src={avatar || AccountPhoto} alt='Profile' className='profile-image' />
                 <div className='avatar-overlay'></div>
               </div>
-              <div className='verification-badge'>
-                <img src={VerificatePhoto} alt='Verified' className='checkmark-icon' />
-                <span className='verified-text'>Подтвержден</span>
+              
+              {/* Бейдж статуса */}
+              <div 
+                className='verification-badge' 
+                style={{ 
+                  borderColor: statusConfig.color,
+                  backgroundColor: `${statusConfig.color}15`
+                }}
+                title={statusConfig.description}
+              >
+                <span style={{ fontSize: '16px' }}>{statusConfig.badge}</span>
+                <span 
+                  className='verified-text' 
+                  style={{ color: statusConfig.color }}
+                >
+                  {statusConfig.label}
+                </span>
               </div>
+
+              
             </div>
           </div>
 
           <div className='profile-right'>
             <form className='accountcontent-form' onSubmit={handleSubmit}>
-              <div className='form-field'>
-                <label htmlFor='login' className='form-label'>
-                  Ваш логин
-                </label>
-                <input
-                  id='login'
-                  type='text'
-                  value={formData.login}
-                  onChange={handleInputChange('login')}
-                  className='form-input'
-                  placeholder='Логин'
-                  required
-                  maxLength={PHOTO_CONSTANTS.FIELD_LIMITS.login}
-                  disabled={isSubmitting}
-                />
-                <div className='character-count-right'>
-                  {formData.login.length}/{PHOTO_CONSTANTS.FIELD_LIMITS.login}
-                </div>
-                {errors.login && <span className='error-message'>{errors.login}</span>}
-              </div>
-
-              <div className='form-field'>
-                <label htmlFor='email' className='form-label'>
-                  Ваш адрес электронной почты
-                </label>
-                <input
-                  id='email'
-                  type='email'
-                  value={formData.email}
-                  onChange={handleInputChange('email')}
-                  className='form-input'
-                  placeholder='email@example.com'
-                  required
-                  maxLength={PHOTO_CONSTANTS.FIELD_LIMITS.email}
-                  disabled={isSubmitting}
-                />
-                <div className='character-count-right'>
-                  {formData.email.length}/{PHOTO_CONSTANTS.FIELD_LIMITS.email}
-                </div>
-                {errors.email && <span className='error-message'>{errors.email}</span>}
-              </div>
-
-              <div className='form-field'>
-                <label htmlFor='description' className='form-labels'>
-                  Опишите немного о себе
-                </label>
-                <textarea
-                  id='description'
-                  value={formData.description}
-                  onChange={handleInputChange('description')}
-                  className='form-textarea'
-                  placeholder='Описание профиля'
-                  rows={4}
-                  maxLength={PHOTO_CONSTANTS.FIELD_LIMITS.description}
-                  disabled={isSubmitting}
-                />
-                <div className='character-count-right'>
-                  {formData.description.length}/{PHOTO_CONSTANTS.FIELD_LIMITS.description}
-                </div>
-                {errors.description && <span className='error-message'>{errors.description}</span>}
-              </div>
-
-              <div className='form-field'>
-                <label htmlFor='password' className='form-label'>
-                  Ваш пароль
-                </label>
-                <div className='password-input-container'>
+              <div className='form-grid-container'>
+                
+                <div className='form-field'>
+                  <label htmlFor='login' className='form-label'>
+                    Ваш логин
+                  </label>
                   <input
-                    id='password'
-                    type={'password'}
-                    value={formData.password}
-                    onChange={handleInputChange('password')}
+                    id='login'
+                    type='text'
+                    value={formData.login}
+                    onChange={handleInputChange('login')}
                     className='form-input'
-                    placeholder='Пароль'
+                    placeholder='Логин'
                     required
-                    maxLength={PHOTO_CONSTANTS.FIELD_LIMITS.password}
+                    maxLength={PHOTO_CONSTANTS.FIELD_LIMITS.login}
                     disabled={isSubmitting}
                   />
+                  <div className='character-count-right'>
+                    {formData.login.length}/{PHOTO_CONSTANTS.FIELD_LIMITS.login}
+                  </div>
+                  {errors.login && <span className='error-message'>{errors.login}</span>}
                 </div>
-                <div className='character-count-right'>
-                  {formData.password.length}/{PHOTO_CONSTANTS.FIELD_LIMITS.password}
+
+                <div className='form-field'>
+                  <label htmlFor='email' className='form-label'>
+                    Ваш адрес электронной почты
+                  </label>
+                  <input
+                    id='email'
+                    type='email'
+                    value={formData.email}
+                    onChange={handleInputChange('email')}
+                    className='form-input'
+                    placeholder='email@example.com'
+                    required
+                    maxLength={PHOTO_CONSTANTS.FIELD_LIMITS.email}
+                    disabled={isSubmitting}
+                  />
+                  <div className='character-count-right'>
+                    {formData.email.length}/{PHOTO_CONSTANTS.FIELD_LIMITS.email}
+                  </div>
+                  {errors.email && <span className='error-message'>{errors.email}</span>}
                 </div>
-                {errors.password && <span className='error-message'>{errors.password}</span>}
+
+                <div className='form-field'>
+                  <label htmlFor='password' className='form-label'>
+                    Ваш пароль
+                  </label>
+                  <div className='password-input-container'>
+                    <input
+                      id='password'
+                      type={'password'}
+                      value={formData.password}
+                      onChange={handleInputChange('password')}
+                      className='form-input'
+                      placeholder='Пароль'
+                      required
+                      maxLength={PHOTO_CONSTANTS.FIELD_LIMITS.password}
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                  <div className='character-count-right'>
+                    {formData.password.length}/{PHOTO_CONSTANTS.FIELD_LIMITS.password}
+                  </div>
+                  {errors.password && <span className='error-message'>{errors.password}</span>}
+                </div>
+
+                <div className='form-field'>
+                  <label htmlFor='description' className='form-labels'>
+                    Описание профиля
+                  </label>
+                  <textarea
+                    id='description'
+                    value={formData.description}
+                    onChange={handleInputChange('description')}
+                    className='form-textarea'
+                    placeholder='Опишите себя или вашу организацию'
+                    rows={1}
+                    maxLength={PHOTO_CONSTANTS.FIELD_LIMITS.description}
+                    disabled={isSubmitting}
+                  />
+                  <div className='character-count-right'>
+                    {formData.description.length}/{PHOTO_CONSTANTS.FIELD_LIMITS.description}
+                  </div>
+                  {errors.description && <span className='error-message'>{errors.description}</span>}
+                </div>
               </div>
 
-              <div className='form-field'>
-                <div className='form-buttons-container'>
-                  <>
-                    <button
-                      type='button'
-                      className='button-delete-account'
-                      onClick={handleDeleteAccount}
-                      disabled={isSubmitting}
-                    >
-                      Удалить аккаунт
-                    </button>
-                    <button type='submit' className='button-accountcontents' disabled={isSubmitting}>
-                      {isSubmitting ? 'Сохранение...' : 'Изменить данные'}
-                    </button>
-                  </>
-                </div>
+              <div className='form-buttons-container'>
+                <button
+                  type='button'
+                  className='button-delete-account'
+                  onClick={handleDeleteAccount}
+                  disabled={isSubmitting}
+                >
+                  Удалить аккаунт
+                </button>
+                <button 
+                  className='logout-button logout-button-mobile' 
+                  onClick={handleLogout} 
+                  disabled={isSubmitting}
+                >
+                  <span>Выйти</span>
+                </button>
+                <button type='submit' className='button-accountcontents' disabled={isSubmitting}>
+                  {isSubmitting ? 'Сохранение...' : 'Изменить данные'}
+                </button>
               </div>
             </form>
           </div>

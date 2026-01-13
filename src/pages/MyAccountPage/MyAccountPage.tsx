@@ -1,14 +1,34 @@
 import { Header } from '../../components/Header/Header';
+import { Footer } from '../../components/Footer/Footer';
 import { useDocumentTitle } from '../../hooks/useDocumentTitle';
+import { AccountContent } from '../../components/AccountContent/AccountContent';
+import { useState } from 'react';
 
 // Страница с выводом мероприятий своего аккаунта
 const MyAccountPage: React.FC = () => {
-  useDocumentTitle('Мой профиль | Events Together — ETog');
+    useDocumentTitle('Личный кабинет | Events Together — ETog');
+  
+    const [formData, setFormData] = useState({
+      login: '',
+      email: '',
+      description: '',
+      password: '',
+    });
+  
+    const handleFormChange = (field: string, value: string | boolean | Date) => {
+      setFormData(prev => ({
+        ...prev,
+        [field]: value,
+      }));
+      console.log('Field changed:', field, value);
+    };
 
   return (
     <div className='main-page-wrapper'>
       <Header />
       <div className="header-spacer"></div>
+            <AccountContent formData={formData} onFormChange={handleFormChange} />
+            <Footer />
     </div>
   );
 };

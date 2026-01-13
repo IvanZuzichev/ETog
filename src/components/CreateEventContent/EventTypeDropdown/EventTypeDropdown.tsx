@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './EventTypeDropdown.scss';
 import { EVENT_TYPE_OPTIONS } from '../../../store/constants/eventTypeOptions';
 import type { EventType } from '../../../store/constants/eventTypeOptions';
@@ -7,16 +7,31 @@ import { useThemeApply } from '../../../hooks/useThemeApply';
 interface DropdownProps {
   onSelect: (value: EventType) => void;
   className?: string;
+  selectedValue?: EventType | null; // Добавляем новый проп
 }
 
-// Компонент отвечающий за выпадающий список выбора типа мероприятия
-export const EventTypeDropdown: React.FC<DropdownProps> = ({ onSelect }) => {
+export const EventTypeDropdown: React.FC<DropdownProps> = ({ 
+  onSelect, 
+  selectedValue: externalSelectedValue = null // Добавляем внешнее управление
+}) => {
   useThemeApply();
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState<EventType | null>(null);
+  const [internalSelectedValue, setInternalSelectedValue] = useState<EventType | null>(null);
+
+  // Синхронизируем внутреннее состояние с внешним пропом
+  useEffect(() => {
+    if (externalSelectedValue !== undefined) {
+      setInternalSelectedValue(externalSelectedValue);
+    }
+  }, [externalSelectedValue]);
+
+  // Используем внешнее значение или внутреннее
+  const selectedValue = externalSelectedValue !== undefined ? externalSelectedValue : internalSelectedValue;
 
   const handleSelect = (value: EventType) => {
-    setSelectedValue(value);
+    if (externalSelectedValue === undefined) {
+      setInternalSelectedValue(value);
+    }
     onSelect(value);
     setIsOpen(false);
   };

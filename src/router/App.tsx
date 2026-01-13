@@ -11,11 +11,9 @@ const FavoriteEventsPage = lazy(() => import('../pages/FavoriteEventsPage/Favori
 const RecommendationEventsPage = lazy(() => import('../pages/RecommendationEventsPage/RecommendationEventsPage'));
 const SubscribersPage = lazy(() => import('../pages/SubscribersPage/SubscribersPage'));
 const ConfigurationPage = lazy(() => import('../pages/ConfigurationPage/ConfigurationPage'));
-const ContactUsPage = lazy(() => import('../pages/ContactUsPage/ContactUsPage'));
 const SupportPage = lazy(() => import('../pages/SupportPage/SupportPage'));
 const AboutUsPage = lazy(() => import('../pages/AboutUsPage/AboutUsPage'));
 const MyAccountPage = lazy(() => import('../pages/MyAccountPage/MyAccountPage'));
-const AccountPage = lazy(() => import('../pages/AccountPage/AccountPage'));
 const RegistrationPage = lazy(() => import('../pages/RegistrationPage/RegistrationPage'));
 const AuthorizationPage = lazy(() => import('../pages/AuthorizationPage/AuthorizationPage'));
 const SendMessagePage = lazy(() => import('../pages/SendMessagePage/SendMessagePage'));
@@ -47,16 +45,15 @@ function App() {
           <Route path='/RecommendationEvents' element={<RecommendationEventsPage />} />
           <Route path='/Subscribers' element={<SubscribersPage />} />
           <Route path='/Configuration' element={<ConfigurationPage />} />
-          <Route path='/ContactUs' element={<ContactUsPage />} />
           <Route path='/Support' element={<SupportPage />} />
           <Route path='/AboutUs' element={<AboutUsPage />} />
-          <Route path='/MyAccount' element={<MyAccountPage />} />
+          <Route path='/MyAccount' element={<MyAccountPage />} />     {/* Сделать jwt-токен блокировку */}
           <Route path='/PrivacyPolicy' element={<PrivacyPolicyPage />} />
           <Route path='/TechnicalRequirements' element={<TechnicalRequirementsPage />} />
           <Route path='/UserAgreement' element={<UserAgreementPage />} />
           <Route path='/EventRegulations' element={<EventRegulationsPage />} />
           <Route path='/OrganizerRules' element={<OrganizerRulesPage />} />
-          <Route path='/Account' element={<AccountPage />} /> {/* Сделать jwt-токен блокировку */}
+     
           <Route path='/Registration' element={<RegistrationPage />} />
           <Route path='/Authorization' element={<AuthorizationPage />} />
           <Route path='/SendMessage' element={<SendMessagePage />} />

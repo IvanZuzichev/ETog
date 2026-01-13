@@ -1,0 +1,214 @@
+.subscription-avatars {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 50px 1.5rem 50px;
+
+  &__container {
+    background: var(--content-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid rgba(123, 31, 162, 0.1);
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  &__scroll {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    padding: 0.5rem 0.25rem 1.5rem;
+    
+    /* Скрываем стандартный скроллбар */
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: rgba(123, 31, 162, 0.05);
+      border-radius: 10px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: rgba(123, 31, 162, 0.2);
+      border-radius: 10px;
+      
+      &:hover {
+        background: rgba(123, 31, 162, 0.3);
+      }
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 80px;
+  }
+
+  &__avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+    border: 2px solid rgba(123, 31, 162, 0.15);
+    transition: transform 0.2s, border-color 0.2s;
+    
+    &:hover {
+      transform: scale(1.05);
+      border-color: rgba(123, 31, 162, 0.3);
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+   
+
+  &__name {
+    font-size: 0.875rem;
+    color: #888;
+    text-align: center;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+  }
+
+    &__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0 0 1.5rem 0;
+    font-family: "Inter", sans-serif;
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    text-align: center;
+  }
+
+  &__empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+
+  &__empty-text {
+    font-size: 1.125rem;
+    color: var(--text-color);
+    font-weight: 500;
+    margin: 0 0 0.5rem 0;
+  }
+
+  &__empty-hint {
+    font-size: 0.95rem;
+    color: #888;
+    line-height: 1.5;
+    max-width: 400px;
+    margin: 0;
+  }
+}
+
+// Адаптивные стили для пустого состояния
+@media (max-width: 743px) {
+  .subscription-avatars {
+    &__title {
+      font-size: 1.125rem;
+      margin-bottom: 1.25rem;
+    }
+
+    &__empty {
+      padding: 2rem 1rem;
+    }
+
+    &__empty-icon {
+      font-size: 2.5rem;
+    }
+
+    &__empty-text {
+      font-size: 1rem;
+    }
+
+    &__empty-hint {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+/* Адаптивные стили */
+@media (max-width: 1439px) and (min-width: 1024px) {
+  .subscription-avatars {
+    padding: 32px 20px;
+  }
+}
+
+@media (max-width: 1023px) and (min-width: 744px) {
+  .subscription-avatars {
+    padding: 24px 16px;
+
+    &__container {
+      padding: 1.25rem;
+    }
+
+    &__avatar {
+      width: 65px;
+      height: 65px;
+    }
+  }
+}
+
+@media (max-width: 743px) {
+  .subscription-avatars {
+    padding: 16px 12px;
+
+    &__container {
+      padding: 1rem;
+      border-radius: 12px;
+    }
+
+    &__avatar {
+      width: 60px;
+      height: 60px;
+    }
+
+    &__scroll {
+      gap: 1.5rem;
+    }
+
+    &__name {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+  .subscription-avatars {
+    &__avatar {
+      width: 55px;
+      height: 55px;
+    }
+
+    &__scroll {
+      gap: 1.25rem;
+    }
+
+    &__name {
+      font-size: 0.75rem;
+    }
+  }
+}
