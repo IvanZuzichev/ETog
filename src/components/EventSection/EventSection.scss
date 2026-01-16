@@ -81,7 +81,7 @@
     width: 40px;
     height: 40px;
     border: 3px solid rgba(16, 16, 16, 0.1);
-    border-top-color: #9B1E1C;
+    border-top-color: #7b1fa2;
     border-radius: 50%;
     animation: event-section-spin 1s linear infinite;
   }
@@ -101,7 +101,7 @@
 
   &__load-more-btn {
     padding: 12px 32px;
-    background: #9B1E1C;
+    background: #7b1fa2;
     color: #FFFFFF;
     border: none;
     border-radius: 8px;
@@ -111,7 +111,7 @@
     transition: background-color 0.2s ease;
 
     &:hover {
-      background: #860202;
+      background: #6a178e;
     }
 
     &:disabled {

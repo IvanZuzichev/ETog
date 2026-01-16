@@ -14,6 +14,7 @@ interface EventFormData {
   phone: string;
   telegram: string;
   email: string;
+  users: string; // Добавлено поле количества гостей
   eventType?: string;
   eventDateTime?: Date;
 }
@@ -30,8 +31,11 @@ interface UploadedFile {
   extension: string;
 }
 
-// Компонент отвечающий за форму создания мероприятия
-export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFormChange, className = '' }) => {
+export const EventFormFields: React.FC<EventFormFieldsProps> = ({ 
+  formData, 
+  onFormChange, 
+  className = '' 
+}) => {
   useThemeApply();
   const navigate = useNavigate();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -46,6 +50,7 @@ export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFo
     phone?: string;
     telegram?: string;
     email?: string;
+    users?: string; // Добавлено поле ошибок для количества гостей
   }>({});
 
   const handleInputChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -79,12 +84,10 @@ export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFo
     setErrors(prev => ({ ...prev, eventDateTime: undefined }));
   };
 
-  // Функция для открытия проводника файлов
   const handleCoverUpload = () => {
     fileInputRef.current?.click();
   };
 
-  // Функция для обработки выбора файла
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
@@ -110,7 +113,6 @@ export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFo
     }
   };
 
-  // Функция для удаления загруженного файла
   const handleRemoveFile = () => {
     setUploadedFile(null);
     if (fileInputRef.current) {
@@ -118,45 +120,8 @@ export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFo
     }
   };
 
-  // Функция для очистки формы
-  const clearForm = () => {
-    const fields = [
-      'title',
-      'description',
-      'price',
-      'address',
-      'phone',
-      'telegram',
-      'email',
-      'eventType',
-      'eventDateTime',
-    ];
-    fields.forEach(field => {
-      if (field === 'eventDateTime') {
-        onFormChange(field, undefined as any);
-      } else {
-        onFormChange(field, '');
-      }
-    });
-    setUploadedFile(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
-  };
-
-  // Валидация перед отправкой
   const validateForm = () => {
-    const newErrors: {
-      eventType?: string;
-      eventDateTime?: string;
-      title?: string;
-      description?: string;
-      address?: string;
-      price?: string;
-      phone?: string;
-      telegram?: string;
-      email?: string;
-    } = {};
+    const newErrors: typeof errors = {};
 
     if (!formData.eventType) {
       newErrors.eventType = 'Выберите тип мероприятия';
@@ -202,30 +167,65 @@ export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFo
       newErrors.email = `Email не должен превышать ${EVENT_FORM_CONSTANTS.FIELD_LIMITS.email} символов`;
     }
 
+    // Валидация количества гостей
+    if (!formData.users.trim()) {
+      newErrors.users = 'Введите количество гостей';
+    } else if (isNaN(Number(formData.users)) || Number(formData.users) <= 0) {
+      newErrors.users = 'Введите корректное количество гостей';
+    } else if (formData.users.length > EVENT_FORM_CONSTANTS.FIELD_LIMITS.users) {
+      newErrors.users = `Количество гостей не должно превышать ${EVENT_FORM_CONSTANTS.FIELD_LIMITS.users} символов`;
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  const clearForm = () => {
+    const fields = [
+      'title',
+      'description',
+      'price',
+      'address',
+      'users',
+      'phone',
+      'telegram',
+      'email',
+      'eventType',
+      'eventDateTime',
+    ];
+    fields.forEach(field => {
+      if (field === 'eventDateTime') {
+        onFormChange(field, undefined as any);
+      } else {
+        onFormChange(field, '');
+      }
+    });
+    setUploadedFile(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
       const eventDataMessage = `
-          Вы выбрали:
-          Название: ${formData.title}
-          Тип мероприятия: ${formData.eventType}
-          Дата и время: ${formData.eventDateTime ? formData.eventDateTime.toLocaleString('ru-RU') : 'Не указано'}
-          Описание: ${formData.description}
-          Стоимость: ${formData.price || 'Бесплатно'}
-          Адрес: ${formData.address}
-          Телефон: ${formData.phone}
-          Telegram: ${formData.telegram || 'Не указан'}
-          Email: ${formData.email}
-          ${uploadedFile ? `Фото: ${uploadedFile.name}` : 'Фото: Не загружено'}
+        Вы выбрали:
+        Название: ${formData.title}
+        Тип мероприятия: ${formData.eventType}
+        Дата и время: ${formData.eventDateTime ? formData.eventDateTime.toLocaleString('ru-RU') : 'Не указано'}
+        Описание: ${formData.description}
+        Стоимость: ${formData.price || 'Бесплатно'}
+        Адрес: ${formData.address}
+        Количество гостей: ${formData.users}
+        Телефон: ${formData.phone}
+        Telegram: ${formData.telegram || 'Не указан'}
+        Email: ${formData.email}
+        ${uploadedFile ? `Фото: ${uploadedFile.name}` : 'Фото: Не загружено'}
       `.trim();
 
       alert(eventDataMessage);
       clearForm();
-      // Переход в профиль со своими мероприятиями
       navigate('/MyAccount');
     }
   };
@@ -323,7 +323,7 @@ export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFo
           </div>
         </div>
 
-        {/* Стоимость и адрес - одинаковой ширины */}
+        {/* Стоимость, адрес и количество гостей - три колонки */}
         <div className='equal-fields'>
           <div className='form-field'>
             <label htmlFor='price' className='form-label'>
@@ -341,9 +341,30 @@ export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFo
                 step='100'
                 onWheel={e => e.currentTarget.blur()}
               />
-              <span className='price-suffix'>₽</span>
+             
             </div>
             {errors.price && <span className='error-message'>{errors.price}</span>}
+          </div>
+
+           <div className='form-field'>
+            <label htmlFor='users' className='form-label'>
+              Количество гостей
+            </label>
+            <input
+              id='users'
+              type='number'
+              value={formData.users}
+              onChange={handleInputChange('users')}
+              className='form-input no-spinner'
+              placeholder='Введите количество гостей'
+              required
+              min='1'
+              step='1'
+              onWheel={e => e.currentTarget.blur()}
+              maxLength={EVENT_FORM_CONSTANTS.FIELD_LIMITS.users}
+            />
+           
+            {errors.users && <span className='error-message'>{errors.users}</span>}
           </div>
 
           <div className='form-field'>
@@ -365,6 +386,8 @@ export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFo
             </div>
             {errors.address && <span className='error-message'>{errors.address}</span>}
           </div>
+
+         
         </div>
       </div>
 
@@ -439,46 +462,46 @@ export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFo
 
       {/* Загрузка обложки */}
       <div className='form-section'>
-  <h3 className='section-title'>Загрузка обложки</h3>
-  
-  <div className='form-field'>
-    <div className='upload-area' onClick={handleCoverUpload}>
-      {uploadedFile ? (
-        <div className='uploaded-file-info'>
-          <div className='file-preview'>
-            <div className='file-details'>
-              <span className='file-name'>{uploadedFile.name}</span>
-              <span className='file-size'>
-                {(uploadedFile.file.size / 1024 / 1024).toFixed(2)} MB
-              </span>
-            </div>
+        <h3 className='section-title'>Загрузка обложки</h3>
+        
+        <div className='form-field'>
+          <div className='upload-area' onClick={handleCoverUpload}>
+            {uploadedFile ? (
+              <div className='uploaded-file-info'>
+                <div className='file-preview'>
+                  <div className='file-details'>
+                    <span className='file-name'>{uploadedFile.name}</span>
+                    <span className='file-size'>
+                      {(uploadedFile.file.size / 1024 / 1024).toFixed(2)} MB
+                    </span>
+                  </div>
+                </div>
+                <button 
+                  type='button' 
+                  className='remove-file-btn'
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleRemoveFile();
+                  }}
+                  title='Удалить файл'
+                  aria-label='Удалить файл'
+                >
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className='upload-text'>
+                  <p className='upload-title'>Загрузите обложку мероприятия</p>
+                  <p className='upload-subtitle'>JPG, PNG • Максимум 5MB</p>
+                </div>
+                <button type='button' className='upload-btn'>
+                  Выбрать файл
+                </button>
+              </>
+            )}
           </div>
-          <button 
-            type='button' 
-            className='remove-file-btn'
-            onClick={(e) => {
-              e.stopPropagation();
-              handleRemoveFile();
-            }}
-            title='Удалить файл'
-            aria-label='Удалить файл'
-          >
-          </button>
         </div>
-      ) : (
-        <>
-          <div className='upload-text'>
-            <p className='upload-title'>Загрузите обложку мероприятия</p>
-            <p className='upload-subtitle'>JPG, PNG • Максимум 5MB</p>
-          </div>
-          <button type='button' className='upload-btn'>
-            Выбрать файл
-          </button>
-        </>
-      )}
-    </div>
-  </div>
-</div>
+      </div>
 
       {/* Кнопки действий */}
       <div className='form-actions'>
@@ -486,14 +509,14 @@ export const EventFormFields: React.FC<EventFormFieldsProps> = ({ formData, onFo
           type='button' 
           className='btn-secondary'
           onClick={clearForm}
-            title='Очистить форму'
+          title='Очистить форму'
         >
           Очистить форму
         </button>
         <button 
           type='submit' 
           className='btn-primary'
-           title='Создать мероприятие'
+          title='Создать мероприятие'
         >
           Создать мероприятие
         </button>

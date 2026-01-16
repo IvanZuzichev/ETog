@@ -10,7 +10,6 @@ const CreateEventPage = lazy(() => import('../pages/CreateEventPage/CreateEventP
 const FavoriteEventsPage = lazy(() => import('../pages/FavoriteEventsPage/FavoriteEventsPage'));
 const RecommendationEventsPage = lazy(() => import('../pages/RecommendationEventsPage/RecommendationEventsPage'));
 const SubscribersPage = lazy(() => import('../pages/SubscribersPage/SubscribersPage'));
-const ConfigurationPage = lazy(() => import('../pages/ConfigurationPage/ConfigurationPage'));
 const SupportPage = lazy(() => import('../pages/SupportPage/SupportPage'));
 const AboutUsPage = lazy(() => import('../pages/AboutUsPage/AboutUsPage'));
 const MyAccountPage = lazy(() => import('../pages/MyAccountPage/MyAccountPage'));
@@ -25,6 +24,9 @@ const TechnicalRequirementsPage = lazy(() => import('../pages/TechnicalRequireme
 const UserAgreementPage = lazy(() => import('../pages/UserAgreementPage/UserAgreementPage'));
 const EventRegulationsPage = lazy(() => import('../pages/EventRegulationsPage/EventRegulationsPage'));
 const OrganizerRulesPage = lazy(() => import('../pages/OrganizerRulesPage/OrganizerRulesPage'));
+const EventDetailPage = lazy(() => import('../pages/EventDetailPage/EventDetailPage'));
+const UserDetailPage = lazy(() => import('../pages/UserDetailPage/UserDetailPage'));
+
 // Маршрутизация веб-сервиса
 function App() {
   const { preloadPages } = usePreload();
@@ -44,7 +46,6 @@ function App() {
           <Route path='/FavoriteEvents' element={<FavoriteEventsPage />} />
           <Route path='/RecommendationEvents' element={<RecommendationEventsPage />} />
           <Route path='/Subscribers' element={<SubscribersPage />} />
-          <Route path='/Configuration' element={<ConfigurationPage />} />
           <Route path='/Support' element={<SupportPage />} />
           <Route path='/AboutUs' element={<AboutUsPage />} />
           <Route path='/MyAccount' element={<MyAccountPage />} />     {/* Сделать jwt-токен блокировку */}
@@ -53,7 +54,23 @@ function App() {
           <Route path='/UserAgreement' element={<UserAgreementPage />} />
           <Route path='/EventRegulations' element={<EventRegulationsPage />} />
           <Route path='/OrganizerRules' element={<OrganizerRulesPage />} />
-     
+            <Route path='/event/:id' element={<EventDetailPage />} />
+              <Route 
+  path='/user/:id' 
+  element={
+    <UserDetailPage 
+      userData={{
+        login: 'TestUser',
+        email: 'test@example.com',
+        description: 'Тестовый пользователь',
+        accountStatus: 'verified',
+        rating: 4.5,
+        reviewCount: 10,
+        userId: '123'
+      }} 
+    />
+  } 
+/>
           <Route path='/Registration' element={<RegistrationPage />} />
           <Route path='/Authorization' element={<AuthorizationPage />} />
           <Route path='/SendMessage' element={<SendMessagePage />} />

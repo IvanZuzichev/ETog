@@ -1,0 +1,120 @@
+// Добавьте в конец AccountContent.scss
+
+// Компактный тумблер темы для профиля
+.profile-theme-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 180px;
+  
+  @media (max-width: 768px) {
+    max-width: 150px;
+  }
+  
+  &__text {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-color);
+    font-family: "Inter", sans-serif;
+    text-align: center;
+    margin: 0;
+  }
+  
+  &__container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  &__label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-color);
+    min-width: 50px;
+    text-align: center;
+  }
+  
+  &__switch {
+    display: inline-block;
+    height: 24px;
+    position: relative;
+    cursor: pointer;
+    
+    input {
+      display: none;
+    }
+  }
+  
+  &__slider {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    border: 2px solid rgba(123, 31, 162, 0.3);
+    border-radius: 25px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #7b1fa2;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+    
+    input:checked + & {
+      background: rgba(123, 31, 162, 0.2);
+      border-color: #7b1fa2;
+      
+      &::before {
+        transform: translateX(20px);
+        background: #7b1fa2;
+      }
+    }
+    
+    &:hover {
+      border-color: rgba(123, 31, 162, 0.5);
+    }
+  }
+  
+  // Темная тема
+  [data-theme="dark"] & {
+    &__text,
+    &__label {
+      color: #ffffff;
+    }
+    
+    &__slider {
+      background: #2a2a2a;
+      border-color: rgba(187, 134, 252, 0.3);
+      
+      &::before {
+        background: #bb86fc;
+      }
+      
+      input:checked + & {
+        background: rgba(187, 134, 252, 0.2);
+        border-color: #bb86fc;
+        
+        &::before {
+          background: #bb86fc;
+        }
+      }
+      
+      &:hover {
+        border-color: rgba(187, 134, 252, 0.5);
+      }
+    }
+  }
+}

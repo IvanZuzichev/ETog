@@ -1,1 +1,0 @@
-export { UseFullPages } from './UseFullPages';

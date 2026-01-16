@@ -1,4 +1,4 @@
-// Стили для страниц при процессе муршрутизации
+// Стили для страниц при процессе маршрутизации
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 * {
   margin: 0;
@@ -7,16 +7,40 @@
 }
 
 :root {
-  --header-height: clamp(60px, 8vh, 80px);
-  --padding-x: clamp(1rem, 4vw, 2rem);
-  --padding-y: clamp(0.5rem, 1.5vh, 1rem);
-  --background-color: #F1F0EE;
+  
+  // Основные цвета
+  --background-color: #F1F0EE; // Изменил с #F8F8F8 на #F1F0EE как в lightTheme
   --text-color: #000000;
   --primary-color: #7b1fa2;
   --footer-bg: #7b1fa2;
   --footer-text: #ffffff;
+  --content-bg: #ffffff;
+  --error-color: #dc3545;
+  
+  // Переменные для кнопок
   --button-bg: #ffffff;
-  --button-text: #7b1fa2;
+  --button-text: #000000;
+  --button-hover-bg: #d6d6d6;
+  --button-border: rgba(123, 31, 162, 0.3);
+  
+  // Переменные для карточек
+  --card-bg: #FFFFFF;
+  --card-border: #e5e7eb;
+  --text-color-primary: #000000;
+  --text-color-secondary: #666666;
+  --accent-color: #7b1fa2;
+  --accent-color-transparent: rgba(123, 31, 162, 0.8);
+  --border-color-light: #EEEEEE;
+  --button-bg-secondary: #F1F0EE;
+  --price-color: #7B1FA2;
+  --free-price-color: #2E7D32;
+  --shadow-hover: rgba(123, 31, 162, 0.15);
+  
+  // Тени
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  
   font-family: 'Onest', sans-serif;
 }
 
@@ -38,19 +62,16 @@ body {
   position: relative;
 }
 
-.main-page-wrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--background-color);
-  color: var(--text-color);
-}
-
 p, h1, h2, h3, h4, h5, h6, span, div {
   color: inherit; 
 }
 
 .content-area, .card, .container {
-  background-color: var(--background-color);
+  background-color: var(--content-bg);
   color: var(--text-color);
+}
+
+/* Для темной темы - это резервные значения */
+html[data-theme="dark"] {
+  // Темная тема переопределяет эти переменные через applyThemeToDOM
 }

@@ -13,6 +13,7 @@ const CreateEventContent: React.FC = () => {
     phone: '',
     telegram: '',
     email: '',
+    users: '',
     eventType: undefined,
     eventDateTime: undefined,
   });

@@ -7,7 +7,6 @@ export const usePreload = () => {
     const pagesToPreload = [
       import('../pages/CreateEventPage/CreateEventPage'),
       import('../pages/MyAccountPage/MyAccountPage'),
-      import('../pages/AccountPage/AccountPage'),
       import('../pages/DetailsEventPage/DetailsEventPage'),
       import('../pages/FavoriteEventsPage/FavoriteEventsPage'),
       import('../pages/RecommendationEventsPage/RecommendationEventsPage'),
@@ -26,9 +25,6 @@ export const usePreload = () => {
       case '/MyAccount':
         import('../pages/MyAccountPage/MyAccountPage');
         break;
-      case '/Account':
-        import('../pages/AccountPage/AccountPage');
-        break;
       case '/DetailsEvent':
         import('../pages/DetailsEventPage/DetailsEventPage');
         break;
@@ -37,12 +33,6 @@ export const usePreload = () => {
         break;
       case '/RecommendationEvents':
         import('../pages/RecommendationEventsPage/RecommendationEventsPage');
-        break;
-      case '/Configuration':
-        import('../pages/ConfigurationPage/ConfigurationPage');
-        break;
-      case '/ContactUs':
-        import('../pages/ContactUsPage/ContactUsPage');
         break;
       case '/Support':
         import('../pages/SupportPage/SupportPage');

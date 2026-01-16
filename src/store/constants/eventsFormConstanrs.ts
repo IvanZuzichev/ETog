@@ -7,6 +7,7 @@ export const EVENT_FORM_CONSTANTS = {
     phone: 50,
     telegram: 50,
     email: 50,
+    users: 50
   },
   ALLOWED_FILE_TYPES: ['image/jpeg', 'image/jpg', 'image/png'],
 } as const;

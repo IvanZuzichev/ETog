@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Event } from '../../api/mockEvents';
 import './EventCard.scss';
+import { HeartIcon } from '../icons/HeartIcon'; 
+import { useTheme } from '../../theme/ThemeContext';
 
 interface EventCardProps {
   event: Event;
 }
 
+
 const EventCard: React.FC<EventCardProps> = ({ event }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+  useTheme();
+  const handleToggleFavorite = (e: React.MouseEvent) => {
+    e.preventDefault(); 
+    e.stopPropagation();
+    setIsFavorite(!isFavorite);
+  };
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('ru-RU', {
@@ -24,12 +35,10 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
     return `${price.toLocaleString('ru-RU')} ₽`;
   };
 
-  // Определяем цвет цены в зависимости от темы
   const getPriceClassName = (price: number | 'Бесплатно') => {
     return `event-card__price ${price === 'Бесплатно' ? 'event-card__price--free' : ''}`;
   };
 
-  // Создаем заглушку для изображения
   const getPlaceholderSVG = () => {
     const theme = document.documentElement.className.includes('dark') ? 'dark' : 'light';
     const bgColor = theme === 'dark' ? '#2C2C2C' : '#F8F9FA';
@@ -61,6 +70,15 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             }}
           />
           <div className="event-card__category">{event.category}</div>
+          
+          {/* Кнопка избранного в правом верхнем углу изображения */}
+          <button 
+            onClick={handleToggleFavorite}
+            className={`event-card__favorite ${isFavorite ? 'event-card__favorite--active' : ''}`}
+            title={isFavorite ? 'Удалить из избранного' : 'Добавить в избранное'}
+          >
+            <HeartIcon isActive={isFavorite} size={18} />
+          </button>
         </div>
         
         <div className="event-card__content">
@@ -79,12 +97,6 @@ const EventCard: React.FC<EventCardProps> = ({ event }) => {
             </div>
             <button 
               className="event-card__details-btn"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                // Здесь будет логика открытия подробной информации
-                console.log('Подробнее о событии:', event.id);
-              }}
             >
               Подробнее
             </button>

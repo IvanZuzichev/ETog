@@ -1,6 +1,21 @@
+// Добавьте эти переменные если их еще нет
+:root {
+  --card-bg: #FFFFFF;
+  --card-border: #e5e7eb;
+  --text-color-primary: #000000;
+  --text-color-secondary: #666666;
+  --accent-color: #7b1fa2;
+  --accent-color-transparent: rgba(123, 31, 162, 0.8);
+  --border-color-light: #EEEEEE;
+  --button-bg-secondary: #F1F0EE;
+  --button-hover-bg: #E4E2DF;
+  --price-color: #7B1FA2;
+  --free-price-color: #2E7D32;
+  --shadow-hover: rgba(123, 31, 162, 0.15);
+}
+
 .event-card {
-  background:  #FFFFFF;
-  // border: 1px solid var(--primary-color, #7B1FA2);
+  background: var(--card-bg, #FFFFFF);
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -9,9 +24,9 @@
   flex-direction: column;
   position: relative;
   box-sizing: border-box;
-    border-width: 0;
-    border-style: solid;
-    border-color: #e5e7eb;
+  border-width: 0;
+  border-style: solid;
+  border-color: var(--card-border, #e5e7eb);
 
   &:hover {
     box-shadow: 0 4px 12px var(--shadow-hover, rgba(123, 31, 162, 0.15));
@@ -32,7 +47,7 @@
     margin: 12px 12px 0 12px;
     border-radius: 4px;
     overflow: hidden;
-    background: var(--border-color, #EEEEEE);
+    background: var(--border-color-light, #EEEEEE);
   }
 
   &__image {
@@ -53,7 +68,7 @@
     position: absolute;
     top: 8px;
     left: 8px;
-    background: rgba(123, 31, 162, 0.8); 
+    background: var(--accent-color-transparent, rgba(123, 31, 162, 0.8));
     padding: 4px 8px;
     border-radius: 8px;
     font-size: 11px;
@@ -63,6 +78,48 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     backdrop-filter: blur(4px);
+  }
+
+  &__favorite {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: var(--accent-color-transparent, rgba(123, 31, 162, 0.8));
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 3;
+    
+    &:hover {
+      background: var(--accent-color, #7b1fa2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    &--active {
+      background: var(--accent-color-transparent, rgba(123, 31, 162, 0.8));
+      
+      &:hover {
+        background: var(--accent-color-transparent, rgba(123, 31, 162, 0.8));
+      }
+      
+      svg {
+        color: #FFFFFF;
+        transition: color 0.3s ease;
+      }
+    }
+    
+    svg {
+      color: #FFFFFF;
+      transition: color 0.3s ease;
+    }
   }
 
   &__content {
@@ -81,7 +138,7 @@
     font-size: 16px;
     font-weight: 600;
     line-height: 1.3;
-    color: var(--text-color, #000000);
+    color: var(--text-color-primary, #000000);
     margin: 0 0 8px 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -150,22 +207,22 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 16px;
-    border-top: 1px solid var(--border-color, #EEEEEE);
+    border-top: 1px solid var(--border-color-light, #EEEEEE);
   }
 
   &__price {
     font-size: 18px;
     font-weight: 700;
-    color: var(#FFFFFF, #7B1FA2);
+    color: var(--price-color, #7B1FA2);
     
     &--free {
-      color: var(#FFFFFF, #2E7D32);
+      color: var(--free-price-color, #2E7D32);
     }
   }
 
   &__details-btn {
-    background: #F1F0EE;
-    color: var(--button-text, #000000);
+    background: var(--button-bg-secondary, #F1F0EE);
+    color: var(--text-color-primary, #000000);
     border: none;
     border-radius: 8px;
     padding: 10px 20px;
@@ -176,7 +233,90 @@
     
     &:hover {
       background: var(--button-hover-bg, #E4E2DF);
-      color: #000;
+      color: var(--text-color-primary, #000000);
+    }
+  }
+}
+
+/* Темная тема - обновляем переменные */
+[data-theme="dark"] {
+  --card-bg: #1e1e1e;
+  --card-border: rgba(255, 255, 255, 0.1);
+  --text-color-primary: #ffffff;
+  --text-color-secondary: rgba(255, 255, 255, 0.7);
+  --accent-color: #bb86fc;
+  --accent-color-transparent: rgba(187, 134, 252, 0.8);
+  --border-color-light: rgba(255, 255, 255, 0.1);
+  --button-bg-secondary: #2d2d2d;
+  --button-hover-bg: #3d3d3d;
+  --price-color: #bb86fc;
+  --free-price-color: #4CAF50;
+  --shadow-hover: rgba(0, 0, 0, 0.3);
+
+  .event-card {
+    background: var(--card-bg);
+    border-color: var(--card-border);
+    
+    &:hover {
+      box-shadow: 0 4px 12px var(--shadow-hover);
+    }
+  }
+  
+  .event-card__title {
+    color: var(--text-color-primary);
+  }
+  
+  .event-card__organizer {
+    color: var(--text-color-secondary);
+  }
+  
+  .event-card__date,
+  .event-card__location {
+    color: var(--text-color-secondary);
+  }
+  
+  .event-card__favorite {
+    background: var(--accent-color-transparent);
+    
+    &:hover {
+      background: var(--accent-color);
+    }
+    
+    &--active {
+      background: var(--accent-color-transparent);
+      
+      &:hover {
+        background: var(--accent-color-transparent);
+      }
+      
+      svg {
+        color: #FFFFFF;
+      }
+    }
+    
+    svg {
+      color: #FFFFFF;
+    }
+  }
+  
+  .event-card__footer {
+    border-top-color: var(--border-color-light);
+  }
+  
+  .event-card__price {
+    color: var(--price-color);
+    
+    &--free {
+      color: var(--free-price-color);
+    }
+  }
+  
+  .event-card__details-btn {
+    background: var(--button-bg-secondary);
+    color: var(--text-color-primary);
+    
+    &:hover {
+      background: var(--button-hover-bg);
     }
   }
 }
@@ -199,6 +339,16 @@
     &__details-btn {
       padding: 9px 18px;
       font-size: 13px;
+    }
+    
+    &__favorite {
+      width: 32px;
+      height: 32px;
+      
+      svg {
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 }
@@ -244,6 +394,18 @@
       font-size: 13px;
       border-radius: 6px;
     }
+    
+    &__favorite {
+      width: 32px;
+      height: 32px;
+      top: 6px;
+      right: 6px;
+      
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
   }
 }
 
@@ -261,6 +423,18 @@
     &__details-btn {
       padding: 6px 12px;
       font-size: 12px;
+    }
+    
+    &__favorite {
+      width: 28px;
+      height: 28px;
+      top: 4px;
+      right: 4px;
+      
+      svg {
+        width: 14px;
+        height: 14px;
+      }
     }
   }
 }

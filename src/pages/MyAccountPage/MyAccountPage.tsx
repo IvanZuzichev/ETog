@@ -3,6 +3,8 @@ import { Footer } from '../../components/Footer/Footer';
 import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 import { AccountContent } from '../../components/AccountContent/AccountContent';
 import { useState } from 'react';
+import EventSection from '../../components/EventSection/EventSection';
+import { ButtonsEvents } from '../../components/ButtonsEvents/ButtonsEvents'
 
 // Страница с выводом мероприятий своего аккаунта
 const MyAccountPage: React.FC = () => {
@@ -28,6 +30,8 @@ const MyAccountPage: React.FC = () => {
       <Header />
       <div className="header-spacer"></div>
             <AccountContent formData={formData} onFormChange={handleFormChange} />
+            <ButtonsEvents/>
+            <EventSection/>
             <Footer />
     </div>
   );

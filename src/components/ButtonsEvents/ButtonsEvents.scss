@@ -1,0 +1,124 @@
+:root {
+  // Добавьте эти переменные если их нет
+  --button-bg: #ffffff;
+  --button-text: #7b1fa2;
+  --active-button-bg: #7b1fa2;
+  --active-button-text: #ffffff;
+  --hover-button-bg: rgba(123, 31, 162, 0.08);
+  --border-color: rgba(123, 31, 162, 0.3);
+}
+
+.account-section {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 50px;
+  
+  @media (max-width: 1023px) and (min-width: 744px) {
+    padding: 24px 16px;
+  }
+  
+  @media (max-width: 743px) {
+    padding: 16px 12px;
+  }
+}
+
+.buttons-events-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  width: 100%;
+  
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.event-filter-button {
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+  transition: all 0.3s ease;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  width: 100%;
+  border: 1px solid var(--border-color, rgba(123, 31, 162, 0.3));
+  background: var(--button-bg, #ffffff);
+  color: var(--button-text, #7b1fa2);
+  box-shadow: 0 2px 8px rgba(123, 31, 162, 0.1);
+  
+  &:hover:not(:disabled) {
+    background: var(--hover-button-bg, rgba(123, 31, 162, 0.08));
+    box-shadow: 0 4px 12px rgba(123, 31, 162, 0.15);
+    border-color: rgba(123, 31, 162, 0.4);
+    transform: translateY(-1px);
+    color: var(--button-text, #7b1fa2);
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+.event-filter-button--active {
+  background: var(--active-button-bg, #7b1fa2);
+  color: var(--active-button-text, white);
+  border-color: rgba(123, 31, 162, 0.3);
+  box-shadow: 0 2px 8px rgba(123, 31, 162, 0.2);
+  
+  &:hover {
+    background: #9716ce;
+    border-color: rgba(123, 31, 162, 0.5);
+    box-shadow: 0 4px 12px rgba(123, 31, 162, 0.3);
+  }
+}
+
+/* Отключенные состояния */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Темная тема - теперь использует CSS переменные */
+[data-theme="dark"] {
+  // Обновляем переменные для темной темы
+  --button-bg: #2a2a2a;
+  --button-text: #bb86fc;
+  --active-button-bg: #7b1fa2;
+  --active-button-text: #ffffff;
+  --hover-button-bg: rgba(187, 134, 252, 0.1);
+  --border-color: rgba(187, 134, 252, 0.3);
+
+  .event-filter-button {
+    background: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--border-color);
+    
+    &:hover:not(:disabled) {
+      background: var(--hover-button-bg);
+    }
+  }
+  
+  .event-filter-button--active {
+    background: var(--active-button-bg);
+    color: var(--active-button-text);
+    border-color: var(--border-color);
+    
+    &:hover {
+      background: #9b76d8;
+    }
+  }
+}

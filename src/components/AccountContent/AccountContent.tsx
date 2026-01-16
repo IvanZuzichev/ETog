@@ -6,6 +6,7 @@ import { PHOTO_CONSTANTS } from '../../store/constants/photoTypeOptions';
 import { useDataProtection } from '../../hooks/useDataProtection';
 import { useBlacklist } from '../../hooks/useBlackList';
 import { useGlobalAvatar } from '../../hooks/useGlobalAvatar';
+import { ThemeToggleCompact } from '../ConfigurationContent/ThemeToggleCompact/ThemeToggleCompact';
 import { 
   ACCOUNT_STATUS, 
   STATUS_CONFIG,
@@ -17,23 +18,38 @@ interface AccountContentData {
   login: string;
   email: string;
   description: string;
-  password: string;
+  oldPassword?: string;
+  newPassword?: string;
+  confirmPassword?: string;
 }
 
 interface AccountContentDataProps {
   formData: AccountContentData;
   onFormChange: (field: string, value: string) => void;
-  accountStatus?: string; // статус из ACCOUNT_STATUS
+  accountStatus?: string;
   className?: string;
+  rating?: number; // рейтинг от 0 до 5
+  reviewCount?: number; // количество отзывов
+  userId?: string; // ID пользователя для ссылки
 }
 
 export const AccountContent: React.FC<AccountContentDataProps> = ({ 
   formData, 
   onFormChange, 
   accountStatus = ACCOUNT_STATUS.UNVERIFIED,
-  className = '' 
+  className = '',
+  rating = 4.5,
+  reviewCount = 12,
+  userId = '12345' // Моковый ID пользователя
 }) => {
-  const [errors, setErrors] = useState<{ login?: string; email?: string; password?: string; description?: string }>({});
+  const [errors, setErrors] = useState<{ 
+    login?: string; 
+    email?: string; 
+    description?: string;
+    oldPassword?: string;
+    newPassword?: string;
+    confirmPassword?: string;
+  }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -45,7 +61,7 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({
   useThemeApply();
   const navigate = useNavigate();
 
-  const statusConfig = STATUS_CONFIG[ACCOUNT_STATUS.UNVERIFIED];
+  const statusConfig = STATUS_CONFIG[accountStatus as keyof typeof STATUS_CONFIG] || STATUS_CONFIG[ACCOUNT_STATUS.UNVERIFIED];
 
   const handleInputChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -105,8 +121,9 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({
   };
 
   const validateForm = () => {
-    const newErrors: { login?: string; email?: string; password?: string; description?: string } = {};
+    const newErrors: typeof errors = {};
 
+    // Валидация основных полей
     if (!formData.login) {
       newErrors.login = PHOTO_CONSTANTS.ERROR_MESSAGES.LOGIN_REQUIRED;
     } else if (formData.login.length > PHOTO_CONSTANTS.FIELD_LIMITS.login) {
@@ -123,14 +140,25 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({
       newErrors.email = `Email не должен превышать ${PHOTO_CONSTANTS.FIELD_LIMITS.email} символов`;
     }
 
-    if (!formData.password) {
-      newErrors.password = PHOTO_CONSTANTS.ERROR_MESSAGES.PASSWORD_REQUIRED;
-    } else if (formData.password.length < 6) {
-      newErrors.password = PHOTO_CONSTANTS.ERROR_MESSAGES.PASSWORD_TOO_SHORT;
-    } else if (formData.password.length > PHOTO_CONSTANTS.FIELD_LIMITS.password) {
-      newErrors.password = `Пароль не должен превышать ${PHOTO_CONSTANTS.FIELD_LIMITS.password} символов`;
-    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
-      newErrors.password = 'Пароль должен содержать заглавные и строчные буквы, а также цифры';
+    // Валидация полей смены пароля
+    if (formData.oldPassword || formData.newPassword || formData.confirmPassword) {
+      if (!formData.oldPassword) {
+        newErrors.oldPassword = 'Введите старый пароль';
+      }
+
+      if (!formData.newPassword) {
+        newErrors.newPassword = 'Введите новый пароль';
+      } else if (formData.newPassword.length < 6) {
+        newErrors.newPassword = 'Новый пароль должен быть не менее 6 символов';
+      } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.newPassword)) {
+        newErrors.newPassword = 'Пароль должен содержать заглавные и строчные буквы, а также цифры';
+      }
+
+      if (!formData.confirmPassword) {
+        newErrors.confirmPassword = 'Повторите новый пароль';
+      } else if (formData.newPassword !== formData.confirmPassword) {
+        newErrors.confirmPassword = 'Пароли не совпадают';
+      }
     }
 
     const descriptionValidation = validateInput(formData.description);
@@ -153,7 +181,6 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({
     setIsSubmitting(true);
 
     try {
-      const hashedPassword = hashData(formData.password);
       const updateId = generateSecureId();
       const normalizedEmail = formData.email.trim().toLowerCase();
       const normalizedLogin = formData.login.trim();
@@ -162,10 +189,13 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({
         updateId,
         login: normalizedLogin,
         email: normalizedEmail,
-        passwordHash: hashedPassword,
         description: formData.description || '',
         avatarChanged: avatar !== AccountPhoto,
         updateTime: Date.now(),
+        ...(formData.newPassword && {
+          passwordHash: hashData(formData.newPassword),
+          passwordChanged: true
+        })
       };
 
       const accountDataMessage = `
@@ -173,18 +203,25 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({
       Логин: ${formData.login}
       Email: ${formData.email}
       Описание: ${formData.description || 'Не указано'}
-      Пароль: ${formData.password}
+      ${formData.newPassword ? 'Пароль: Изменен' : 'Пароль: Без изменений'}
       Аватарка: ${avatar !== AccountPhoto ? 'Обновлена' : 'По умолчанию'}
       
       Для API будут переданы защищенные данные:
       ID обновления: ${secureDataForAPI.updateId.substring(0, 8)}...
       Логин: ${secureDataForAPI.login}
       Email: ${secureDataForAPI.email}
-      Хеш пароля: ${secureDataForAPI.passwordHash.substring(0, 16)}...
+      ${formData.newPassword ? 'Пароль: Изменен' : 'Пароль: Без изменений'}
       `.trim();
 
       alert(accountDataMessage);
       alert('Данные успешно обновлены!');
+      
+      // Сброс полей смены пароля после успешного обновления
+      if (formData.newPassword) {
+        onFormChange('oldPassword', '');
+        onFormChange('newPassword', '');
+        onFormChange('confirmPassword', '');
+      }
     } catch (error) {
       console.error('Ошибка обновления данных:', error);
       alert('Ошибка при обновлении данных. Попробуйте позже.');
@@ -214,14 +251,13 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({
         navigate('/');
       } catch (error) {
         console.error('Ошибка при удалении профиля:', error);
-        alert('Ошибка при удалении профиля');
+        alert('Ошибка при удаления профиля');
       }
     }
 
     setDeleteConfirm(false);
   };
 
-  // Функция для выхода из аккаунта
   const handleLogout = () => {
     const isConfirmed = window.confirm('Вы действительно хотите выйти из аккаунта?');
     
@@ -240,84 +276,91 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({
     }
   };
 
-  // Функция для подтверждения аккаунта
-  const handleVerifyAccount = () => {
-    const isConfirmed = window.confirm(
-      'Отправить письмо для подтверждения email?\n\n' +
-      'На вашу почту будет отправлена ссылка для подтверждения.'
-    );
-    
-    if (isConfirmed) {
-      alert('Письмо с подтверждением отправлено на вашу почту');
-      // Здесь логика отправки письма
-    }
+  const handleShareAccount = () => {
+    const accountUrl = `${window.location.origin}/user/${userId}`;
+    navigator.clipboard.writeText(accountUrl)
+      .then(() => {
+        alert(`Ссылка на профиль скопирована в буфер обмена:\n${accountUrl}`);
+      })
+      .catch(() => {
+        alert('Не удалось скопировать ссылку. Скопируйте вручную:\n' + accountUrl);
+      });
   };
 
-  // Функция для запроса статуса организации
-  const handleRequestOrganizationStatus = () => {
-    const isConfirmed = window.confirm(
-      'Запросить статус организации?\n\n' +
-      'Для получения статуса организации вам потребуется:\n' +
-      '1. Официальные документы компании\n' +
-      '2. Подтверждение домена email\n' +
-      '3. Верификация через службу поддержки\n\n' +
-      'Подать заявку?'
-    );
+  const renderStars = () => {
+    const filledStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
     
-    if (isConfirmed) {
-      alert('Заявка на статус организации отправлена. Мы свяжемся с вами в течение 3 рабочих дней.');
-      // Здесь логика отправки заявки
+    let starsString = '';
+    
+    for (let i = 1; i <= 5; i++) {
+      if (i <= filledStars) {
+        starsString += '★';
+      } else if (i === filledStars + 1 && hasHalfStar) {
+        starsString += '☆';
+      } else {
+        starsString += '☆';
+      }
     }
+    
+    return starsString;
   };
 
   return (
-    <div className='main-page-wrapper'>
-      <div className={`accountcontent-container ${className}`}>
-        <input
-          type='file'
-          ref={fileInputRef}
-          onChange={handleAvatarSelect}
-          accept={PHOTO_CONSTANTS.FILE_ACCEPT}
-          style={{ display: 'none' }}
-        />
+  <div className='main-page-wrapper'>
+    <div className='account-section'>
+    <div className={`accountcontent-container ${className}`}>
+      <input
+        type='file'
+        ref={fileInputRef}
+        onChange={handleAvatarSelect}
+        accept={PHOTO_CONSTANTS.FILE_ACCEPT}
+        style={{ display: 'none' }}
+      />
 
-        <div className='profile-header'>
-          <h1 className='profile-title'>Личные данные профиля</h1>
+      <div className='profile-header'>
+        <h1 className='profile-title'>Личные данные профиля</h1>
+      </div>
+
+      <div className='profile-content'>
+        <div className='profile-left'>
+          <div className='profile-photo-container'>
+            <div className='profile-photo' onClick={handleAvatarUpload} style={{ cursor: 'pointer' }}>
+              <img src={avatar || AccountPhoto} alt='Profile' className='profile-image' />
+              <div className='avatar-overlay'></div>
+            </div>
+            
+            {/* Рейтинг и отзывы */}
+            <div className='rating-section'>
+              <div className='stars-container'>
+                <span className='stars-text' title={`Рейтинг: ${rating.toFixed(1)} из 5`}>
+                  {renderStars()}
+                </span>
+                <span className='rating-value'>{rating.toFixed(1)}</span>
+              </div>
+              <div className='reviews-count' title={`Количество отзывов: ${reviewCount}`}>
+                {reviewCount} {reviewCount === 1 ? 'отзыв' : reviewCount >= 2 && reviewCount <= 4 ? 'отзыва' : 'отзывов'}
+              </div>
+            </div>
+
+            {/* Статус аккаунта (без стикера) */}
+            <div 
+              className='account-status' 
+              style={{ color: statusConfig.color }}
+              title={statusConfig.description}
+            >
+              {statusConfig.label}
+            </div>
+            <ThemeToggleCompact/>
+          </div>
         </div>
 
-        <div className='profile-content'>
-          <div className='profile-left'>
-            <div className='profile-photo-container'>
-              <div className='profile-photo' onClick={handleAvatarUpload} style={{ cursor: 'pointer' }}>
-                <img src={avatar || AccountPhoto} alt='Profile' className='profile-image' />
-                <div className='avatar-overlay'></div>
-              </div>
-              
-              {/* Бейдж статуса */}
-              <div 
-                className='verification-badge' 
-                style={{ 
-                  borderColor: statusConfig.color,
-                  backgroundColor: `${statusConfig.color}15`
-                }}
-                title={statusConfig.description}
-              >
-                <span style={{ fontSize: '16px' }}>{statusConfig.badge}</span>
-                <span 
-                  className='verified-text' 
-                  style={{ color: statusConfig.color }}
-                >
-                  {statusConfig.label}
-                </span>
-              </div>
-
-              
-            </div>
-          </div>
-
-          <div className='profile-right'>
-            <form className='accountcontent-form' onSubmit={handleSubmit}>
-              <div className='form-grid-container'>
+        <div className='profile-right'>
+          <form className='accountcontent-form' onSubmit={handleSubmit}>
+            <div className='two-column-layout'>
+              {/* Левая колонка: Основные данные */}
+              <div className='left-column'>
+                <h3 className='column-title'>Основные данные</h3>
                 
                 <div className='form-field'>
                   <label htmlFor='login' className='form-label'>
@@ -329,7 +372,7 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({
                     value={formData.login}
                     onChange={handleInputChange('login')}
                     className='form-input'
-                    placeholder='Логин'
+                    placeholder='Введите ваш логин'
                     required
                     maxLength={PHOTO_CONSTANTS.FIELD_LIMITS.login}
                     disabled={isSubmitting}
@@ -362,29 +405,6 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({
                 </div>
 
                 <div className='form-field'>
-                  <label htmlFor='password' className='form-label'>
-                    Ваш пароль
-                  </label>
-                  <div className='password-input-container'>
-                    <input
-                      id='password'
-                      type={'password'}
-                      value={formData.password}
-                      onChange={handleInputChange('password')}
-                      className='form-input'
-                      placeholder='Пароль'
-                      required
-                      maxLength={PHOTO_CONSTANTS.FIELD_LIMITS.password}
-                      disabled={isSubmitting}
-                    />
-                  </div>
-                  <div className='character-count-right'>
-                    {formData.password.length}/{PHOTO_CONSTANTS.FIELD_LIMITS.password}
-                  </div>
-                  {errors.password && <span className='error-message'>{errors.password}</span>}
-                </div>
-
-                <div className='form-field'>
                   <label htmlFor='description' className='form-labels'>
                     Описание профиля
                   </label>
@@ -393,8 +413,8 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({
                     value={formData.description}
                     onChange={handleInputChange('description')}
                     className='form-textarea'
-                    placeholder='Опишите себя или вашу организацию'
-                    rows={1}
+                    placeholder='Расскажите о себе...'
+                    rows={3}
                     maxLength={PHOTO_CONSTANTS.FIELD_LIMITS.description}
                     disabled={isSubmitting}
                   />
@@ -405,30 +425,98 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({
                 </div>
               </div>
 
-              <div className='form-buttons-container'>
-                <button
-                  type='button'
-                  className='button-delete-account'
-                  onClick={handleDeleteAccount}
-                  disabled={isSubmitting}
-                >
-                  Удалить аккаунт
-                </button>
-                <button 
-                  className='logout-button logout-button-mobile' 
-                  onClick={handleLogout} 
-                  disabled={isSubmitting}
-                >
-                  <span>Выйти</span>
-                </button>
-                <button type='submit' className='button-accountcontents' disabled={isSubmitting}>
-                  {isSubmitting ? 'Сохранение...' : 'Изменить данные'}
-                </button>
+              {/* Правая колонка: Смена пароля */}
+              <div className='right-column'>
+                <h3 className='column-title'>Смена пароля</h3>
+                
+                <div className='form-field'>
+                  <label htmlFor='oldPassword' className='form-label'>
+                    Старый пароль
+                  </label>
+                  <input
+                    id='oldPassword'
+                    type='password'
+                    value={formData.oldPassword || ''}
+                    onChange={handleInputChange('oldPassword')}
+                    className='form-input'
+                    placeholder='Введите старый пароль'
+                    disabled={isSubmitting}
+                  />
+                  {errors.oldPassword && <span className='error-message'>{errors.oldPassword}</span>}
+                </div>
+
+                <div className='form-field'>
+                  <label htmlFor='newPassword' className='form-label'>
+                    Новый пароль
+                  </label>
+                  <input
+                    id='newPassword'
+                    type='password'
+                    value={formData.newPassword || ''}
+                    onChange={handleInputChange('newPassword')}
+                    className='form-input'
+                    placeholder='Введите новый пароль'
+                    disabled={isSubmitting}
+                  />
+                  {errors.newPassword && <span className='error-message'>{errors.newPassword}</span>}
+                </div>
+
+                <div className='form-field'>
+                  <label htmlFor='confirmPassword' className='form-label'>
+                    Повторите новый пароль
+                  </label>
+                  <input
+                    id='confirmPassword'
+                    type='password'
+                    value={formData.confirmPassword || ''}
+                    onChange={handleInputChange('confirmPassword')}
+                    className='form-input'
+                    placeholder='Повторите новый пароль'
+                    disabled={isSubmitting}
+                  />
+                  {errors.confirmPassword && <span className='error-message'>{errors.confirmPassword}</span>}
+                </div>
               </div>
-            </form>
-          </div>
+            </div>
+
+            {/* Кнопки действий (4 кнопки) */}
+            <div className='form-buttons-container'>
+              <button
+                type='button'
+                className='button-delete-account'
+                onClick={handleDeleteAccount}
+                disabled={isSubmitting}
+              >
+                {deleteConfirm ? 'Подтвердить удаление' : 'Удалить аккаунт'}
+              </button>
+              
+              <button 
+                type='button'
+                className='logout-button'
+                onClick={handleLogout}
+                disabled={isSubmitting}
+              >
+                Выйти из аккаунта
+              </button>
+              
+              <button 
+                type='button'
+                className='share-button'
+                onClick={handleShareAccount}
+                disabled={isSubmitting}
+              >
+                Поделиться аккаунтом
+              </button>
+              
+              <button type='submit' className='button-accountcontents' disabled={isSubmitting}>
+                {isSubmitting ? 'Сохранение...' : 'Сохранить изменения'}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  );
+    </div>
+  </div>
+);
 };
