@@ -156,7 +156,7 @@ const UserDetailPage: React.FC<UserDetailPageProps> = ({
                         className={`subscribe-button ${isSubscribed ? 'subscribe-button--subscribed' : ''}`}
                         onClick={handleSubscribeClick}
                       >
-                        {isSubscribed ? '✓ Вы подписаны' : 'Подписаться'}
+                        {isSubscribed ? 'Вы подписаны' : 'Подписаться'}
                       </button>
                       
                       <button 

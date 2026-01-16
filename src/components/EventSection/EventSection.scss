@@ -267,3 +267,18 @@
     font-family: "Inter", sans-serif;
   }
 }
+
+[data-theme="dark"] {
+.events-counter {
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem;
+  background: var(--primary-color);
+  border-radius: 12px;
+  font-size: 1rem;
+  color: white;
+  font-family: "Inter", sans-serif;
+  border: 1px solid rgba(123, 31, 162, 0.1);
+  text-align: center;
+}
+
+}

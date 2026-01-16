@@ -285,7 +285,7 @@
 }
 
 .event-form-container .upload-area .upload-btn {
-  background: var(--footer-bg);
+  background: #7b1fa2;
   color: white;
   border: 1px solid rgba(123, 31, 162, 0.3);
   border-radius: 8px;
@@ -427,7 +427,7 @@
 }
 
 .event-form-container .form-actions .btn-primary {
-  background: var(--footer-bg);
+  background: #7b1fa2;
   color: white;
   border: 1px solid rgba(123, 31, 162, 0.3);
   box-shadow: 0 4px 15px rgba(123, 31, 162, 0.3);
@@ -458,17 +458,6 @@
 
 .event-form-container .form-actions .btn-secondary:active {
   transform: none;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 @keyframes slideIn {

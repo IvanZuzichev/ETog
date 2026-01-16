@@ -30,7 +30,7 @@
   }
 }
 
-.buttons-events-container {
+.buttons-events-containers {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
@@ -70,7 +70,7 @@
     box-shadow: 0 4px 12px var(--shadow-hover-color, rgba(123, 31, 162, 0.15));
     border-color: rgba(123, 31, 162, 0.4);
     transform: translateY(-1px);
-    color: var(--button-text, #7b1fa2);
+    color: #7b1fa2;
   }
   
   &:active:not(:disabled) {
@@ -102,8 +102,8 @@ button:disabled {
 /* Темная тема - обновляем переменные */
 [data-theme="dark"] {
   --button-bg: #2a2a2a;
-  --button-text: #bb86fc;
-  --active-button-bg: #bb86fc;
+  --button-text: #7b1fa2;
+  --active-button-bg: #7b1fa2;
   --active-button-text: #ffffff;
   --hover-button-bg: rgba(187, 134, 252, 0.1);
   --border-color: rgba(187, 134, 252, 0.3);
@@ -117,14 +117,14 @@ button:disabled {
     &:hover {
       // Ховер для активной кнопки в темной теме
       .event-filter-button--active & {
-        background: #9b76d8;
+        background: #7b1fa2;
       }
     }
   }
   
   .event-filter-button--active {
     &:hover {
-      background: #9b76d8;
+      background: #7b1fa2;
     }
   }
 }

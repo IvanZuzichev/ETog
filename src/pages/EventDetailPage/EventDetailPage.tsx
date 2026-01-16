@@ -246,7 +246,7 @@ const EventDetailPage: React.FC = () => {
                       onClick={handleSubscribe}
                       className={`subscribe-button ${isSubscribed ? 'subscribe-button--subscribed' : ''}`}
                     >
-                      {isSubscribed ? '✓ Вы подписаны' : 'Подписаться'}
+                      {isSubscribed ? 'Вы подписаны' : 'Подписаться'}
                     </button>
                   </div>
                 </div>

@@ -24,7 +24,7 @@ const MyAccountPage: React.FC = () => {
       }));
       console.log('Field changed:', field, value);
     };
-
+    
   return (
     <div className='main-page-wrapper'>
       <Header />

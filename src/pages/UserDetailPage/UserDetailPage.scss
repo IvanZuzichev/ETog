@@ -408,12 +408,6 @@
   }
 }
 
-
-
-.userprofile-container {
-  animation: fadeIn 0.5s ease-out;
-}
-
 /* Отключенные состояния */
 button:disabled {
   opacity: 0.6;
@@ -468,12 +462,12 @@ button:disabled {
   }
   
   .subscribe-button {
-    background: #bb86fc;
+    background: #7b1fa2;
     color: #ffffff;
     border-color: rgba(187, 134, 252, 0.3);
     
     &:hover:not(:disabled) {
-      background: #9b76d8;
+      background: #7b1fa2;
     }
   }
   
@@ -487,7 +481,7 @@ button:disabled {
   
   .share-button {
     background: #2a2a2a;
-    color: #bb86fc;
+    color: #fff;
     border-color: rgba(187, 134, 252, 0.3);
     
     &:hover:not(:disabled) {

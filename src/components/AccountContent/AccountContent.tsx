@@ -7,6 +7,8 @@ import { useDataProtection } from '../../hooks/useDataProtection';
 import { useBlacklist } from '../../hooks/useBlackList';
 import { useGlobalAvatar } from '../../hooks/useGlobalAvatar';
 import { ThemeToggleCompact } from '../ConfigurationContent/ThemeToggleCompact/ThemeToggleCompact';
+import { useTheme } from '../../theme/ThemeContext';
+
 import { 
   ACCOUNT_STATUS, 
   STATUS_CONFIG,
@@ -57,6 +59,8 @@ export const AccountContent: React.FC<AccountContentDataProps> = ({
   const { avatar, updateAvatar } = useGlobalAvatar();
   const { hashData, generateSecureId } = useDataProtection();
   const { validateInput } = useBlacklist();
+
+  useTheme();
 
   useThemeApply();
   const navigate = useNavigate();

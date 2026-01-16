@@ -12,27 +12,27 @@
   cursor: pointer;
    font-family: "Inter", sans-serif;
   font-size: 14px;
-  color: var(--text-color, #2d3748);
+  color: black;
   transition: all 0.2s ease;
   line-height: 1;
 
   &--primary {
-    color: var(--text-color, #2d3748);
+    color: black;
     background: var(--background-color, transparent);
 
     &:hover {
       background-color: rgba(123, 31, 162, 0.125);
-      color: var(--primary-color, #7b1fa2);
+      color: black;
     }
   }
 
   &--secondary {
     background: rgba(123, 31, 162, 0.125);
-    color: var(--text-color, #2d3748);
+    color: black;
 
     &:hover {
       background-color: rgba(123, 31, 162, 0.25);
-      color: var(--primary-color, #7b1fa2);
+      color: black;
     }
   }
 

@@ -159,7 +159,7 @@
   padding: 16px 32px;
   border: none;
   border-radius: 8px;
-  background: var(--footer-bg);
+  background: #7b1fa2;
   color: white;
   font-size: 1.125rem;
   font-weight: 600;
@@ -472,7 +472,7 @@
   padding: 16px 32px;
   border: none;
   border-radius: 8px;
-  background: var(--footer-bg);
+  background: #7b1fa2;
   color: white;
   font-size: 1.125rem;
   font-weight: 600;
@@ -602,8 +602,8 @@
   padding: 10px 24px;
   border: 1px solid rgba(123, 31, 162, 0.3);
   border-radius: 8px;
-  background: transparent;
-  color: var(--primary-color);
+  background: #7b1fa2;
+  color: white;
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
@@ -611,19 +611,19 @@
   font-family: "Inter", sans-serif;
   
   &:hover {
-    background: rgba(123, 31, 162, 0.1);
+    background: #871ab5;
     border-color: var(--primary-color);
-     color: white;
+    color: #ffffff;
   }
   
   &--subscribed {
-    background: var(--primary-color);
+    background: #7b1fa2;
     color: white;
     border-color: var(--primary-color);
     
     &:hover {
-      background: #9716ce;
-      
+      background: #7b1fa2;
+      color: white;
     }
   }
 }

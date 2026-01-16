@@ -9,7 +9,6 @@
   min-width: 180px;
   z-index: 1000;
   overflow: hidden;
-  animation: dropdownFadeIn 0.2s ease-out;
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(1px);
   color: var(--text-color, #2d3748);
@@ -32,14 +31,14 @@
     text-align: left;
     cursor: pointer;
     font-size: 14px;
-    color: var(--text-color, #2d3748);
+    color: black;
     transition: all 0.2s ease;
     backdrop-filter: blur(0.5px);
     -webkit-backdrop-filter: blur(0.5px);
 
     &:hover {
       background-color: rgba(123, 31, 162, 0.125);
-      color: var(--primary-color, #7b1fa2);
+      color: black;
     }
 
     &:not(:last-child) {
@@ -47,16 +46,7 @@
     }
   }
 
-  @keyframes dropdownFadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+
 
   @media (max-width: 768px) {
     min-width: 160px;
@@ -69,4 +59,15 @@
       right: 0;
     }
   }
+}
+
+  // Темная тема
+[data-theme="dark"] {
+ .dropdown-item {
+  color: white;
+ }
+
+  .dropdown-item:hover {
+  color: white;
+ }
 }

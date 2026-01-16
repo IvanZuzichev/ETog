@@ -2,7 +2,6 @@ import { useThemeApply } from '../../hooks/useThemeApply';
 import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 import { useState } from 'react';
 import './SupportContent.scss';
-import { useNavigate } from 'react-router-dom';
 import { SUPPORT_CONSTANTS } from '../../store/constants/supportConstants';
 import { useBlacklist } from '../../hooks/useBlackList';
 

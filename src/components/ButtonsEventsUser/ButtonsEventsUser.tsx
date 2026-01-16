@@ -21,7 +21,7 @@ export const ButtonsEventsUser: React.FC = () => {
 
   return (
     <div className="account-section">
-      <div className="buttons-events-container">
+      <div className="buttons-events-containers">
         {buttons.map((button) => (
           <button
             key={button.id}

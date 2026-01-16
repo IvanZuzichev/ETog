@@ -452,22 +452,6 @@
   }
 }
 
-/* Анимации */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.accountcontent-container {
-  animation: fadeIn 0.5s ease-out;
-}
-
 /* Отключенные состояния */
 button:disabled {
   opacity: 0.6;
