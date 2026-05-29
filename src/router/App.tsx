@@ -39,7 +39,7 @@ function App() {
 
   return (
     <div className='app'>
-      <Router>
+      <Router basename="/ETog">
         <Routes>
           <Route index element={<MainPage />} />
           <Route path='/CreateEvent' element={<CreateEventPage />} />
