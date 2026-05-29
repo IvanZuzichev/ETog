@@ -12,8 +12,6 @@
   font-family: 'Onest', sans-serif;
 }
 
-
-
 .support-form-container {
   display: flex;
   flex-direction: column;
@@ -158,14 +156,14 @@
 }
 
 .support-form-container .form-field .button-supports:hover {
-  background-color: #9716ce;
+  background-color: #9C27B0;
   box-shadow: 0 6px 20px rgba(123, 31, 162, 0.4);
   border-color: rgba(123, 31, 162, 0.5);
   transform: translateY(-2px);
 }
 
 .support-form-container .form-field .button-supports:active {
-  background-color: #9716ce;
+  background-color: #9C27B0;
   box-shadow: 0 3px 10px rgba(123, 31, 162, 0.3);
   transform: translateY(0);
 }
@@ -185,7 +183,6 @@
   box-shadow: 0 4px 15px rgba(123, 31, 162, 0.2) !important;
 }
 
-/* Стили для ошибок */
 .form-input.has-error,
 .form-textarea.has-error {
   border-color: #dc3545 !important;
@@ -323,7 +320,6 @@
   }
 }
 
-/* Убираем стрелки у number input */
 .no-spinner {
   -moz-appearance: textfield;
 }

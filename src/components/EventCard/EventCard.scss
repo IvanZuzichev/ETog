@@ -221,7 +221,7 @@
   }
 
   &__details-btn {
-    background: var(--button-bg-secondary, #F1F0EE);
+    background: #F1F0EE;
     color: var(--text-color-primary, #000000);
     border: none;
     border-radius: 8px;
@@ -244,12 +244,12 @@
   --card-border: rgba(255, 255, 255, 0.1);
   --text-color-primary: #ffffff;
   --text-color-secondary: rgba(255, 255, 255, 0.7);
-  --accent-color: #bb86fc;
+  --accent-color: #9C27B0;
   --accent-color-transparent: rgba(187, 134, 252, 0.8);
   --border-color-light: rgba(255, 255, 255, 0.1);
   --button-bg-secondary: #2d2d2d;
   --button-hover-bg: #3d3d3d;
-  --price-color: #bb86fc;
+  --price-color: #9C27B0;
   --free-price-color: #4CAF50;
   --shadow-hover: rgba(0, 0, 0, 0.3);
 
@@ -321,7 +321,6 @@
   }
 }
 
-// Адаптивные стили
 @media (max-width: 1023px) and (min-width: 744px) {
   .event-card {
     &__content {

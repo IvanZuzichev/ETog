@@ -1,5 +1,4 @@
 :root {
-  // Добавьте эти переменные если их нет
   --button-bg: #ffffff;
   --button-text: #7b1fa2;
   --active-button-bg: #7b1fa2;
@@ -92,11 +91,9 @@ button:disabled {
   box-shadow: none !important;
 }
 
-/* Темная тема - теперь использует CSS переменные */
 [data-theme="dark"] {
-  // Обновляем переменные для темной темы
   --button-bg: #2a2a2a;
-  --button-text: #bb86fc;
+  --button-text: #9C27B0;
   --active-button-bg: #7b1fa2;
   --active-button-text: #ffffff;
   --hover-button-bg: rgba(187, 134, 252, 0.1);
@@ -118,7 +115,7 @@ button:disabled {
     border-color: var(--border-color);
     
     &:hover {
-      background: #9b76d8;
+      background: #9C27B0;
     }
   }
 }

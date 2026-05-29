@@ -1,6 +1,3 @@
-// Добавьте в конец AccountContent.scss
-
-// Компактный тумблер темы для профиля
 .profile-theme-toggle {
   display: flex;
   flex-direction: column;
@@ -88,7 +85,6 @@
     }
   }
   
-  // Темная тема
   [data-theme="dark"] & {
     &__text,
     &__label {
@@ -100,15 +96,15 @@
       border-color: rgba(187, 134, 252, 0.3);
       
       &::before {
-        background: #bb86fc;
+        background: #9C27B0;
       }
       
       input:checked + & {
         background: rgba(187, 134, 252, 0.2);
-        border-color: #bb86fc;
+        border-color: #9C27B0;
         
         &::before {
-          background: #bb86fc;
+          background: #9C27B0;
         }
       }
       

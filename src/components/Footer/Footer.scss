@@ -1,9 +1,4 @@
 .footer {
-  //  background: linear-gradient(
-  //   to bottom,
-  //   rgba(123, 31, 162, 0.09) 90%,
-  //   #ffffff 100%
-  // );
   background-color: #F1F0EE;
   color: #000000;
   padding: 4rem 0 2rem;
@@ -21,7 +16,6 @@
   position: relative;
 }
 
-// Верхняя часть футера - ИСПРАВЛЕНО
 .footer__top {
   display: flex;
   justify-content: space-between;
@@ -29,12 +23,12 @@
   margin-bottom: 3rem;
   padding-bottom: 3rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  flex-wrap: wrap; // Добавлено для мобильной адаптивности
-  gap: 2rem; // Добавлено для отступов между элементами
+  flex-wrap: wrap;
+  gap: 2rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
-    align-items: center; // Центрируем на мобильных
+    align-items: center;
     text-align: center;
     gap: 2.5rem;
     padding-bottom: 2.5rem;
@@ -43,17 +37,17 @@
 }
 
 .footer__brand {
-  flex: 1 1 300px; // Изменено: теперь может сжиматься и имеет минимальную ширину
-  max-width: 100%; // Разрешаем занимать всю ширину на мобильных
+  flex: 1 1 300px;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 0;
 
   @media (max-width: 768px) {
-    align-items: center; // Центрируем на мобильных
+    align-items: center;
     text-align: center;
-    flex: 1 1 100%; // На мобильных занимает всю ширину
+    flex: 1 1 100%;
   }
 
   .footer__logo {
@@ -64,8 +58,8 @@
     justify-content: flex-start;
 
     @media (max-width: 768px) {
-      justify-content: center; // Центрируем на мобильных
-      flex-wrap: wrap; // Разрешаем перенос элементов лого
+      justify-content: center;
+      flex-wrap: wrap; 
     }
 
     &-text {
@@ -127,10 +121,10 @@
   flex-direction: row;
   gap: 1rem;
   align-items: flex-start;
-  flex-wrap: wrap; // Разрешаем перенос кнопок на мобильных
+  flex-wrap: wrap;
 
   @media (max-width: 768px) {
-    justify-content: center; // Центрируем кнопки на мобильных
+    justify-content: center; 
     align-items: center;
   }
 
@@ -141,7 +135,7 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 0.5rem;
-    width: 100%; // Занимает всю ширину
+    width: 100%;
   }
 
   &-buttons {
@@ -152,7 +146,7 @@
     
     @media (max-width: 768px) {
       justify-content: center;
-      flex-wrap: wrap; // Разрешаем перенос на мобильных
+      flex-wrap: wrap;
     }
   }
 
@@ -173,8 +167,8 @@
     white-space: nowrap;
     
     @media (max-width: 768px) {
-      flex: 1 1 auto; // Разрешаем сжиматься и расти
-      min-width: 140px; // Минимальная ширина для кнопок
+      flex: 1 1 auto;
+      min-width: 140px;
       justify-content: center;
     }
     
@@ -214,9 +208,8 @@
   }
 }
 
-// QR код секция (если раскомментируете)
 .footer__qr-section {
-  flex: 0 0 auto; // Не растягивается
+  flex: 0 0 auto;
   margin-left: 2rem;
   
   @media (max-width: 768px) {
@@ -225,7 +218,6 @@
   }
 }
 
-// Навигационные колонки
 .footer__nav {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -292,8 +284,6 @@
   transition: color 0.2s ease;
   display: inline-block;
   line-height: 1.5;
-  
-  // Элегантный ховер эффект для ссылок
   position: relative;
   
   &::after {
@@ -331,7 +321,6 @@
   }
 }
 
-// Нижняя часть футера (оставляю как было)
 .footer__bottom {
   display: flex;
   justify-content: space-between;
@@ -387,7 +376,6 @@
   font-size: 0.8rem;
 }
 
-// Темная тема адаптация
 [data-theme="dark"] .footer {
   background: #121212;
   color: #ffffff;
@@ -402,7 +390,7 @@
   }
 
   .footer__logo-subtitle {
-    color: #bb86fc;
+    color: #9C27B0;
   }
 
   .footer__description {
@@ -411,7 +399,7 @@
 
   .footer__social {
     &-label {
-      color: #bb86fc;
+      color: #9C27B0;
     }
 
     &-button {
@@ -422,12 +410,12 @@
       &:hover {
         background: rgba(187, 134, 252, 0.1);
         border-color: rgba(187, 134, 252, 0.4);
-        color: #bb86fc;
+        color: #9C27B0;
       }
     }
 
     &-icon {
-      color: #bb86fc;
+      color: #9C27B0;
     }
   }
 
@@ -443,11 +431,11 @@
     color: #ccc;
 
     &:hover {
-      color: #bb86fc;
+      color: #9C27B0;
     }
     
     &::after {
-      background: #bb86fc;
+      background: #9C27B0;
     }
   }
 
@@ -460,7 +448,7 @@
     color: #888;
     
     &:hover {
-      color: #bb86fc;
+      color: #9C27B0;
     }
   }
 
@@ -469,23 +457,6 @@
   }
 }
 
-// Анимации
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.footer {
-  animation: fadeInUp 0.5s ease-out;
-}
-
-// Улучшения для мобильных устройств
 @media (max-width: 480px) {
   .footer {
     padding: 3rem 0 1.5rem;
@@ -522,14 +493,12 @@
   }
 }
 
-// Медиа запрос для соцсетей в одну строку на десктопе
 @media (min-width: 769px) {
   .footer__social-buttons {
-    flex-wrap: nowrap; // Всегда в одну строку
+    flex-wrap: nowrap;
   }
 }
 
-// Дополнительные мелкие экраны
 @media (max-width: 360px) {
   .footer__container {
     padding: 0 1rem;

@@ -83,10 +83,10 @@
   justify-items: center;
   transition: all 0.3s ease;
   padding: 0;
-  color: var(--background-color); // Цвет для неактивного состояния
+  color: var(--background-color); 
   
   &:hover {
-    background: rgba(123, 31, 162, 0.1);
+    background: rgba(123, 31, 162, 0);
     border-color:rgba(123, 31, 162, 0.3);
     color: var(--primary-color);
   }
@@ -117,13 +117,13 @@
     
     &:hover {
       background: rgba(123, 31, 162, 0.2);
-      border-color: #bb86fc;
-      color: #bb86fc;
+      border-color: #9C27B0;
+      color: #9C27B0;
     }
     
     &--active {
-      background: #bb86fc;
-      border-color: #bb86fc;
+      background: #9C27B0;
+      border-color: #9C27B0;
       color: #000000;
       
       &:hover {
@@ -169,7 +169,7 @@
   font-family: "Inter", sans-serif;
   
   &:hover:not(:disabled) {
-    background: #9716ce;
+    background: #9C27B0;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(123, 31, 162, 0.4);
   }
@@ -223,7 +223,7 @@
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #7b1fa2 0%, #9c27b0 100%);
+  background: linear-gradient(135deg, #7b1fa2 0%, #9C27B0 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -244,27 +244,23 @@
     
     &:hover {
       background: rgba(123, 31, 162, 0.2);
-      border-color: #bb86fc;
+      border-color: #9C27B0;
     }
     
     &--active {
-      background: #bb86fc;
-      border-color: #bb86fc;
+      background: #9C27B0;
+      border-color: #9C27B0;
       color: #000000;
       
       &:hover {
-        background: #9c27b0;
-        border-color: #9c27b0;
+        background: #9C27B0;
+        border-color: #9C27B0;
       }
     }
   }
   
   .organizer-avatar {
-    background: linear-gradient(135deg, #bb86fc 0%, #3700b3 100%);
-  }
-  
-  .organizer-avatar-link:hover .organizer-avatar {
-    box-shadow: 0 4px 12px rgba(187, 134, 252, 0.4);
+    background: linear-gradient(135deg, #9C27B0 0%, #3700b3 100%);
   }
 }
 
@@ -369,7 +365,6 @@
   max-height: 600px;
 }
 
-/* Основная информация в две колонки */
 .event-info-section {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -408,7 +403,6 @@
   font-family: "Inter", sans-serif;
 }
 
-/* Детали мероприятия */
 .event-details-card {
   background: var(--content-bg);
   border: 1px solid rgba(123, 31, 162, 0.1);
@@ -482,7 +476,7 @@
   font-family: "Inter", sans-serif;
   
   &:hover {
-    background: #9716ce;
+    background: #9C27B0;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(123, 31, 162, 0.4);
   }
@@ -505,7 +499,6 @@
   font-family: "Inter", sans-serif;
 }
 
-/* Блок организатора и правил */
 .organizer-section {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -540,7 +533,7 @@
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #7b1fa2 0%, #9c27b0 100%);
+  background: linear-gradient(135deg, #7b1fa2 0%, #9C27B0 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -611,7 +604,7 @@
   font-family: "Inter", sans-serif;
   
   &:hover {
-    background: #871ab5;
+    background: #9C27B0;
     border-color: var(--primary-color);
     color: #ffffff;
   }
@@ -641,7 +634,6 @@
   font-size: 1rem;
 }
 
-/* Темная тема */
 [data-theme="dark"] {
   .event-detail-container {
     background-color: #121212;
@@ -664,12 +656,12 @@
   }
   
   .organizer-name {
-    color: #bb86fc;
+    color: #9C27B0;
   }
   
   .event-category-badge {
     background: rgba(123, 31, 162, 0.2);
-    color: #bb86fc;
+    color: #9C27B0;
   }
   
   .event-image-container,
@@ -688,16 +680,16 @@
     
     &:hover {
       background: rgba(123, 31, 162, 0.2);
-      border-color: #bb86fc;
+      border-color: #9C27B0;
     }
   }
   
   .organizer-avatar {
-    background: linear-gradient(135deg, #bb86fc 0%, #3700b3 100%);
+    background: linear-gradient(135deg, #9C27B0 0%, #3700b3 100%);
   }
   
   .event-price {
-    color: #bb86fc;
+    color: #9C27B0;
     
     &--free {
       color: #4CAF50;
@@ -847,7 +839,7 @@
   font-family: "Inter", sans-serif;
   
   &:hover {
-    background: #9716ce;
+    background: #9C27B0;
     transform: translateY(-2px);
   }
 }

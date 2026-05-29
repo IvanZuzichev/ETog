@@ -66,15 +66,13 @@
     padding-bottom: 1.75rem;
   }
 
-  /* Иконка избранного (опционально) */
   &__icon {
-    color: #ff4081; /* или #ff9800 для звезды */
+    color: #ff4081;
     margin-right: 12px;
     font-size: 1.8rem;
   }
 }
 
-/* Адаптивные стили */
 @media (max-width: 1439px) and (min-width: 1024px) {
   .favorite-content {
     padding: 32px 20px;

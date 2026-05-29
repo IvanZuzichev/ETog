@@ -151,7 +151,7 @@
 }
 
 .stars {
-  color: #FFD700; // Золотой цвет для звезд
+  color: #FFD700;
   font-size: 1.2rem;
   letter-spacing: 2px;
   line-height: 1;
@@ -186,7 +186,6 @@
   }
 }
 
-// Статус аккаунта
 .account-status {
   font-size: 0.9rem;
   font-weight: 600;
@@ -327,7 +326,7 @@
   &:hover:not(:disabled) {
     box-shadow: 0 4px 12px rgba(123, 31, 162, 0.3);
     border-color: rgba(123, 31, 162, 0.5);
-    background: #9716ce;
+    background: #9C27B0;
   }
 }
 
@@ -447,7 +446,7 @@ button:disabled {
   
   .account-status {
     background: rgba(187, 134, 252, 0.1);
-    color: #bb86fc;
+    color: #9C27B0;
   }
   
   .userprofile-form .form-field .form-label {
