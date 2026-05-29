@@ -1,0 +1,67 @@
+<!-- Events Together — спасибо, что доверяете нам! -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/assets/Logo-Icon-CnULvgrO.png" />
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#7b1fa2" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Events Together" />
+    <link rel="apple-touch-icon" href="/pwa-192.png" />
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" as="style" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Events Together — ETog</title>
+    
+   <script>
+  function getInitialTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') return 'dark';
+    if (savedTheme === 'light') return 'light';
+    
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return prefersDark ? 'dark' : 'light';
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const theme = getInitialTheme();
+    const root = document.documentElement;
+    
+    // Добавляем класс к body
+    document.body.className = theme + '-theme';
+    
+    if (theme === 'dark') {
+      root.style.setProperty('--background-color', '#121212');
+      root.style.setProperty('--text-color', '#ffffff');
+      root.style.setProperty('--primary-color', '#1e1e1e');
+      root.style.setProperty('--footer-bg', '#1e1e1e');
+      root.style.setProperty('--footer-text', '#ffffff');
+      root.style.setProperty('--button-bg', '#333333');
+      root.style.setProperty('--button-text', '#ffffff');
+    } else {
+      root.style.setProperty('--background-color', '#ffffff');
+      root.style.setProperty('--text-color', '#000000');
+      root.style.setProperty('--primary-color', '#7b1fa2');
+      root.style.setProperty('--footer-bg', '#7b1fa2');
+      root.style.setProperty('--footer-text', '#ffffff');
+      root.style.setProperty('--button-bg', '#e6e6e6');
+      root.style.setProperty('--button-text', '#000000');
+    }
+  });
+</script>
+    <script type="module" crossorigin src="/assets/index-DXXXZghJ.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-CjZsb-BP.js">
+    <link rel="modulepreload" crossorigin href="/assets/router-B2tN5Lql.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-1Cfp3sHe.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
